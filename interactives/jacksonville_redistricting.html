@@ -1,0 +1,219 @@
+
+<!doctype html>
+<html>
+<head>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-D8Y7D6LYBF');
+</script>
+<meta charset="utf-8">
+<title>Gerrymandering Jacksonville • The Tributary</title>
+<link href="style-race.css" rel="stylesheet" type="text/css">
+
+<meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
+
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.css" type="text/css">
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.min.js"></script>
+
+<link rel="icon" href="https://jaxtrib.org/wp-content/uploads/2021/06/cropped-favicon-32x32.png" sizes="32x32">
+<link rel="icon" href="https://i2.wp.com/jaxtrib.org/wp-content/uploads/2021/06/cropped-favicon.png?fit=192%2C192&amp;ssl=1" sizes="192x192">
+<meta name="description" content="Explore how Jacksonville's redistricting plans disenfranchise Black voters with The Tributary's interactive map.">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Interactive • See how Jacksonville's redistricting plans disenfranchise Black voters • The Tributary">
+<meta property="og:description" content="Explore how Jacksonville's redistricting plans disenfranchise Black voters with The Tributary's interactive map.">
+<meta property="og:url" content="https://data.jaxtrib.org/jacksonville_redistricting">
+<meta property="og:site_name" content="The Tributary">
+<meta property="article:publisher" content="https://www.facebook.com/TheJaxTrib/">
+<meta property="article:published_time" content="2022-01-18T08:00:00+00:00">
+<meta property="article:modified_time" content="2022-01-18T08:00:00+00:00">
+<meta property="og:image" content="https://jaxtrib.org/wp-content/uploads/2022/01/interactive.png">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="926">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Interactive • See how Jacksonville's redistricting plans disenfranchise Black voters • The Tributary">
+<meta name="twitter:description" content="Explore how Jacksonville's redistricting plans disenfranchise Black voters with The Tributary's interactive map.">
+<meta name="twitter:image" content="https://i0.wp.com/jaxtrib.org/wp-content/uploads/2022/01/interactive.png?fit=1000%2C800&amp;ssl=1">
+<meta name="twitter:creator" content="@APantazi">
+<meta name="twitter:site" content="@TheJaxTrib">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Andrew Pantazi">
+<meta property="fb:pages" content="399115500554052">
+<meta name="theme-color" content="#fff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="YES">
+<meta name="apple-mobile-web-app-title" content="The Tributary">
+<meta name="application-name" content="The Tributary">
+</head>
+
+<body>
+<header>
+  <div class="banner">
+    <div class="site-branding">
+      <div class="centered"> <a href="https://jaxtrib.org/" aria-label="The Tributary logo. Click to visit the homepage" class="logo-img"> <img class="logo-img" decoding="async" alt="The Tributary" src="https://jaxtrib.org/wp-content/uploads/2021/09/TRB_TributaryLogo_NoTagline_White.png"></a></div>
+    </div>
+  </div>
+</header>
+<main id="site-content">
+  <div class="g-asset g-graphic g-asset-width-full" style=""> </div>
+</main>
+<div id="map"></div>
+<div class="map-overlay" id="legend">
+  <h4>CENSUS LEGEND</h4>
+</div>
+
+
+<div class="byline-wrap">
+  <div class="byline">
+    <h1 class="hed"><a href="https://jaxtrib.org/2022/01/11/jacksonvilles-redistricting-plan-risks-racial-gerrymandering-claims/" class="inherit">Dividing Jacksonville</a></h1>
+    <div class="bylinepubdate">
+      <p class="byline">By <a href="https://jaxtrib.org/author/apantazi">ANDREW PANTAZI</a></p>
+      <p class="pubdate">Jan. 18, 2022</p>
+    </div>
+  </div>
+  <div class="map-control-group">
+    <p class="lead">Jacksonville City Council's redistricting plans carve neighborhoods, ensuring a majority of Black residents reside in four of the 14 districts.</p>
+    <p class="leadin">This map shows how the redistricting plan uses surgical precision to divide neighborhoods by race or partisanship.</p>
+		<p class="leadin">Experts say this might constitute illegal racial gerrymandering.</p>
+	<p class="leadin"><strong>Note:</strong> Dots were <strong>randomly generated</strong> within census blocks and voting precincts based on 2020 Census data and presidential results. <strong>They are not precise enough to represent the people living in individual homes.</strong></p>
+	<p class="leadin">Red dashed lines represent the current districts, while the black lines represent new proposed lines.</p>
+    <p class="leadin"><a href="https://jaxtrib.org/2022/01/11/jacksonvilles-redistricting-plan-risks-racial-gerrymandering-claims/" class="leadin">Read more about racial gerrymandering.</a></p>
+  </div>
+  <div class="map-toggle">
+    <div id="menu">
+      <div class="toggle-wrap">
+        <div class="toggle-option toggle-results toggle-selected first">
+          <input id="ckwclm4lu2ptq14p1hnmbyyos" type="button" name="rtoggle" value="2020 Census" checked="checked" />
+        </div>
+        <div class="toggle-option toggle-change second">
+          <input id="cky9chllf6r0s14o4iab9g2yd" type="button" name="rtoggle" value="2020 election" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="etc"> <a class="etc-link" href="https://data.jaxtrib.org/race" target="_blank">2020 Florida Census</a>
+  <a class="etc-link" href="https://github.com/apantazi/RaceDotMap/blob/redistricting/README.md" target="_blank">About the data</a> 
+ <a href="https://jaxtrib.org/2022/01/18/see-jacksonvilles-gerrymandered-city-council-districts-for-yourself-with-the-tributarys-new-tool/" class="etc-link" target="_blank">About this tool</a> 
+  </div>
+  
+</div>
+  <button id="sidebar-reopen" title="Show sidebar" aria-label="Show sidebar" style="display:none;">&#8594;</button>
+
+<script>
+  // Hide sidebar and show arrow button
+  document.querySelector('.byline-close').onclick = function() {
+    document.querySelector('.byline-wrap').classList.add('closed');
+    document.getElementById('sidebar-reopen').style.display = 'block';
+  };
+
+  // Reopen sidebar, hide arrow
+  document.getElementById('sidebar-reopen').onclick = function() {
+    document.querySelector('.byline-wrap').classList.remove('closed');
+    this.style.display = 'none';
+  };
+</script>
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoiYXBhbnRhemkxMSIsImEiOiJjbWIxNnBjNXYwM3N3Mm1wd2cxNTdxdGxtIn0.hMx6b5eXMRECQoWiwo79gQ';
+
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/apantazi11/cmb6wff8w002001s5hnohb30h',
+    center: [-81.6255, 30.3336],
+    zoom: 10
+  });
+
+  // IDs for your layer toggles (from your style.json)
+  const RACE_LAYER_ID = 'race-dots';
+  const PRES_LAYER_ID = 'pres-dots';
+
+  // Legend configs that match your actual style expressions
+  const LEGENDS = {
+    'race': {
+      title: 'CENSUS LEGEND',
+      items: [
+        { label: 'Black', color: '#00bfff' },
+        { label: 'White', color: '#dadada' },
+        { label: 'Asian/Pacific Islander', color: '#ffb000' },
+        { label: 'Hispanic', color: '#ff4c4c' },
+        { label: 'Other', color: '#a678f0' }
+      ]
+    },
+    'pres': {
+      title: 'PRESIDENTIAL VOTE',
+      items: [
+        { label: 'Biden', color: 'hsl(213, 100%, 45%)' },
+        { label: 'Trump', color: 'hsl(7, 95%, 40%)' },
+        { label: 'Other', color: '#ffe666' }
+      ]
+    }
+  };
+
+  // Dynamic legend builder
+  function setLegend(type) {
+    const legend = document.getElementById('legend');
+    legend.innerHTML = `<h4>${LEGENDS[type].title}</h4>`;
+    LEGENDS[type].items.forEach(item => {
+      const entry = document.createElement('div');
+      const key = document.createElement('span');
+      key.className = 'legend-key';
+      key.style.backgroundColor = item.color;
+      const value = document.createElement('span');
+      value.textContent = item.label;
+      entry.appendChild(key);
+      entry.appendChild(value);
+      legend.appendChild(entry);
+    });
+  }
+
+  function showRaceDots() {
+    map.setLayoutProperty(RACE_LAYER_ID, 'visibility', 'visible');
+    map.setLayoutProperty(PRES_LAYER_ID, 'visibility', 'none');
+    document.getElementById('ckwclm4lu2ptq14p1hnmbyyos').parentElement.classList.add('toggle-selected');
+    document.getElementById('cky9chllf6r0s14o4iab9g2yd').parentElement.classList.remove('toggle-selected');
+    setLegend('race');
+  }
+
+  function showPresDots() {
+    map.setLayoutProperty(RACE_LAYER_ID, 'visibility', 'none');
+    map.setLayoutProperty(PRES_LAYER_ID, 'visibility', 'visible');
+    document.getElementById('ckwclm4lu2ptq14p1hnmbyyos').parentElement.classList.remove('toggle-selected');
+    document.getElementById('cky9chllf6r0s14o4iab9g2yd').parentElement.classList.add('toggle-selected');
+    setLegend('pres');
+  }
+
+  map.on('load', function () {
+    // Default: show race dots
+    showRaceDots();
+    document.getElementById('ckwclm4lu2ptq14p1hnmbyyos').onclick = showRaceDots;
+    document.getElementById('cky9chllf6r0s14o4iab9g2yd').onclick = showPresDots;
+
+    // Map controls, geocoder, etc.
+    const nav = new mapboxgl.NavigationControl({ visualizePitch: true });
+    map.addControl(nav, 'top-right');
+    map.addControl(new mapboxgl.GeolocateControl({ positionOptions: { enableHighAccuracy: true } }));
+    const geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      marker: { color: '#098677' },
+      mapboxgl: mapboxgl,
+      countries: "us",
+      types: "postcode,district,place,locality,neighborhood,region,address,poi.landmark"
+    });
+    map.addControl(geocoder, 'bottom-left');
+  });
+</script>
+
+
+
+</body>
+</html>
