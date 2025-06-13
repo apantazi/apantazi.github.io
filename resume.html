@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Resume | Andrew Pantazi</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fjalla+One|Libre+Franklin:400,700&display=swap">
+  <style>
+    body { font-family: 'Libre Franklin', Arial, sans-serif; background: #f9f9f9; margin: 0; }
+    header, nav { background: #fff; box-shadow: 0 1px 2px #ddd; }
+    .container { max-width: 800px; margin: 2em auto; background: #fff; padding: 2em 2em 1em; border-radius: 8px; }
+    nav { display: flex; justify-content: center; gap: 2em; padding: 1em 0; font-size: 1.1em; }
+    nav a { text-decoration: none; color: #214366; padding: 0.2em 0.7em; border-radius: 4px; }
+    nav a.active, nav a:hover { background: #f0f4fa; }
+    h1 { font-family: 'Fjalla One', Arial, sans-serif; font-size: 2.2em; text-align: center; margin-top: 0; }
+    h2 { font-family: 'Fjalla One', Arial, sans-serif; font-size: 1.3em; margin: 1.4em 0 0.6em 0; color: #222; }
+    h3 { font-family: 'Libre Franklin', Arial, sans-serif; font-size: 1.1em; margin: 1.2em 0 0.2em 0; font-weight: 700; color: #214366;}
+    .section { margin-bottom: 2em; }
+    .resume-header { text-align: center; margin-bottom: 1.2em; }
+    .resume-header strong { font-size: 1.15em; }
+    .resume-header em { font-style: normal; color: #888; font-size: 1em; display: block; margin-top: 0.3em; }
+    ul { margin: 0 0 1em 1.3em; padding: 0; }
+    li { margin-bottom: 0.6em; }
+    .skills-list { columns: 2 250px; column-gap: 2em; }
+    .skills-list li { break-inside: avoid; }
+    hr { border: none; border-top: 1px solid #eee; margin: 2em 0; }
+    .footer { margin-top: 30px; text-align: center; color: #aaa; font-size: 0.97em; padding: 20px 0 8px 0; }
+    .social-links { margin: 2em 0 0; display: flex; gap: 18px; justify-content: center; }
+    .social-links a { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #e9e9ec; color: #214366; transition: background 0.15s; }
+    .social-links a:hover { background: #bcdcff; color: #1248d1; }
+    @media (max-width: 700px) {
+      .container { padding: 1em 0.5em; }
+      .skills-list { columns: 1; }
+    }
+    @media (max-width: 500px) {
+      h1 { font-size: 1.3em; }
+    }
+  </style>
+</head>
+<body>
+<div id="header"></div>
+<script>
+  fetch('header.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('header').innerHTML = data;
+
+      // Optionally highlight the current page
+      const path = window.location.pathname;
+      if (path.includes("clips")) {
+        document.getElementById('clips-link').classList.add('active');
+      } else if (path.includes("interactives")) {
+        document.getElementById('interactives-link').classList.add('active');
+      } else if (path.includes("resume")) {
+        document.getElementById('resume-link').classList.add('active');
+      } else {
+        document.getElementById('home-link').classList.add('active');
+      }
+    });
+</script>
+  <div class="container">
+    <h1>Resume</h1>
+    <div class="resume-header">
+      <strong>Andrew Pantazi</strong> – Jacksonville, FL<br>
+      <span style="color:#214366; font-weight:500;">Investigative Journalist | Editor | Data Reporter</span>
+    </div>
+    <div class="section">
+      <h2>Professional Experience</h2>
+      <h3>Freelance – Editor / Reporter <span style="font-weight:400; color:#888; font-size:0.92em;">Dec. 2024 – Present</span></h3>
+      <ul>
+        <li>Report and edit freelance stories for local and national outlets.</li>
+        <li>Provide data analysis and investigative work on assignment.</li>
+        <li>Develop interactive news apps.</li>
+    </ul>
+
+      <h3>The Tributary – Founding Editor <span style="font-weight:400; color:#888; font-size:0.92em;">Dec. 2020 – Dec. 2024</span></h3>
+      <ul>
+        <li>Launched and ran a nonprofit investigative newsroom that delivered results: a sheriff’s resignation, a $98-million contract canceled and a federal court order striking down the city’s redistricting map.</li>
+        <li>Edited  Led data-driven investigations into jailhouse deaths, redistricting abuses and public corruption, building datasets from scratch and uncovering connections—like shell companies, shady contracts and ethical red flags.</li>
+        <li>Investigated and uncovered the Jacksonville sheriff's illegal residency, leading to his resignation.</li>
+        <li>Exposed local racial gerrymandering that led to a federal court order.</li>
+      </ul>
+      <h3>The Florida Times-Union – Enterprise Reporter <span style="font-weight:400; color:#888; font-size:0.92em;">Feb. 2013 – Dec. 2020</span></h3>
+      <ul>
+        <li>Conducted in-depth investigations into systemic criminal justice failures, including negligent jail policies and racial disparities in prosecution.</li>
+        <li>Created a database tracking 30+ variables in drug convictions to expose inequities and profiled key figures behind disparities.</li>
+        <li>Covered diverse beats, including statehouse, city hall, education and  courts.</li>
+        <li>Spearheaded projects in data analysis and visualization.</li>
+      </ul>
+    </div>
+
+    <hr>
+    <div class="section">
+      <h2>Technical Skills</h2>
+      <ul class="skills-list">
+        <li><strong>Data Analysis &amp; Visualization:</strong> R, Tableau, Flourish, PSPP</li>
+        <li><strong>Web &amp; App Development:</strong> JavaScript, GitHub, Google Scripts, APIs, HTML/CSS</li>
+        <li><strong>Data Journalism &amp; Mapping:</strong> Mapbox, GIS, Dave’s Redistricting App</li>
+        <li><strong>Project &amp; Investigative Management:</strong> Large-scale research, FOIA requests, editorial leadership, data and investigative editing</li>
+      </ul>
+    </div>
+
+    <hr>
+    <div class="section">
+      <h2>Education</h2>
+      <ul>
+        <li><strong>University of Florida</strong><br>
+          Bachelor of Science in Journalism, 2013</li>
+      </ul>
+    </div>
+
+<div id="social-links"></div>
+<script>
+  fetch('/social.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('social-links').innerHTML = html;
+    });
+</script>
+
+</body>
+</html>

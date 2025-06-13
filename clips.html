@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Portfolio | Andrew Pantazi</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fjalla+One|Libre+Franklin:400,700&display=swap">
+  <style>
+    body { font-family: 'Libre Franklin', Arial, sans-serif; background: #f9f9f9; margin: 0; }
+    header, nav { background: #fff; box-shadow: 0 1px 2px #ddd; }
+    .container { max-width: 900px; margin: 2em auto; background: #fff; padding: 2em; border-radius: 8px; }
+    nav { display: flex; justify-content: center; gap: 2em; padding: 1em 0; font-size: 1.1em; }
+    nav a { text-decoration: none; color: #214366; padding: 0.2em 0.7em; border-radius: 4px; }
+    nav a.active, nav a:hover { background: #f0f4fa; }
+    h1 { font-family: 'Fjalla One', Arial, sans-serif; font-size: 2em; text-align: center; margin-top: 0; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 1.5em; margin-top: 2em; }
+    .card { background: #f6f8fa; padding: 1.5em 1.5em 1.2em; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .card h2 { margin: 0 0 0.4em; font-size: 1.25em; color: #214366; font-family: 'Fjalla One', Arial, sans-serif; }
+    .blurb { color: #555; margin-bottom: 1em; font-style: italic; }
+    .card h3 { margin: 1.1em 0 0.2em; font-size: 1.1em; font-family: 'Fjalla One', Arial, sans-serif; }
+    .card p { color: #333; margin: 0 0 1em; }
+    .card a { color: #2874a6; text-decoration: underline; font-weight: bold; }
+    .card a:hover { color: #1c5986; }
+    .social-links { margin: 2em 0 0; display: flex; gap: 18px; justify-content: center; }
+    .social-links a { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #e9e9ec; color: #214366; transition: background 0.15s; }
+    .social-links a:hover { background: #bcdcff; color: #1248d1; }
+    .footer { margin-top: 32px; text-align: center; color: #aaa; font-size: 0.97em; padding: 24px 0 8px 0; }
+    @media (max-width: 700px) {
+      .container { padding: 1em 0.5em; }
+      .grid { gap: 1em; }
+    }
+    @media (max-width: 600px) {
+      .card { padding: 1em 0.6em 1em; }
+      h1 { font-size: 1.3em; }
+      .card h2 { font-size: 1.07em; }
+    }
+  </style>
+</head>
+<body>
+<div id="header"></div>
+<script>
+  fetch('header.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('header').innerHTML = data;
+
+      // Optionally highlight the current page
+      const path = window.location.pathname;
+      if (path.includes("clips")) {
+        document.getElementById('clips-link').classList.add('active');
+      } else if (path.includes("interactives")) {
+        document.getElementById('interactives-link').classList.add('active');
+      } else if (path.includes("resume")) {
+        document.getElementById('resume-link').classList.add('active');
+      } else {
+        document.getElementById('home-link').classList.add('active');
+      }
+    });
+</script>
+  <div class="container">
+    <h1>Portfolio</h1>
+    <div class="grid">
+
+      <!-- Investigative -->
+      <div class="card">
+        <h2>Investigative</h2>
+        <div class="blurb">Uncovering corruption, systemic failures, and hidden injustices to hold those in power accountable.</div>
+        <h3><a href="https://web.archive.org/web/20180621232302/http://projects.heraldtribune.com/influence" target="_blank">Influence & Injustice</a> <span style="font-weight:400;color:#888;">(June 21, 2018)</span></h3>
+        <p>Our investigation into Duval County’s legal system revealed racial disparities in sentencing—Black defendants received nearly four times longer sentences for drug offenses than white defendants.</p>
+        <h3><a href="https://www.jacksonville.com/story/news/local/2019/11/19/jacksonville-home-for-teen-delinquents-shut-down-after-decade-of-criticism-1800-police-calls/2226545007/" target="_blank">Jacksonville home for teen delinquents shut down after decade of criticism, 1,800 police calls</a> <span style="font-weight:400;color:#888;">(Nov. 19, 2019)</span></h3>
+        <p>My year-long investigation into Panama Youth Services prompted its closure after exposing 1,800 police calls and mismanagement.</p>
+        <h3><a href="https://jaxtrib.org/2022/05/27/jacksonville-sheriff-mike-williams-doesnt-live-in-duval-and-might-need-to-leave-office/" target="_blank">Jacksonville Sheriff Mike Williams doesn’t live in Duval and might violate city law</a> <span style="font-weight:400;color:#888;">(May 27, 2022)</span></h3>
+        <p>This reporting uncovered the sheriff’s move out of the county, leading to his resignation and city scrutiny.</p>
+      </div>
+
+      <!-- Editing -->
+      <div class="card">
+        <h2>Editing</h2>
+        <div class="blurb">Investigative stories I edited, ensuring deep accountability and impactful storytelling.</div>
+        <h3><a href="https://jaxtrib.org/2024/10/24/red-lights-green-cash-how-rep-vicki-lopez-boosted-buspatrol-and-benefited-her-family-donny-wolfe-adrian/">Red Lights, Green Cash: How a Florida Legislator Boosted School Bus Cameras and Benefited Her Family</a> <span style="font-weight:400;color:#888;">(Oct. 24, 2024)</span></h3>
+        <p>Uncovered Rep. Vicki Lopez’s ties to BusPatrol and possible ethics violations.</p>
+        <h3><a href="https://jaxtrib.org/2023/07/25/jacksonvilles-jail-death-rate-tripled-after-privatizing-medical-care/">Jacksonville's Jail Death Rate Tripled After Privatizing Medical Care</a> <span style="font-weight:400;color:#888;">(July 25, 2023)</span></h3>
+        <p>Inmate deaths surged after privatizing jail healthcare; the contract was canceled after this investigation.</p>
+        <h3><a href="https://jaxtrib.org/2023/05/23/i-cant-miss-those-doses-jacksonville-man-died-after-jail-denied-him-heart-transplant-medicine/">‘My Heart Will Be Rejected’: Jacksonville Man Dies After Missing Doses in Jail</a> <span style="font-weight:400;color:#888;">(May 23, 2023)</span></h3>
+        <p>Dexter Barry died after missing heart medication in jail, sparking outrage and reforms.</p>
+      </div>
+
+      <!-- Redistricting -->
+      <div class="card">
+        <h2>Redistricting</h2>
+        <div class="blurb">Examining how electoral maps are drawn, who benefits, and the legal battles over fair representation.</div>
+        <h3>Interactives:</h3>
+        <p>
+          <a href="https://data.jaxtrib.org/jacksonville_redistricting">Jacksonville Redistricting Analysis</a> — How district plans segregate voters by race.<br>
+          <a href="https://data.jaxtrib.org/neighborhoods">Neighborhood Splits Interactive</a> — Which neighborhoods get divided by lines.
+        </p>
+        <h3><a href="https://jaxtrib.org/2022/07/21/for-decades-jacksonville-city-council-redistricting-based-off-misinformation-federal-lawsuit-racial-gerrymander/">For Decades, Jacksonville City Council Packed Black Voters Based on 'Misinformation'</a> <span style="font-weight:400;color:#888;">(July 21, 2022)</span></h3>
+        <p>Months in archives showed how Black voters were packed into districts for decades on a misunderstanding of law, diluting political power.</p>
+        <h3><a href="https://jaxtrib.org/2023/08/22/is-voting-rights-act-on-trial-on-florida-redistricting-case-could-have-broad-impact/" target="_blank">Ron DeSantis' redistricting court strategy: attack the Voting Rights Act</a> <span style="font-weight:400;color:#888;">(Aug. 22, 2023)</span></h3>
+        <p>Explained the legal battle over Florida’s congressional map and its broader Voting Rights Act implications.</p>
+      </div>
+
+      <!-- Human Interest -->
+      <div class="card">
+        <h2>Human Interest</h2>
+        <div class="blurb">Stories of people navigating hardship, resilience, and societal forces.</div>
+        <h3><a href="https://www.dallasnews.com/news/2012/12/30/cheese-heroin-led-dallas-13-year-old-to-a-life-on-the-edge/" target="_blank">‘Cheese’ Heroin Led Dallas 13-Year-Old to a Life on the Edge</a> <span style="font-weight:400;color:#888;">(Dec. 30, 2012)</span></h3>
+        <p>Mariela Torres’ descent into addiction began in middle school. One of my earliest major features.</p>
+        <h3><a href="https://www.jacksonville.com/story/news/crime/2013/06/30/mothers-grief-week-after-8-year-old-cherish-perrywinkles-death/15824202007/" target="_blank">A Mother's Grief in the Week After 8-Year-Old Cherish Perrywinkle’s Death</a> <span style="font-weight:400;color:#888;">(June 30, 2013)</span></h3>
+        <p>Rayne Perrywinkle’s loss and the aftermath of her daughter’s murder, in her own words.</p>
+      </div>
+
+      <!-- Business -->
+      <div class="card">
+        <h2>Business</h2>
+        <div class="blurb">Revealing corporate and financial decisions that shape communities, for better or worse.</div>
+        <h3><a href="https://www.jacksonville.com/story/news/courts/2014/11/16/reverse-mortgages-were-supposed-to-help-elderly-for-some-it-destroyed-their-retirements/6753989007/" target="_blank">Reverse Mortgages Were Supposed to Help the Elderly. For Some, They Destroyed Their Retirements.</a> <span style="font-weight:400;color:#888;">(Nov. 16, 2014)</span></h3>
+        <p>How aggressive foreclosure practices upended the lives of elderly homeowners.</p>
+      </div>
+
+      <!-- Judges -->
+      <div class="card">
+        <h2>Judges</h2>
+        <div class="blurb">Scrutinizing judicial ethics, sentencing disparities, and the power of Florida’s courts.</div>
+        <h3><a href="https://www.jacksonville.com/story/news/politics/elections/2020/04/24/last-minute-maneuvers-allow-jacksonville-lawyer-to-become-judge-without-election/41700071/" target="_blank">Last-minute maneuvers allow Jacksonville lawyer to become judge without an election</a> <span style="font-weight:400;color:#888;">(Apr. 24, 2020)</span></h3>
+        <p>Exposed how legal insiders gamed the system to secure a judicial seat without election.</p>
+      </div>
+    </div>
+
+ <div id="social-links"></div>
+<script>
+  fetch('/social.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('social-links').innerHTML = html;
+    });
+</script>
+
+  </div>
+</body>
+</html>

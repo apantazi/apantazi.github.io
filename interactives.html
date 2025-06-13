@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Interactives | Andrew Pantazi</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fjalla+One|Libre+Franklin:400,700&display=swap">
+  <style>
+    body { font-family: 'Libre Franklin', Arial, sans-serif; background: #f9f9f9; margin: 0; }
+    header, nav { background: #fff; box-shadow: 0 1px 2px #ddd; }
+    .container { max-width: 900px; margin: 2em auto; background: #fff; padding: 2em; border-radius: 8px; }
+    nav { display: flex; justify-content: center; gap: 2em; padding: 1em 0; font-size: 1.1em; }
+    nav a { text-decoration: none; color: #214366; padding: 0.2em 0.7em; border-radius: 4px; }
+    nav a.active, nav a:hover { background: #f0f4fa; }
+    h1 { font-family: 'Fjalla One', Arial, sans-serif; font-size: 2em; text-align: center; margin-top: 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.5em; margin-top: 2em; }
+    .card { background: #f6f8fa; padding: 1.2em 1em; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); display: flex; flex-direction: column; }
+    .card h2 { margin: 0 0 0.6em; font-size: 1.15em; color: #214366; }
+    .card p { color: #555; flex: 1; }
+    .card a { margin-top: 0.7em; color: #2874a6; text-decoration: underline; font-weight: bold; }
+    @media (max-width: 600px) {
+      .container { padding: 1em 0.3em; }
+    }
+  </style>
+</head>
+<body>
+<div id="header"></div>
+<script>
+  fetch('header.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('header').innerHTML = data;
+
+      // Optionally highlight the current page
+      const path = window.location.pathname;
+      if (path.includes("clips")) {
+        document.getElementById('clips-link').classList.add('active');
+      } else if (path.includes("interactives")) {
+        document.getElementById('interactives-link').classList.add('active');
+      } else if (path.includes("resume")) {
+        document.getElementById('resume-link').classList.add('active');
+      } else {
+        document.getElementById('home-link').classList.add('active');
+      }
+    });
+</script>
+  <div class="container">
+    <h1>Interactives</h1>
+    <div class="grid">
+      <!-- Example card -->
+      <div class="card">
+        <h2>Jacksonville Redistricting Map</h2>
+        <p>Interactive map visualizing Jacksonville's district changes over time and exposing racial gerrymandering.</p>
+        <a href="https://data.jaxtrib.org/jacksonville_redistricting" target="_blank">View Interactive</a>
+      </div>
+      <div class="card">
+        <h2>Neighborhood Segregation Explorer</h2>
+        <p>Explore historical patterns of racial segregation in Jacksonville neighborhoods through census and map overlays.</p>
+        <a href="https://data.jaxtrib.org/race" target="_blank">View Interactive</a>
+      </div>
+      <div class="card">
+        <h2>Florida School Funding Visualization</h2>
+        <p>Breakdown of funding gaps in Florida schools, filterable by county and year.</p>
+        <a href="https://github.com/yourusername/florida-school-funding-viz" target="_blank">View on GitHub</a>
+      </div>
+      <!-- Add more cards as needed -->
+    </div>
+  </div>
+  <div id="social-links"></div>
+<script>
+  fetch('/social.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('social-links').innerHTML = html;
+    });
+</script>
+</body>
+</html>
