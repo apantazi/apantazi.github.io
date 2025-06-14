@@ -5,7 +5,7 @@
   <title>Portfolio | Andrew Pantazi</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fjalla+One|Libre+Franklin:400,700&display=swap">
-<link href="style.css" rel="stylesheet" type="text/css">
+  <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="header"></div>
@@ -14,8 +14,6 @@
     .then(res => res.text())
     .then(data => {
       document.getElementById('header').innerHTML = data;
-
-      // Optionally highlight the current page
       const path = window.location.pathname;
       if (path.includes("clips")) {
         document.getElementById('clips-link').classList.add('active');
@@ -28,85 +26,170 @@
       }
     });
 </script>
-  <div class="container">
-    <h1>Portfolio</h1>
-    <div class="grid">
+<div class="container">
+  <h1>Portfolio</h1>
+  <div class="grid">
 
-      <!-- Investigative -->
-      <div class="card">
-        <h2>Investigative</h2>
-        <div class="blurb">Uncovering corruption, systemic failures, and hidden injustices to hold those in power accountable.</div>
-        <h3><a href="https://web.archive.org/web/20180621232302/http://projects.heraldtribune.com/influence" target="_blank">Influence & Injustice</a> <span style="font-weight:400;color:#888;">(June 21, 2018)</span></h3>
-        <p>Our investigation into Duval County’s legal system revealed racial disparities in sentencing—Black defendants received nearly four times longer sentences for drug offenses than white defendants.</p>
-        <h3><a href="https://www.jacksonville.com/story/news/local/2019/11/19/jacksonville-home-for-teen-delinquents-shut-down-after-decade-of-criticism-1800-police-calls/2226545007/" target="_blank">Jacksonville home for teen delinquents shut down after decade of criticism, 1,800 police calls</a> <span style="font-weight:400;color:#888;">(Nov. 19, 2019)</span></h3>
-        <p>My year-long investigation into Panama Youth Services prompted its closure after exposing 1,800 police calls and mismanagement.</p>
-        <h3><a href="https://jaxtrib.org/2022/05/27/jacksonville-sheriff-mike-williams-doesnt-live-in-duval-and-might-need-to-leave-office/" target="_blank">Jacksonville Sheriff Mike Williams doesn’t live in Duval and might violate city law</a> <span style="font-weight:400;color:#888;">(May 27, 2022)</span></h3>
-        <p>This reporting uncovered the sheriff’s move out of the county, leading to his resignation and city scrutiny.</p>
-      </div>
+    <!-- Investigative -->
+    <div class="card">
+      <h2>Investigative</h2>
+      <div class="blurb">Uncovering corruption, systemic failures, and hidden injustices to hold the powerful to account.</div>
+      
+      <h3><a href="https://web.archive.org/web/20180621232302/http://projects.heraldtribune.com/influence" target="_blank">Influence & Injustice</a> <span style="font-weight:400;color:#888;">(June 21, 2018)</span></h3>
+      <p>Unmasked racial disparities in Duval County’s courts—Black defendants received nearly four times longer sentences for drug crimes than whites.</p>
+      
+      <h3><a href="https://www.jacksonville.com/story/news/local/2019/11/19/jacksonville-home-for-teen-delinquents-shut-down-after-decade-of-criticism-1800-police-calls/2226545007/" target="_blank">Jacksonville home for teen delinquents shut down after decade of criticism, 1,800 police calls</a> <span style="font-weight:400;color:#888;">(Nov. 19, 2019)</span></h3>
+      <p>Yearlong investigation into Panama Youth Services exposed neglect, triggering the facility’s closure and state review of oversight failures.</p>
+      
+      <h3><a href="https://jaxtrib.org/2022/05/27/jacksonville-sheriff-mike-williams-doesnt-live-in-duval-and-might-need-to-leave-office/" target="_blank">Jacksonville Sheriff Mike Williams doesn’t live in Duval and might violate city law</a> <span style="font-weight:400;color:#888;">(May 27, 2022)</span></h3>
+      <p>Exposed that the sheriff had moved out of Duval County, violating residency law—leading to his resignation under mounting scrutiny.</p>
 
-      <!-- Editing -->
-      <div class="card">
-        <h2>Editing</h2>
-        <div class="blurb">Investigative stories I edited, ensuring deep accountability and impactful storytelling.</div>
-        <h3><a href="https://jaxtrib.org/2024/10/24/red-lights-green-cash-how-rep-vicki-lopez-boosted-buspatrol-and-benefited-her-family-donny-wolfe-adrian/">Red Lights, Green Cash: How a Florida Legislator Boosted School Bus Cameras and Benefited Her Family</a> <span style="font-weight:400;color:#888;">(Oct. 24, 2024)</span></h3>
-        <p>Uncovered Rep. Vicki Lopez’s ties to BusPatrol and possible ethics violations.</p>
-        <h3><a href="https://jaxtrib.org/2023/07/25/jacksonvilles-jail-death-rate-tripled-after-privatizing-medical-care/">Jacksonville's Jail Death Rate Tripled After Privatizing Medical Care</a> <span style="font-weight:400;color:#888;">(July 25, 2023)</span></h3>
-        <p>Inmate deaths surged after privatizing jail healthcare; the contract was canceled after this investigation.</p>
-        <h3><a href="https://jaxtrib.org/2023/05/23/i-cant-miss-those-doses-jacksonville-man-died-after-jail-denied-him-heart-transplant-medicine/">‘My Heart Will Be Rejected’: Jacksonville Man Dies After Missing Doses in Jail</a> <span style="font-weight:400;color:#888;">(May 23, 2023)</span></h3>
-        <p>Dexter Barry died after missing heart medication in jail, sparking outrage and reforms.</p>
-      </div>
+      <h3><a href="https://jaxtrib.org/2024/03/14/former-jacksonville-public-defender-matt-shirk-disbarred/" target="_blank">Former Jacksonville Public Defender Matt Shirk Disbarred</a> <span style="font-weight:400;color:#888;">(Mar. 14, 2024)</span></h3>
+      <p>
+      I spent more than a decade reporting on how Matt Shirk transformed Jacksonville’s public defender’s office into a slow-motion scandal. I tracked a pattern of misconduct: Shirk hired women based on appearance, propositioned and fired them, drank in the office, deleted public records, diverted campaign funds, gave away office guns and routinely violated public trust.
+      </p>
 
-      <!-- Redistricting -->
-      <div class="card">
-        <h2>Redistricting</h2>
-        <div class="blurb">Examining how electoral maps are drawn, who benefits, and the legal battles over fair representation.</div>
-        <h3>Interactives:</h3>
-        <p>
-          <a href="https://data.jaxtrib.org/jacksonville_redistricting">Jacksonville Redistricting Analysis</a> — How district plans segregate voters by race.<br>
-          <a href="https://data.jaxtrib.org/neighborhoods">Neighborhood Splits Interactive</a> — Which neighborhoods get divided by lines.
-        </p>
-        <h3><a href="https://jaxtrib.org/2022/07/21/for-decades-jacksonville-city-council-redistricting-based-off-misinformation-federal-lawsuit-racial-gerrymander/">For Decades, Jacksonville City Council Packed Black Voters Based on 'Misinformation'</a> <span style="font-weight:400;color:#888;">(July 21, 2022)</span></h3>
-        <p>Months in archives showed how Black voters were packed into districts for decades on a misunderstanding of law, diluting political power.</p>
-        <h3><a href="https://jaxtrib.org/2023/08/22/is-voting-rights-act-on-trial-on-florida-redistricting-case-could-have-broad-impact/" target="_blank">Ron DeSantis' redistricting court strategy: attack the Voting Rights Act</a> <span style="font-weight:400;color:#888;">(Aug. 22, 2023)</span></h3>
-        <p>Explained the legal battle over Florida’s congressional map and its broader Voting Rights Act implications.</p>
-      </div>
-
-      <!-- Human Interest -->
-      <div class="card">
-        <h2>Human Interest</h2>
-        <div class="blurb">Stories of people navigating hardship, resilience, and societal forces.</div>
-        <h3><a href="https://www.dallasnews.com/news/2012/12/30/cheese-heroin-led-dallas-13-year-old-to-a-life-on-the-edge/" target="_blank">‘Cheese’ Heroin Led Dallas 13-Year-Old to a Life on the Edge</a> <span style="font-weight:400;color:#888;">(Dec. 30, 2012)</span></h3>
-        <p>Mariela Torres’ descent into addiction began in middle school. One of my earliest major features.</p>
-        <h3><a href="https://www.jacksonville.com/story/news/crime/2013/06/30/mothers-grief-week-after-8-year-old-cherish-perrywinkles-death/15824202007/" target="_blank">A Mother's Grief in the Week After 8-Year-Old Cherish Perrywinkle’s Death</a> <span style="font-weight:400;color:#888;">(June 30, 2013)</span></h3>
-        <p>Rayne Perrywinkle’s loss and the aftermath of her daughter’s murder, in her own words.</p>
-      </div>
-
-      <!-- Business -->
-      <div class="card">
-        <h2>Business</h2>
-        <div class="blurb">Revealing corporate and financial decisions that shape communities, for better or worse.</div>
-        <h3><a href="https://www.jacksonville.com/story/news/courts/2014/11/16/reverse-mortgages-were-supposed-to-help-elderly-for-some-it-destroyed-their-retirements/6753989007/" target="_blank">Reverse Mortgages Were Supposed to Help the Elderly. For Some, They Destroyed Their Retirements.</a> <span style="font-weight:400;color:#888;">(Nov. 16, 2014)</span></h3>
-        <p>How aggressive foreclosure practices upended the lives of elderly homeowners.</p>
-      </div>
-
-      <!-- Judges -->
-      <div class="card">
-        <h2>Judges</h2>
-        <div class="blurb">Scrutinizing judicial ethics, sentencing disparities, and the power of Florida’s courts.</div>
-        <h3><a href="https://www.jacksonville.com/story/news/politics/elections/2020/04/24/last-minute-maneuvers-allow-jacksonville-lawyer-to-become-judge-without-election/41700071/" target="_blank">Last-minute maneuvers allow Jacksonville lawyer to become judge without an election</a> <span style="font-weight:400;color:#888;">(Apr. 24, 2020)</span></h3>
-        <p>Exposed how legal insiders gamed the system to secure a judicial seat without election.</p>
-      </div>
     </div>
 
- <div id="social-links"></div>
-<script>
-  fetch('/social.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('social-links').innerHTML = html;
-    });
-</script>
+    <!-- Editing -->
+<div class="card">
+  <h2>Editing</h2>
+  <div class="blurb">Investigative stories shaped from pitch to publication.</div>
 
+  <h3><a href="https://jaxtrib.org/2024/10/24/red-lights-green-cash-how-rep-vicki-lopez-boosted-buspatrol-and-benefited-her-family-donny-wolfe-adrian/" target="_blank">Red Lights, Green Cash: How a Florida Legislator Boosted School Bus Cameras and Benefited Her Family</a> <span style="font-weight:400;color:#888;">(Oct. 24, 2024)</span></h3>
+  <p>
+    Edited an exposé on a lawmaker’s bill that created a market for her own family. Traced campaign cash, shadow lobbying and missing records. Coached an intern through investigation and legal review.
+  </p>
+
+  <h3><a href="https://jaxtrib.org/2023/07/25/jacksonvilles-jail-death-rate-tripled-after-privatizing-medical-care/" target="_blank">Jacksonville's Jail Death Rate Tripled After Privatizing Medical Care</a> <span style="font-weight:400;color:#888;">(July 25, 2023)</span></h3>
+  <p>
+    Edited reporting that exposed a spike in inmate deaths after privatized jail health care—uncovered preventable fatalities, botched meds, whistleblowers and a contract renewed despite criminal conviction.
+  </p>
+
+  <h3><a href="https://jaxtrib.org/2023/05/23/i-cant-miss-those-doses-jacksonville-man-died-after-jail-denied-him-heart-transplant-medicine/" target="_blank">‘My Heart Will Be Rejected’: Jacksonville Man Dies After Missing Doses in Jail</a> <span style="font-weight:400;color:#888;">(May 23, 2023)</span></h3>
+  <p>
+    Edited reporting that uncovered a heart transplant patient’s death after jail staff ignored repeated pleas for life-sustaining meds. Revealed failures by the Sheriff’s Office and contractor.
+  </p>
+
+  <h3><a href="https://jaxtrib.org/2023/04/17/jacksonville-sheriffs-office-strip-search-called-outrageous-unwarranted-embarrassing/" target="_blank">Jacksonville Sheriff's Office Strip Search Called 'Outrageous, Unwarranted, Embarrassing'</a> <span style="font-weight:400;color:#888;">(Apr. 17, 2023)</span></h3>
+  <p>
+    Edited reporting that revealed Jacksonville police stripped a man in public during a routine drug arrest—no drugs found, no search reported. Verified unreleased bodycam footage, exposed misstatements and violations.
+  </p>
+</div>
+
+
+
+    <!-- Redistricting -->
+    <div class="card">
+      <h2>Redistricting</h2>
+      <div class="blurb">Examining how maps are drawn, who benefits, and the court fights over fair representation.</div>
+      <h3>Interactives:</h3>
+      <p>
+        <a href="https://apantazi.github.io/interactives/jacksonville_redistricting">Jacksonville Redistricting Analysis</a> — How district plans segregate voters by race.<br>
+        <a href="https://apantazi.github.io/interactives/neighborhoods">Neighborhood Splits Interactive</a> — Which neighborhoods get divided by lines.
+      </p>
+      <h3><a href="https://jaxtrib.org/2022/01/11/jacksonvilles-redistricting-plan-risks-racial-gerrymandering-claims-experts-say/" target="_blank">Jacksonville’s Redistricting Plan Risks Racial Gerrymandering</a> <span style="font-weight:400;color:#888;">(Jan. 11, 2022)</span></h3>
+      <p>Showed how City Council prioritized race—without legal justification—fueling federal gerrymandering lawsuits.</p>
+      <h3><a href="https://jaxtrib.org/2022/07/21/for-decades-jacksonville-city-council-redistricting-based-off-misinformation-federal-lawsuit-racial-gerrymander/">For Decades, Jacksonville Packed Black Voters Based on Misinformation</a> <span style="font-weight:400;color:#888;">(July 21, 2022)</span></h3>
+      <p>Exposed how a myth shaped district lines and diluted Black political power for generations.</p>
+      <h3><a href="https://jaxtrib.org/2023/08/22/is-voting-rights-act-on-trial-on-florida-redistricting-case-could-have-broad-impact/" target="_blank">DeSantis’ Redistricting Strategy: Attack the Voting Rights Act</a> <span style="font-weight:400;color:#888;">(Aug. 22, 2023)</span></h3>
+      <p>Explained how Florida’s congressional map was designed to diminish Black voting power—setting up a landmark legal fight.</p>
+    </div>
+
+    <!-- Politics -->
+    <div class="card">
+      <h2>Politics</h2>
+      <div class="blurb">Tracking elections, campaign money, and the political maneuvering shaping Florida government.</div>
+      <h3><a href="https://www.jacksonville.com/story/news/politics/2022/06/07/money-and-politics-jacksonvilles-mayoral-race-exposes-lax-campaign-finance-laws/7524911001/" target="_blank">Money and Politics: Jacksonville’s Mayoral Race Exposes Lax Campaign Finance Laws</a> <span style="font-weight:400;color:#888;">(June 7, 2022)</span></h3>
+      <p>Exposed the record-breaking flood of dark money, mega-donors, and loopholes in a heated mayoral race.</p>
+      <h3><a href="https://www.jacksonville.com/story/news/politics/elections/2020/10/29/duval-county-judge-leading-vote-counting-board-donated-to-trump-12-times-thats-not-allowed/6065174002/" target="_blank">Judge Broke Law With Trump Donations While Running Vote Count</a> <span style="font-weight:400;color:#888;">(Oct. 29, 2020)</span></h3>
+      <p>Uncovered a judge’s illegal political donations, leading to his resignation and reforms on election oversight.</p>
+      <h3><a href="https://www.jacksonville.com/story/news/politics/2018/11/04/before-next-governor-is-chosen-florida-supreme-court-hopefuls-face-ideological-test/1805753007/" target="_blank">Florida Supreme Court Hopefuls Face Ideological Test</a> <span style="font-weight:400;color:#888;">(Nov. 4, 2018)</span></h3>
+      <p>Exposed how the governor’s handpicked commission shaped the court, limiting diversity and ideological balance.</p>
+      <h3><a href="https://www.jacksonville.com/story/news/2016/11/09/trump-s-winning-florida-strategy-forget-cities-show-me-suburbs/15731117007/" target="_blank">Trump’s Florida Play: Forget Cities, Win the Suburbs</a> <span style="font-weight:400;color:#888;">(Nov. 9, 2016)</span></h3>
+      <p>Analyzed how Trump’s campaign pivoted to the suburbs—reshaping the state’s political map in 2016.</p>
+    </div>
+    
+    <!-- Policing & Justice -->
+    <div class="card">
+      <h2>Policing & Prosecuting</h2>
+      <div class="blurb">Investigating law enforcement, judicial misconduct, and failures of justice.</div>
+      <h3><a href="https://jaxtrib.org/2020/07/11/jacksonville-sheriffs-office-59-employees-arrested-but-few-consequences/" target="_blank">Jacksonville Sheriff’s Office: 59 Employees Arrested, Few Consequences</a> <span style="font-weight:400;color:#888;">(July 11, 2020)</span></h3>
+      <p>Revealed a pattern of arrests and lack of accountability for Jacksonville Sheriff’s Office employees.</p>
+      <h3><a href="https://www.jacksonville.com/story/news/2017/07/07/why-can-t-jacksonville-sheriff-s-office-stop-violent-officers-before-crisis/15789765007/" target="_blank">Why Can’t the Sheriff’s Office Stop Violent Officers?</a> <span style="font-weight:400;color:#888;">(July 7, 2017)</span></h3>
+      <p>Uncovered failures in discipline that let violent officers stay on the force until crisis hit.</p>
+      <h3><a href="https://www.jacksonville.com/story/news/2015/04/19/nightmare-jail-sexual-assaults-jacksonvilles-detention-facility/15698306007/" target="_blank">A Nightmare in Jail: Sexual Assaults in Detention</a> <span style="font-weight:400;color:#888;">(Apr. 19, 2015)</span></h3>
+      <p>Investigated more than 100 sexual assault allegations in Jacksonville’s jail—prompting policy and facility changes.</p>
+    </div>
+
+    <!-- Human Interest -->
+    <div class="card">
+      <h2>Human Interest</h2>
+      <div class="blurb">Stories of hardship, resilience, and hope amid injustice.</div>
+      <h3><a href="https://www.jacksonville.com/story/sports/high-school/2016/01/31/three-raines-teenagers-varying-pasts-take-aim-one-ultimate-goal/15698066007/" target="_blank">Raines High School: Football as Escape</a> <span style="font-weight:400;color:#888;">(Jan. 31, 2016)</span></h3>
+      <p>Followed young athletes fighting for scholarships—and a way out of neglected neighborhoods shaped by violence and segregation.</p>
+      <h3><a href="https://www.dallasnews.com/news/2012/12/30/cheese-heroin-led-dallas-13-year-old-to-a-life-on-the-edge/" target="_blank">‘Cheese’ Heroin Led Dallas 13-Year-Old to a Life on the Edge</a> <span style="font-weight:400;color:#888;">(Dec. 30, 2012)</span></h3>
+      <p>Tracked a 13-year-old’s descent into addiction and her fight to survive a drug-plagued Dallas neighborhood.</p>
+      <h3><a href="https://www.jacksonville.com/story/news/crime/2013/06/30/mothers-grief-week-after-8-year-old-cherish-perrywinkles-death/15824202007/" target="_blank">A Mother’s Grief After Cherish Perrywinkle’s Death</a> <span style="font-weight:400;color:#888;">(June 30, 2013)</span></h3>
+      <p>Rayne Perrywinkle’s story of loss and resilience after her daughter’s murder, told in her own words.</p>
+    </div>
+
+    <!-- Business -->
+<div class="card">
+  <h2>Business</h2>
+  <div class="blurb">Chronicling economic change, revitalization, and the forces shaping Florida’s businesses and workers.</div>
+  <h3><a href="https://jaxtrib.org/2022/11/28/edward-waters-university-shuts-down-faculty-union-claiming-religious-exemption/" target="_blank">Edward Waters University shuts down faculty union, claiming religious exemption</a> <span style="font-weight:400;color:#888;">(Nov. 28, 2022)</span></h3>
+  <p>
+Broke the story of Edward Waters ending its faculty union by citing religion, fueling debate over labor rights at Florida’s oldest HBCU.  </p>
+      <h3><a href="https://www.jacksonville.com/story/news/2016/10/01/year-later-eureka-garden-residents-still-wait-change/15726294007/" target="_blank">Eureka Garden: One Year Later, Still Waiting for Change</a> <span style="font-weight:400;color:#888;">(Oct. 1, 2016)</span></h3>
+      <p>A look back after reporting 35 stories in a year that exposed dangerous conditions at a federally subsidized slum—sparking congressional hearings, federal reforms, and the complex’s eventual sale and overhaul.</p>
+      <h3><a href="https://www.jacksonville.com/story/news/courts/2014/11/16/reverse-mortgages-were-supposed-to-help-elderly-for-some-it-destroyed-their-retirements/6753989007/" target="_blank">Reverse Mortgages: From Lifeline to Disaster</a> <span style="font-weight:400;color:#888;">(Nov. 16, 2014)</span></h3>
+      <p>Exposed how aggressive lenders and false promises left seniors facing foreclosure and eviction.</p>
+      <h3><a href="https://www.jacksonville.com/story/news/courts/2014/11/16/they-followed-all-of-their-reverse-mortgages-rules-the-lender-kicked-them-out-anyway/6753988007/" target="_blank">They Followed All the Rules. The Lender Kicked Them Out Anyway.</a> <span style="font-weight:400;color:#888;">(Nov. 16, 2014)</span></h3>
+      <p>Showed how a lender evicted a couple from their home, despite their compliance with every rule.</p>
+      <h3><a href="https://www.jacksonville.com/story/business/2014/07/01/a-banks-error-leaves-jacksonville-woman-out-of-her-home/15635257007/" target="_blank">A Bank’s Error Leaves a Jacksonville Woman Out of Her Home</a> <span style="font-weight:400;color:#888;">(July 1, 2014)</span></h3>
+      <p>Exposed how a simple bank clerical error triggered a six-year legal battle and foreclosure for a blameless homeowner.</p>
+        <h3><a href="https://www.jacksonville.com/story/news/2019/10/10/in-putnam-county-could-once-dying-city-be-coming-back-to-life/2518469007/" target="_blank">A 'dying' Palatka sees signs of life</a> <span style="font-weight:400;color:#888;">(Oct. 10, 2019)</span></h3>
+  <p>
+Charted Palatka’s rebound as poverty fell, home values rose, and new leaders revived hope in a struggling county.
+  </p>
+
+  <h3><a href="https://www.jacksonville.com/story/news/2014/05/03/can-st-johns-river-save-palatka-thats-what-these-men-are-hoping/2564762007/" target="_blank">Can the St. Johns River save Palatka? That's what these men are hoping.</a> <span style="font-weight:400;color:#888;">(May 3, 2014)</span></h3>
+  <p>
+    Followed Palatka’s push to spark eco-tourism and growth by reviving the Bartram Trail along the St. Johns River.
+  </p>
+    </div>
+
+    <!-- Judges -->
+    <div class="card">
+      <h2>Judges</h2>
+      <div class="blurb">Scrutinizing judicial ethics, sentencing disparities, and the power of Florida’s courts.</div>
+      <h3><a href="https://www.jacksonville.com/story/news/politics/elections/2020/04/24/last-minute-maneuvers-allow-jacksonville-lawyer-to-become-judge-without-election/41700071/" target="_blank">Last-minute Maneuvers Put Insider on Bench</a> <span style="font-weight:400;color:#888;">(Apr. 24, 2020)</span></h3>
+      <p>Exposed how legal insiders manipulated the process to secure a judicial seat without public election.</p>
+      <h3><a href="https://www.jacksonville.com/story/news/politics/elections/2018/05/03/oft-criticized-lawyer-running-for-judge-unopposed/1795828007/" target="_blank">Oft-criticized Lawyer Runs for Judge Unopposed</a> <span style="font-weight:400;color:#888;">(May 3, 2018)</span></h3>
+      <p>Revealed how a judge’s race lacked competition—despite the candidate’s performance issues and powerful connections.</p>
+      <h3><a href="https://www.jacksonville.com/story/news/courts/2018/08/14/man-shouldnt-have-gone-jail-getting-job-michaels-instead-home-depot-court-rules/928824002/" target="_blank">Man Sent to Jail for Working the “Wrong” Job</a> <span style="font-weight:400;color:#888;">(Aug. 14, 2018)</span></h3>
+      <p>Exposed judicial overreach—sentencing a man to jail for changing jobs while working 60 hours a week.</p>
+      <h3><a href="https://www.jacksonville.com/story/news/2017/05/07/court-woman-who-stole-17-in-food-shouldnt-have-been-declared-danger-society/15755583007/" target="_blank">Woman Sent to Prison for Stealing $17 in Food</a> <span style="font-weight:400;color:#888;">(May 7, 2017)</span></h3>
+      <p>Showed how a “get tough” law meant for violent crime was used to send a nonviolent woman to state prison for shoplifting food.</p>
+      <h3><a href="https://www.jacksonville.com/story/news/local/2020/06/17/without-explanation-jacksonville-judge-sought-jail-time-required-bail-for-protesters/41742773/" target="_blank">Judicial Discretion Under Fire: Protesters in Court</a> <span style="font-weight:400;color:#888;">(June 17, 2020)</span></h3>
+      <p>Documented how a judge denied almost all bond requests for protesters, exposing arbitrary penalties and due process failures.</p>
+      <h3><a href="https://www.jacksonville.com/story/news/local/2020/05/11/jacksonville-police-union-tells-judges-to-fall-in-line-or-lsquofind-new-line-of-workrsquo/112280852/" target="_blank">Police Union to Judges: ‘Fall in Line or Find a New Line of Work’</a> <span style="font-weight:400;color:#888;">(May 11, 2020)</span></h3>
+      <p>Investigated a police union campaign to pressure judges into harsher rulings—raising sharp questions about judicial independence.</p>
+      <h3><a href="https://www.jacksonville.com/story/news/2017/08/12/commission-interviews-17-candidates-duval-judge-opening-virtually-everyone-who/15768401007/" target="_blank">Judicial Appointments: Ideology on Display</a> <span style="font-weight:400;color:#888;">(Aug. 12, 2017)</span></h3>
+      <p>Covered how Jacksonville’s judicial commission grilled 17 applicants on ideology, with partisanship and “textualism” as the price of entry.</p>
+      
+    </div>
   </div>
+
+  <div id="social-links"></div>
+  <script>
+    fetch('/social.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('social-links').innerHTML = html;
+      });
+  </script>
+</div>
 </body>
 </html>
