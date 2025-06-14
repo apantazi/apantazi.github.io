@@ -1,0 +1,515 @@
+
+<!doctype html>
+<html>
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D8Y7D6LYBF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-D8Y7D6LYBF');
+</script>
+<meta charset="utf-8">
+<title>Splitting Jacksonville Neighborhoods • The Tributary</title>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.min.js" type="text/css">
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.3/mapbox-gl-geocoder.css" />
+
+<meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
+<link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+<link rel="icon" href="https://jaxtrib.org/wp-content/uploads/2021/06/cropped-favicon-32x32.png" sizes="32x32">
+<link rel="icon" href="https://i2.wp.com/jaxtrib.org/wp-content/uploads/2021/06/cropped-favicon.png?fit=192%2C192&amp;ssl=1" sizes="192x192">
+<link href="style2.css" rel="stylesheet" type="text/css">
+<!-- OG tags -->
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="google-site-verification" content="c-p4lmvJsiiQlKV2swCEQsMzWP3CX46GCRBL7WXjVxk">
+<meta name="description" content="Explore how Jacksonville's redistricting plans divide neighborhoods with The Tributary's interactive map.">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Interactive • See how Jacksonville's redistricting plans split neighborhoods • The Tributary">
+<meta property="og:description" content="Explore how Jacksonville's redistricting plans divide neighborhoods with The Tributary's interactive map.">
+<meta property="og:url" content="https://data.jaxtrib.org/jacksonville_redistricting">
+<meta property="og:site_name" content="The Tributary">
+<meta property="article:publisher" content="https://www.facebook.com/TheJaxTrib/">
+<meta property="article:published_time" content="2022-01-18T08:00:00+00:00">
+<meta property="article:modified_time" content="2022-01-18T08:00:00+00:00">
+<meta property="og:image" content="https://jaxtrib.org/wp-content/uploads/2022/02/neighborhood.png">
+<meta property="og:image:width" content="1217">
+<meta property="og:image:height" content="930">
+<meta property="og:image:type" content="image/png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Interactive • See how Jacksonville's redistricting plans split neighborhoods • The Tributary">
+<meta name="twitter:description" content="Explore how Jacksonville's redistricting plans divide neighborhoods with The Tributary's interactive map.">
+<meta name="twitter:image" content="https://jaxtrib.org/wp-content/uploads/2022/02/neighborhood.png">
+<meta name="twitter:creator" content="@APantazi">
+<meta name="twitter:site" content="@TheJaxTrib">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Andrew Pantazi">
+<meta property="fb:pages" content="399115500554052">
+<meta name="theme-color" content="#fff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="YES">
+<meta name="apple-mobile-web-app-title" content="The Tributary">
+<meta name="application-name" content="The Tributary">
+</head>
+
+<body>
+<header>
+  <div class="banner">
+    <div class="site-branding">
+      <div class="centered"> <a href="https://jaxtrib.org/" aria-label="The Tributary logo. Click to visit the homepage" class="logo-img"> <img class="logo-img" decoding="async" alt="The Tributary" src="https://jaxtrib.org/wp-content/uploads/2021/09/TRB_TributaryLogo_NoTagline_White.png"></a></div>
+    </div>
+  </div>
+</header>
+<div class="byline-wrap">
+  <div class="byline">
+    <h1 class="hed"><a href="https://jaxtrib.org/2022/02/15/jacksonville-redistricting-plan-splits-dozens-of-neighborhoods/" class="inherit">Split Communities</a></h1>
+    <div class="bylinepubdate">
+      <p class="byline">By <a href="https://jaxtrib.org/author/apantazi">ANDREW PANTAZI</a></p>
+      <p class="pubdate">Feb. 15, 2022</p>
+    </div>
+  </div>
+  <div class="map-control-group">
+    <p class="lead">Jacksonville City Council's redistricting plans split 47 neighborhoods, dividing communities and making it harder for residents to speak with a cohesive voice.</p>
+	<p class="leadin">Zoom in to see neighborhood names. Lines represent the city's official neighborhood boundaries.</p>
+	<p class="leadin"><strong>Note:</strong> Neighborhood maps and names — including typos — were generated by the City of Jacksonville. Blame the city, not us, for not knowing it's Sandalwood, not Sandlewood.</p>
+    <p class="leadin"><a href="https://jaxtrib.org/2022/02/15/jacksonville-redistricting-plan-splits-dozens-of-neighborhoods/" class="leadin">READ MORE</a></p>
+  </div>
+    <div class="etc"> 
+  <a class="etc-link" href="https://data.jaxtrib.org/race" target="_blank">2020 Florida Census</a>
+  <a class="etc-link" href="https://data.jaxtrib.org/jacksonville_redistricting" target="_blank">Gerrymandering</a>
+  <a class="etc-link" href="https://jaxtrib.org/2022/02/15/jacksonville-redistricting-plan-splits-dozens-of-neighborhoods/"  target="_blank">About this tool</a> 
+ <a class="etc-link" href="https://jaxtrib.org/about/contact/"  target="_blank">Contact us</a> 
+</div>
+</div>
+  
+<div class="sidebar">
+  <div class="heading">
+    <h1>Neighborhoods</h1>
+  </div>
+  <div id="listings" class="listings"></div>
+</div>
+<div id="map" class="map"></div>
+
+<script>
+  // define access token
+  mapboxgl.accessToken = 'pk.eyJ1IjoiYXBhbnRhemkxMSIsImEiOiJjbWIxNnBjNXYwM3N3Mm1wd2cxNTdxdGxtIn0.hMx6b5eXMRECQoWiwo79gQ';
+
+    //create map
+    const map = new mapboxgl.Map({
+      container: 'map', // container id
+      style: 'mapbox://styles/apantazi11/cmbvvrcy700bp01s94uxhhllj', // map style URL from Mapbox Studio
+   center: [-81.63, 30.37], // starting position [lng, lat]
+zoom: 10 // starting zoom
+});
+const nav = new mapboxgl.NavigationControl({
+		visualizePitch: true
+	});
+	map.addControl(nav, 'top-left');
+
+
+const neighborhoods = {
+"type": "FeatureCollection",
+"name": "neighborhood-points-7jubpq",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "NAME": "Gilmore" }, "geometry": { "type": "Point", "coordinates": [ -81.554459775596797, 30.363489057415627 ] } },
+{ "type": "Feature", "properties": { "NAME": "Tallyrand" }, "geometry": { "type": "Point", "coordinates": [ -81.634016958984958, 30.366989057306853 ] } },
+{ "type": "Feature", "properties": { "NAME": "Arlington Hills" }, "geometry": { "type": "Point", "coordinates": [ -81.565518125554888, 30.359136386849897 ] } },
+{ "type": "Feature", "properties": { "NAME": "Fara Ways Forrest" }, "geometry": { "type": "Point", "coordinates": [ -81.583532483144324, 30.359035319031456 ] } },
+{ "type": "Feature", "properties": { "NAME": "Arlington Manor" }, "geometry": { "type": "Point", "coordinates": [ -81.596886193826649, 30.35921688075474 ] } },
+{ "type": "Feature", "properties": { "NAME": "Girvin" }, "geometry": { "type": "Point", "coordinates": [ -81.453583053080365, 30.340355780380087 ] } },
+{ "type": "Feature", "properties": { "NAME": "Longbranch" }, "geometry": { "type": "Point", "coordinates": [ -81.630937682959456, 30.359191373858177 ] } },
+{ "type": "Feature", "properties": { "NAME": "Regency" }, "geometry": { "type": "Point", "coordinates": [ -81.547306613185455, 30.337200345549402 ] } },
+{ "type": "Feature", "properties": { "NAME": "Holly Oaks" }, "geometry": { "type": "Point", "coordinates": [ -81.52186240921553, 30.352334172877384 ] } },
+{ "type": "Feature", "properties": { "NAME": "East Arlington" }, "geometry": { "type": "Point", "coordinates": [ -81.4933360379774, 30.338881715092626 ] } },
+{ "type": "Feature", "properties": { "NAME": "Springfield" }, "geometry": { "type": "Point", "coordinates": [ -81.652996480943543, 30.344445837221102 ] } },
+{ "type": "Feature", "properties": { "NAME": "Hogans Creek" }, "geometry": { "type": "Point", "coordinates": [ -81.663350815982895, 30.343519971121747 ] } },
+{ "type": "Feature", "properties": { "NAME": "Phoenix" }, "geometry": { "type": "Point", "coordinates": [ -81.642133371414701, 30.351211283626686 ] } },
+{ "type": "Feature", "properties": { "NAME": "Fairfield" }, "geometry": { "type": "Point", "coordinates": [ -81.62885375274243, 30.350034922414768 ] } },
+{ "type": "Feature", "properties": { "NAME": "Arlingtonwood" }, "geometry": { "type": "Point", "coordinates": [ -81.566362931666646, 30.344628277949383 ] } },
+{ "type": "Feature", "properties": { "NAME": "Lake Lucina" }, "geometry": { "type": "Point", "coordinates": [ -81.591726615018118, 30.347578355179618 ] } },
+{ "type": "Feature", "properties": { "NAME": "Monterey" }, "geometry": { "type": "Point", "coordinates": [ -81.606938407344586, 30.337065985862107 ] } },
+{ "type": "Feature", "properties": { "NAME": "Atlantic Blvd. Estate" }, "geometry": { "type": "Point", "coordinates": [ -81.529975947493696, 30.334775479388597 ] } },
+{ "type": "Feature", "properties": { "NAME": "Arlington" }, "geometry": { "type": "Point", "coordinates": [ -81.591543143272006, 30.335342710750023 ] } },
+{ "type": "Feature", "properties": { "NAME": "East Jacksonville" }, "geometry": { "type": "Point", "coordinates": [ -81.634888385376172, 30.336583646777065 ] } },
+{ "type": "Feature", "properties": { "NAME": "Alderman Park" }, "geometry": { "type": "Point", "coordinates": [ -81.570270616380725, 30.332096841378444 ] } },
+{ "type": "Feature", "properties": { "NAME": "LaVilla" }, "geometry": { "type": "Point", "coordinates": [ -81.669651027050818, 30.330471149793308 ] } },
+{ "type": "Feature", "properties": { "NAME": "Downtown Jacksonville" }, "geometry": { "type": "Point", "coordinates": [ -81.656360411517284, 30.327309008431438 ] } },
+{ "type": "Feature", "properties": { "NAME": "Midtown" }, "geometry": { "type": "Point", "coordinates": [ -81.636571634686618, 30.323453827100384 ] } },
+{ "type": "Feature", "properties": { "NAME": "Woodland Acrea" }, "geometry": { "type": "Point", "coordinates": [ -81.578111440882168, 30.320650982948006 ] } },
+{ "type": "Feature", "properties": { "NAME": "Clifton" }, "geometry": { "type": "Point", "coordinates": [ -81.606774284623825, 30.323228164855959 ] } },
+{ "type": "Feature", "properties": { "NAME": "Brooklyn" }, "geometry": { "type": "Point", "coordinates": [ -81.675391028667519, 30.322158313808206 ] } },
+{ "type": "Feature", "properties": { "NAME": "Sandlewood" }, "geometry": { "type": "Point", "coordinates": [ -81.507028611629678, 30.307169977167373 ] } },
+{ "type": "Feature", "properties": { "NAME": "Southside Estates" }, "geometry": { "type": "Point", "coordinates": [ -81.541862993238681, 30.304966569472967 ] } },
+{ "type": "Feature", "properties": { "NAME": "Atantic Highlands" }, "geometry": { "type": "Point", "coordinates": [ -81.439744155908485, 30.314525141476434 ] } },
+{ "type": "Feature", "properties": { "NAME": "Oak Haven" }, "geometry": { "type": "Point", "coordinates": [ -81.600390685051352, 30.316157582920727 ] } },
+{ "type": "Feature", "properties": { "NAME": "Southside" }, "geometry": { "type": "Point", "coordinates": [ -81.652327420955473, 30.313711532346968 ] } },
+{ "type": "Feature", "properties": { "NAME": "Golden Glades\/The Woo" }, "geometry": { "type": "Point", "coordinates": [ -81.465555208247395, 30.302649178330604 ] } },
+{ "type": "Feature", "properties": { "NAME": "Empire Point" }, "geometry": { "type": "Point", "coordinates": [ -81.617183070091897, 30.309853580236314 ] } },
+{ "type": "Feature", "properties": { "NAME": "San Marco" }, "geometry": { "type": "Point", "coordinates": [ -81.651687164250291, 30.305347618254107 ] } },
+{ "type": "Feature", "properties": { "NAME": "Spring Glen" }, "geometry": { "type": "Point", "coordinates": [ -81.606273586142123, 30.302341235089472 ] } },
+{ "type": "Feature", "properties": { "NAME": "Love Grove\/Riviera Ma" }, "geometry": { "type": "Point", "coordinates": [ -81.597043650044853, 30.298868340730674 ] } },
+{ "type": "Feature", "properties": { "NAME": "Glynea\/Grove Park" }, "geometry": { "type": "Point", "coordinates": [ -81.583197891359205, 30.302277365187035 ] } },
+{ "type": "Feature", "properties": { "NAME": "St. Nicholas" }, "geometry": { "type": "Point", "coordinates": [ -81.625072947547125, 30.304919344213474 ] } },
+{ "type": "Feature", "properties": { "NAME": "Holiday Harbors" }, "geometry": { "type": "Point", "coordinates": [ -81.431444652926402, 30.299248695337347 ] } },
+{ "type": "Feature", "properties": { "NAME": "Spring Park" }, "geometry": { "type": "Point", "coordinates": [ -81.630079752704162, 30.296690162340632 ] } },
+{ "type": "Feature", "properties": { "NAME": "South Riverside" }, "geometry": { "type": "Point", "coordinates": [ -81.643922198353735, 30.290457791341353 ] } },
+{ "type": "Feature", "properties": { "NAME": "Miramer" }, "geometry": { "type": "Point", "coordinates": [ -81.654744916916528, 30.281519373655239 ] } },
+{ "type": "Feature", "properties": { "NAME": "Englewood" }, "geometry": { "type": "Point", "coordinates": [ -81.616873025410783, 30.281456534717464 ] } },
+{ "type": "Feature", "properties": { "NAME": "Hogan" }, "geometry": { "type": "Point", "coordinates": [ -81.580655865725134, 30.291299478969322 ] } },
+{ "type": "Feature", "properties": { "NAME": "Park Ridge" }, "geometry": { "type": "Point", "coordinates": [ -81.502044982501175, 30.290797328321087 ] } },
+{ "type": "Feature", "properties": { "NAME": "Beachwood" }, "geometry": { "type": "Point", "coordinates": [ -81.51404683863133, 30.290902905248249 ] } },
+{ "type": "Feature", "properties": { "NAME": "Sans Souci" }, "geometry": { "type": "Point", "coordinates": [ -81.594241572556953, 30.2811598954696 ] } },
+{ "type": "Feature", "properties": { "NAME": "Kilarney Shores" }, "geometry": { "type": "Point", "coordinates": [ -81.566823621149936, 30.28290478006479 ] } },
+{ "type": "Feature", "properties": { "NAME": "Isle of Palms" }, "geometry": { "type": "Point", "coordinates": [ -81.430305318145372, 30.272489773266788 ] } },
+{ "type": "Feature", "properties": { "NAME": "Beach Haven" }, "geometry": { "type": "Point", "coordinates": [ -81.450200367726822, 30.280312896296113 ] } },
+{ "type": "Feature", "properties": { "NAME": "Sans Pareil" }, "geometry": { "type": "Point", "coordinates": [ -81.499070652273616, 30.272264153850525 ] } },
+{ "type": "Feature", "properties": { "NAME": "Pine Forrest" }, "geometry": { "type": "Point", "coordinates": [ -81.632907655595119, 30.274166702041043 ] } },
+{ "type": "Feature", "properties": { "NAME": "Windy Hill" }, "geometry": { "type": "Point", "coordinates": [ -81.539066265181049, 30.268267120289309 ] } },
+{ "type": "Feature", "properties": { "NAME": "Tiger Hole\/ Secret Wo" }, "geometry": { "type": "Point", "coordinates": [ -81.580677613400397, 30.27179425220729 ] } },
+{ "type": "Feature", "properties": { "NAME": "Brackridge" }, "geometry": { "type": "Point", "coordinates": [ -81.565721726652683, 30.27352057153162 ] } },
+{ "type": "Feature", "properties": { "NAME": "Greenfield Monor" }, "geometry": { "type": "Point", "coordinates": [ -81.601347164362011, 30.267182123196118 ] } },
+{ "type": "Feature", "properties": { "NAME": "Bowden" }, "geometry": { "type": "Point", "coordinates": [ -81.612143059777878, 30.263264917874292 ] } },
+{ "type": "Feature", "properties": { "NAME": "Secret Cove" }, "geometry": { "type": "Point", "coordinates": [ -81.567328167886402, 30.258225225731209 ] } },
+{ "type": "Feature", "properties": { "NAME": "South Point" }, "geometry": { "type": "Point", "coordinates": [ -81.601145201868633, 30.251503205826097 ] } },
+{ "type": "Feature", "properties": { "NAME": "San Jose" }, "geometry": { "type": "Point", "coordinates": [ -81.618797527996321, 30.247122275405317 ] } },
+{ "type": "Feature", "properties": { "NAME": "San Jose Forrest" }, "geometry": { "type": "Point", "coordinates": [ -81.632932988874941, 30.248922120227686 ] } },
+{ "type": "Feature", "properties": { "NAME": "Deerwood" }, "geometry": { "type": "Point", "coordinates": [ -81.528047000276985, 30.23300078865838 ] } },
+{ "type": "Feature", "properties": { "NAME": "Baymeadows" }, "geometry": { "type": "Point", "coordinates": [ -81.567803078244864, 30.237514963832126 ] } },
+{ "type": "Feature", "properties": { "NAME": "Deerwood Center" }, "geometry": { "type": "Point", "coordinates": [ -81.587666936586729, 30.232834314582565 ] } },
+{ "type": "Feature", "properties": { "NAME": "Monclair" }, "geometry": { "type": "Point", "coordinates": [ -81.620877853791242, 30.229063042884391 ] } },
+{ "type": "Feature", "properties": { "NAME": "Goodbys Creek" }, "geometry": { "type": "Point", "coordinates": [ -81.611856156717948, 30.228198812239427 ] } },
+{ "type": "Feature", "properties": { "NAME": "Briarwood" }, "geometry": { "type": "Point", "coordinates": [ -81.602146934025058, 30.225235664518372 ] } },
+{ "type": "Feature", "properties": { "NAME": "Royal Lakes" }, "geometry": { "type": "Point", "coordinates": [ -81.558743950696325, 30.212334944823517 ] } },
+{ "type": "Feature", "properties": { "NAME": "Baymeadows Center" }, "geometry": { "type": "Point", "coordinates": [ -81.569895996442852, 30.205339564772679 ] } },
+{ "type": "Feature", "properties": { "NAME": "Craven" }, "geometry": { "type": "Point", "coordinates": [ -81.599549780710177, 30.212392604090926 ] } },
+{ "type": "Feature", "properties": { "NAME": "Beauclec" }, "geometry": { "type": "Point", "coordinates": [ -81.629754379198843, 30.202843480064338 ] } },
+{ "type": "Feature", "properties": { "NAME": "Pickwick Park" }, "geometry": { "type": "Point", "coordinates": [ -81.628480363155916, 30.196906519460423 ] } },
+{ "type": "Feature", "properties": { "NAME": "Sunbeam" }, "geometry": { "type": "Point", "coordinates": [ -81.598917323852547, 30.196951917343739 ] } },
+{ "type": "Feature", "properties": { "NAME": "Mandarin Station" }, "geometry": { "type": "Point", "coordinates": [ -81.580140962221392, 30.181043102877101 ] } },
+{ "type": "Feature", "properties": { "NAME": "Arrowhead" }, "geometry": { "type": "Point", "coordinates": [ -81.617825046370001, 30.190830863330156 ] } },
+{ "type": "Feature", "properties": { "NAME": "Avenues" }, "geometry": { "type": "Point", "coordinates": [ -81.554127268480983, 30.190137019469294 ] } },
+{ "type": "Feature", "properties": { "NAME": "Deercreek" }, "geometry": { "type": "Point", "coordinates": [ -81.524189784251831, 30.175438832286062 ] } },
+{ "type": "Feature", "properties": { "NAME": "Mandarin" }, "geometry": { "type": "Point", "coordinates": [ -81.648521111140269, 30.153481171462406 ] } },
+{ "type": "Feature", "properties": { "NAME": "Southwood" }, "geometry": { "type": "Point", "coordinates": [ -81.614018361763243, 30.178294107699049 ] } },
+{ "type": "Feature", "properties": { "NAME": "Greenland" }, "geometry": { "type": "Point", "coordinates": [ -81.558224305777458, 30.157411851737653 ] } },
+{ "type": "Feature", "properties": { "NAME": "Loretto" }, "geometry": { "type": "Point", "coordinates": [ -81.617775800038459, 30.166877938682028 ] } },
+{ "type": "Feature", "properties": { "NAME": "Julington Creek" }, "geometry": { "type": "Point", "coordinates": [ -81.614236339012422, 30.147091647948788 ] } },
+{ "type": "Feature", "properties": { "NAME": "Del Rio" }, "geometry": { "type": "Point", "coordinates": [ -81.578988966304692, 30.141919814641888 ] } },
+{ "type": "Feature", "properties": { "NAME": "Bayard" }, "geometry": { "type": "Point", "coordinates": [ -81.514190981514588, 30.142111117870105 ] } },
+{ "type": "Feature", "properties": { "NAME": "Black Hammock Island" }, "geometry": { "type": "Point", "coordinates": [ -81.481423591007285, 30.507768392028865 ] } },
+{ "type": "Feature", "properties": { "NAME": "Eagle Bend" }, "geometry": { "type": "Point", "coordinates": [ -81.580416765167669, 30.53631063285053 ] } },
+{ "type": "Feature", "properties": { "NAME": "Forrest Trails" }, "geometry": { "type": "Point", "coordinates": [ -81.750738871184353, 30.472298318156003 ] } },
+{ "type": "Feature", "properties": { "NAME": "North Lake" }, "geometry": { "type": "Point", "coordinates": [ -81.696479679005762, 30.463102555486302 ] } },
+{ "type": "Feature", "properties": { "NAME": "Biscayne" }, "geometry": { "type": "Point", "coordinates": [ -81.685898582719332, 30.449665166891624 ] } },
+{ "type": "Feature", "properties": { "NAME": "Dinsmore" }, "geometry": { "type": "Point", "coordinates": [ -81.769370626313474, 30.429472892979213 ] } },
+{ "type": "Feature", "properties": { "NAME": "Garden City" }, "geometry": { "type": "Point", "coordinates": [ -81.70687333366304, 30.444905269046647 ] } },
+{ "type": "Feature", "properties": { "NAME": "Highlands" }, "geometry": { "type": "Point", "coordinates": [ -81.673660148523766, 30.426290796888797 ] } },
+{ "type": "Feature", "properties": { "NAME": "Jax Naval Air Station" }, "geometry": { "type": "Point", "coordinates": [ -81.686214980016103, 30.219087296227233 ] } },
+{ "type": "Feature", "properties": { "NAME": "Lakewood" }, "geometry": { "type": "Point", "coordinates": [ -81.640497231334493, 30.266024423125959 ] } },
+{ "type": "Feature", "properties": { "NAME": "Holiday Hill\/Century" }, "geometry": { "type": "Point", "coordinates": [ -81.56612012055939, 30.303048260139267 ] } },
+{ "type": "Feature", "properties": { "NAME": "45th & Moncrief" }, "geometry": { "type": "Point", "coordinates": [ -81.680161711104745, 30.377067670540946 ] } },
+{ "type": "Feature", "properties": { "NAME": "College Gardens" }, "geometry": { "type": "Point", "coordinates": [ -81.702462711956912, 30.34675621180855 ] } },
+{ "type": "Feature", "properties": { "NAME": "Atlantic Beach" }, "geometry": { "type": "Point", "coordinates": [ -81.408917095782328, 30.338380080541789 ] } },
+{ "type": "Feature", "properties": { "NAME": "Neptune Beach" }, "geometry": { "type": "Point", "coordinates": [ -81.412337948777818, 30.316512677774742 ] } },
+{ "type": "Feature", "properties": { "NAME": "Baldwin" }, "geometry": { "type": "Point", "coordinates": [ -81.973363166633348, 30.304918789318332 ] } },
+{ "type": "Feature", "properties": { "NAME": "Jacksonville Beach" }, "geometry": { "type": "Point", "coordinates": [ -81.405245873630321, 30.278101479274145 ] } },
+{ "type": "Feature", "properties": { "NAME": "The Cape" }, "geometry": { "type": "Point", "coordinates": [ -81.564296256986566, 30.493015141376262 ] } },
+{ "type": "Feature", "properties": { "NAME": "Jamestown" }, "geometry": { "type": "Point", "coordinates": [ -81.587272620487454, 30.480681025286753 ] } },
+{ "type": "Feature", "properties": { "NAME": "Duval" }, "geometry": { "type": "Point", "coordinates": [ -81.618641015050642, 30.476659323412171 ] } },
+{ "type": "Feature", "properties": { "NAME": "Oceanway" }, "geometry": { "type": "Point", "coordinates": [ -81.595029468065647, 30.452750437103425 ] } },
+{ "type": "Feature", "properties": { "NAME": "San Mateo" }, "geometry": { "type": "Point", "coordinates": [ -81.619109617702705, 30.437390217791243 ] } },
+{ "type": "Feature", "properties": { "NAME": "Brown Island" }, "geometry": { "type": "Point", "coordinates": [ -81.529788727450523, 30.425772868997299 ] } },
+{ "type": "Feature", "properties": { "NAME": "East Point" }, "geometry": { "type": "Point", "coordinates": [ -81.594485567371734, 30.427498715627348 ] } },
+{ "type": "Feature", "properties": { "NAME": "North New Berlin" }, "geometry": { "type": "Point", "coordinates": [ -81.566521872007044, 30.422897613946979 ] } },
+{ "type": "Feature", "properties": { "NAME": "Copper Hill" }, "geometry": { "type": "Point", "coordinates": [ -81.740382333171993, 30.433171015325886 ] } },
+{ "type": "Feature", "properties": { "NAME": "College Park" }, "geometry": { "type": "Point", "coordinates": [ -81.701806159055593, 30.429972103448499 ] } },
+{ "type": "Feature", "properties": { "NAME": "Biscayne Terrace" }, "geometry": { "type": "Point", "coordinates": [ -81.718848474603519, 30.427688025359345 ] } },
+{ "type": "Feature", "properties": { "NAME": "Lincoln Hills" }, "geometry": { "type": "Point", "coordinates": [ -81.747774300077722, 30.40401383177943 ] } },
+{ "type": "Feature", "properties": { "NAME": "Sherwood Forrest" }, "geometry": { "type": "Point", "coordinates": [ -81.72341087023311, 30.410326111445809 ] } },
+{ "type": "Feature", "properties": { "NAME": "Cisco Gardens" }, "geometry": { "type": "Point", "coordinates": [ -81.798497519105936, 30.381802650569064 ] } },
+{ "type": "Feature", "properties": { "NAME": "Riverview" }, "geometry": { "type": "Point", "coordinates": [ -81.686657964301162, 30.407655557846301 ] } },
+{ "type": "Feature", "properties": { "NAME": "Osceola Forrest" }, "geometry": { "type": "Point", "coordinates": [ -81.705536941061254, 30.410918790917233 ] } },
+{ "type": "Feature", "properties": { "NAME": "Harborview" }, "geometry": { "type": "Point", "coordinates": [ -81.715632401480192, 30.398303938203746 ] } },
+{ "type": "Feature", "properties": { "NAME": "Ribault" }, "geometry": { "type": "Point", "coordinates": [ -81.705997025409374, 30.391114493832234 ] } },
+{ "type": "Feature", "properties": { "NAME": "Lake Forrest Hills" }, "geometry": { "type": "Point", "coordinates": [ -81.691204653904975, 30.389768301841638 ] } },
+{ "type": "Feature", "properties": { "NAME": "Picketville" }, "geometry": { "type": "Point", "coordinates": [ -81.755688669705677, 30.382715808608605 ] } },
+{ "type": "Feature", "properties": { "NAME": "Carver Manor" }, "geometry": { "type": "Point", "coordinates": [ -81.728445681088985, 30.382666430208811 ] } },
+{ "type": "Feature", "properties": { "NAME": "Edgewood Manor" }, "geometry": { "type": "Point", "coordinates": [ -81.714688185820734, 30.379862016433794 ] } },
+{ "type": "Feature", "properties": { "NAME": "Royal Terrace" }, "geometry": { "type": "Point", "coordinates": [ -81.693591498679311, 30.371887672064702 ] } },
+{ "type": "Feature", "properties": { "NAME": "Magnolia Gardens" }, "geometry": { "type": "Point", "coordinates": [ -81.712146705135353, 30.369383648961531 ] } },
+{ "type": "Feature", "properties": { "NAME": "Biltmore" }, "geometry": { "type": "Point", "coordinates": [ -81.749483870281395, 30.360299802144237 ] } },
+{ "type": "Feature", "properties": { "NAME": "Bulls Bay" }, "geometry": { "type": "Point", "coordinates": [ -81.790241669019736, 30.35515478719277 ] } },
+{ "type": "Feature", "properties": { "NAME": "Moncrief" }, "geometry": { "type": "Point", "coordinates": [ -81.68249238763218, 30.361545935670431 ] } },
+{ "type": "Feature", "properties": { "NAME": "Grand Park" }, "geometry": { "type": "Point", "coordinates": [ -81.700860931978653, 30.358351027065922 ] } },
+{ "type": "Feature", "properties": { "NAME": "29th & Chase" }, "geometry": { "type": "Point", "coordinates": [ -81.673034626180339, 30.361253488813386 ] } },
+{ "type": "Feature", "properties": { "NAME": "Marrietta" }, "geometry": { "type": "Point", "coordinates": [ -81.798439047700143, 30.336531961788264 ] } },
+{ "type": "Feature", "properties": { "NAME": "Allendale" }, "geometry": { "type": "Point", "coordinates": [ -81.722957688872327, 30.350529073923475 ] } },
+{ "type": "Feature", "properties": { "NAME": "Mid Westside" }, "geometry": { "type": "Point", "coordinates": [ -81.68092756063028, 30.349506857808386 ] } },
+{ "type": "Feature", "properties": { "NAME": "Paxton" }, "geometry": { "type": "Point", "coordinates": [ -81.737229142674025, 30.340083863571252 ] } },
+{ "type": "Feature", "properties": { "NAME": "Commonwealth" }, "geometry": { "type": "Point", "coordinates": [ -81.754477599921884, 30.330295004387921 ] } },
+{ "type": "Feature", "properties": { "NAME": "New Town" }, "geometry": { "type": "Point", "coordinates": [ -81.68018101901859, 30.338937119800455 ] } },
+{ "type": "Feature", "properties": { "NAME": "Woodstock" }, "geometry": { "type": "Point", "coordinates": [ -81.718892184671986, 30.336713992168391 ] } },
+{ "type": "Feature", "properties": { "NAME": "Robinsons Addition" }, "geometry": { "type": "Point", "coordinates": [ -81.698523217421908, 30.336874248942998 ] } },
+{ "type": "Feature", "properties": { "NAME": "Otis" }, "geometry": { "type": "Point", "coordinates": [ -81.87739762844808, 30.322748068357107 ] } },
+{ "type": "Feature", "properties": { "NAME": "Mixon Town" }, "geometry": { "type": "Point", "coordinates": [ -81.686017675083193, 30.328837267161287 ] } },
+{ "type": "Feature", "properties": { "NAME": "Whitehouse" }, "geometry": { "type": "Point", "coordinates": [ -81.826720868463866, 30.321873013623343 ] } },
+{ "type": "Feature", "properties": { "NAME": "Lackawanna" }, "geometry": { "type": "Point", "coordinates": [ -81.713115210772585, 30.325498747380191 ] } },
+{ "type": "Feature", "properties": { "NAME": "Edgewood" }, "geometry": { "type": "Point", "coordinates": [ -81.737213672984737, 30.321527682198337 ] } },
+{ "type": "Feature", "properties": { "NAME": "Riverside" }, "geometry": { "type": "Point", "coordinates": [ -81.693027693385915, 30.312157715893939 ] } },
+{ "type": "Feature", "properties": { "NAME": "Murray Hill" }, "geometry": { "type": "Point", "coordinates": [ -81.719928291833682, 30.309706721067485 ] } },
+{ "type": "Feature", "properties": { "NAME": "Normandy" }, "geometry": { "type": "Point", "coordinates": [ -81.741463821326491, 30.312286875090891 ] } },
+{ "type": "Feature", "properties": { "NAME": "Normandy Village" }, "geometry": { "type": "Point", "coordinates": [ -81.762703390100086, 30.309367138470499 ] } },
+{ "type": "Feature", "properties": { "NAME": "Rolling Hills" }, "geometry": { "type": "Point", "coordinates": [ -81.78158292825988, 30.30555631653192 ] } },
+{ "type": "Feature", "properties": { "NAME": "Crystal Springs" }, "geometry": { "type": "Point", "coordinates": [ -81.82319388394238, 30.299763549631567 ] } },
+{ "type": "Feature", "properties": { "NAME": "Avondale" }, "geometry": { "type": "Point", "coordinates": [ -81.710266737927739, 30.298225138226062 ] } },
+{ "type": "Feature", "properties": { "NAME": "Jacksonville Farms\/Te" }, "geometry": { "type": "Point", "coordinates": [ -81.860767384618427, 30.276043706732253 ] } },
+{ "type": "Feature", "properties": { "NAME": "Hillcrest" }, "geometry": { "type": "Point", "coordinates": [ -81.7404833513596, 30.297564791541074 ] } },
+{ "type": "Feature", "properties": { "NAME": "Hyde park" }, "geometry": { "type": "Point", "coordinates": [ -81.758327566863741, 30.285280706182597 ] } },
+{ "type": "Feature", "properties": { "NAME": "Normandy Estates" }, "geometry": { "type": "Point", "coordinates": [ -81.802492548702688, 30.291013596309757 ] } },
+{ "type": "Feature", "properties": { "NAME": "Normandy Manor" }, "geometry": { "type": "Point", "coordinates": [ -81.780496293321718, 30.282728322473357 ] } },
+{ "type": "Feature", "properties": { "NAME": "Fairfax" }, "geometry": { "type": "Point", "coordinates": [ -81.715438813123939, 30.283338346895754 ] } },
+{ "type": "Feature", "properties": { "NAME": "Lakeshore" }, "geometry": { "type": "Point", "coordinates": [ -81.727382964642644, 30.279250386586828 ] } },
+{ "type": "Feature", "properties": { "NAME": "Cedar Hills Estates" }, "geometry": { "type": "Point", "coordinates": [ -81.741497362079812, 30.271409591137477 ] } },
+{ "type": "Feature", "properties": { "NAME": "Herlong" }, "geometry": { "type": "Point", "coordinates": [ -81.803612226090209, 30.268830419333081 ] } },
+{ "type": "Feature", "properties": { "NAME": "Ortega" }, "geometry": { "type": "Point", "coordinates": [ -81.701895249774765, 30.267263735336638 ] } },
+{ "type": "Feature", "properties": { "NAME": "Jax Heights West" }, "geometry": { "type": "Point", "coordinates": [ -81.830659000456222, 30.257233350455767 ] } },
+{ "type": "Feature", "properties": { "NAME": "Ortega Forest" }, "geometry": { "type": "Point", "coordinates": [ -81.709006246816728, 30.260571749326477 ] } },
+{ "type": "Feature", "properties": { "NAME": "Cedar Hills" }, "geometry": { "type": "Point", "coordinates": [ -81.758540910257878, 30.257316386714429 ] } },
+{ "type": "Feature", "properties": { "NAME": "Sweetwater" }, "geometry": { "type": "Point", "coordinates": [ -81.758415726670435, 30.264391474083819 ] } },
+{ "type": "Feature", "properties": { "NAME": "Jacksonville Heights" }, "geometry": { "type": "Point", "coordinates": [ -81.782484437231545, 30.248412653621539 ] } },
+{ "type": "Feature", "properties": { "NAME": "Confederate Point" }, "geometry": { "type": "Point", "coordinates": [ -81.735609359541698, 30.257328788577794 ] } },
+{ "type": "Feature", "properties": { "NAME": "Ortega Farms" }, "geometry": { "type": "Point", "coordinates": [ -81.723711681273016, 30.253095745485492 ] } },
+{ "type": "Feature", "properties": { "NAME": "Venetia" }, "geometry": { "type": "Point", "coordinates": [ -81.694972761184019, 30.243627281756737 ] } },
+{ "type": "Feature", "properties": { "NAME": "Oak Hill" }, "geometry": { "type": "Point", "coordinates": [ -81.755398060308764, 30.237713613657085 ] } },
+{ "type": "Feature", "properties": { "NAME": "Wesconnett" }, "geometry": { "type": "Point", "coordinates": [ -81.72628459579154, 30.240774187121687 ] } },
+{ "type": "Feature", "properties": { "NAME": "Jax  Heights South" }, "geometry": { "type": "Point", "coordinates": [ -81.815993743889521, 30.237998687052865 ] } },
+{ "type": "Feature", "properties": { "NAME": "McGirts Creek" }, "geometry": { "type": "Point", "coordinates": [ -81.772804306919411, 30.22074236155175 ] } },
+{ "type": "Feature", "properties": { "NAME": "Yukon" }, "geometry": { "type": "Point", "coordinates": [ -81.703278440978522, 30.233134883437305 ] } },
+{ "type": "Feature", "properties": { "NAME": "Duclay Forest" }, "geometry": { "type": "Point", "coordinates": [ -81.727281066785338, 30.219637268585757 ] } },
+{ "type": "Feature", "properties": { "NAME": "Chimmey Lakes" }, "geometry": { "type": "Point", "coordinates": [ -81.823801236166801, 30.204931029700855 ] } },
+{ "type": "Feature", "properties": { "NAME": "Ortega Hills" }, "geometry": { "type": "Point", "coordinates": [ -81.714408677671187, 30.204854774883412 ] } },
+{ "type": "Feature", "properties": { "NAME": "Duclay" }, "geometry": { "type": "Point", "coordinates": [ -81.74872846091877, 30.214088513620027 ] } },
+{ "type": "Feature", "properties": { "NAME": "Settlers Landing" }, "geometry": { "type": "Point", "coordinates": [ -81.792627061188099, 30.214556664883396 ] } },
+{ "type": "Feature", "properties": { "NAME": "Maxville" }, "geometry": { "type": "Point", "coordinates": [ -82.005314882814716, 30.195032123161525 ] } },
+{ "type": "Feature", "properties": { "NAME": "Argyle Forrest" }, "geometry": { "type": "Point", "coordinates": [ -81.755149223883265, 30.196030263544056 ] } },
+{ "type": "Feature", "properties": { "NAME": "Pecan" }, "geometry": { "type": "Point", "coordinates": [ -81.605930855589065, 30.51049320272044 ] } },
+{ "type": "Feature", "properties": { "NAME": "Jax. North Estates" }, "geometry": { "type": "Point", "coordinates": [ -81.653656907142704, 30.475505361769446 ] } },
+{ "type": "Feature", "properties": { "NAME": "Pumpkin Hill" }, "geometry": { "type": "Point", "coordinates": [ -81.496469743766909, 30.434373854561898 ] } },
+{ "type": "Feature", "properties": { "NAME": "Turtle Creek" }, "geometry": { "type": "Point", "coordinates": [ -81.65566184731405, 30.447983208745903 ] } },
+{ "type": "Feature", "properties": { "NAME": "Fort George Island" }, "geometry": { "type": "Point", "coordinates": [ -81.440679726644433, 30.416163770908561 ] } },
+{ "type": "Feature", "properties": { "NAME": "Imeson Park" }, "geometry": { "type": "Point", "coordinates": [ -81.630143018958449, 30.416211764302737 ] } },
+{ "type": "Feature", "properties": { "NAME": "Hollyford" }, "geometry": { "type": "Point", "coordinates": [ -81.653185555658354, 30.412946451211486 ] } },
+{ "type": "Feature", "properties": { "NAME": "Blount Island" }, "geometry": { "type": "Point", "coordinates": [ -81.531480340340195, 30.399301578897656 ] } },
+{ "type": "Feature", "properties": { "NAME": "New Berlin" }, "geometry": { "type": "Point", "coordinates": [ -81.563198051669445, 30.40317639372935 ] } },
+{ "type": "Feature", "properties": { "NAME": "Lake Forrest" }, "geometry": { "type": "Point", "coordinates": [ -81.671726804829149, 30.392548143461219 ] } },
+{ "type": "Feature", "properties": { "NAME": "Little Marsh Hill" }, "geometry": { "type": "Point", "coordinates": [ -81.48447850872688, 30.396628039105721 ] } },
+{ "type": "Feature", "properties": { "NAME": "Mayport" }, "geometry": { "type": "Point", "coordinates": [ -81.430080771682952, 30.392820393879049 ] } },
+{ "type": "Feature", "properties": { "NAME": "Panama Park" }, "geometry": { "type": "Point", "coordinates": [ -81.643450238579391, 30.377455261574777 ] } },
+{ "type": "Feature", "properties": { "NAME": "Tallulah\/ North Shore" }, "geometry": { "type": "Point", "coordinates": [ -81.658816060001527, 30.38296935940776 ] } },
+{ "type": "Feature", "properties": { "NAME": "Fort Caroline Shores" }, "geometry": { "type": "Point", "coordinates": [ -81.477779800313527, 30.371463397453844 ] } },
+{ "type": "Feature", "properties": { "NAME": "Charter Point" }, "geometry": { "type": "Point", "coordinates": [ -81.608648790925585, 30.383044626761158 ] } },
+{ "type": "Feature", "properties": { "NAME": "Beacon Hills & Harbou" }, "geometry": { "type": "Point", "coordinates": [ -81.521679387614, 30.376039787928473 ] } },
+{ "type": "Feature", "properties": { "NAME": "St. Johns Bluff" }, "geometry": { "type": "Point", "coordinates": [ -81.501204522410262, 30.384144955042196 ] } },
+{ "type": "Feature", "properties": { "NAME": "Woodmere" }, "geometry": { "type": "Point", "coordinates": [ -81.589773348950672, 30.372760722938988 ] } },
+{ "type": "Feature", "properties": { "NAME": "North Beach" }, "geometry": { "type": "Point", "coordinates": [ -81.423786466853343, 30.35568627006473 ] } },
+{ "type": "Feature", "properties": { "NAME": "Cobblestone" }, "geometry": { "type": "Point", "coordinates": [ -81.494112413072003, 30.368559470837955 ] } },
+{ "type": "Feature", "properties": { "NAME": "Hidden Hills" }, "geometry": { "type": "Point", "coordinates": [ -81.508973626411546, 30.36812015972162 ] } },
+{ "type": "Feature", "properties": { "NAME": "Brentwood" }, "geometry": { "type": "Point", "coordinates": [ -81.657837095483458, 30.365388488830668 ] } },
+{ "type": "Feature", "properties": { "NAME": "University Park" }, "geometry": { "type": "Point", "coordinates": [ -81.606423020309649, 30.369292523224047 ] } },
+{ "type": "Feature", "properties": { "NAME": "Colony Cove" }, "geometry": { "type": "Point", "coordinates": [ -81.575767504966976, 30.370411115097841 ] } }
+]
+};
+
+
+/* Assign a unique ID to each neighborhood */
+neighborhoods.features.forEach(function (neighborhood, i) {
+  neighborhood.properties.id = i;
+});
+
+map.on('load', () => {
+map.addSource('council-districts', {
+  type: 'vector',
+  url: 'mapbox://apantazi11.6vbdnuy3'
+});
+
+map.addLayer({
+  'id': 'districts-fill',
+  'type': 'fill',
+  'source': 'council-districts',
+  'source-layer': 'polygon-8pc613',
+  'paint': {
+    'fill-color': [
+      'match',
+      ['get', 'id'],
+      1, '#7AC7CA',
+      2, '#BDBB8A',
+      // ...etc...
+      '#ccc'
+    ],
+    'fill-opacity': 0.3
+  }
+});
+map.addLayer({
+  'id': 'districts-outline',
+  'type': 'line',
+  'source': 'council-districts',
+  'source-layer': 'polygon-8pc613',
+  'paint': {
+    'line-color': '#333',
+    'line-width': 2
+  }
+});
+map.addSource('places', {
+'type': 'geojson',
+'data': neighborhoods
+});
+ 
+/**
+* Add all the things to the page:
+* - The location listings on the side of the page
+* - The markers onto the map
+*/
+buildLocationList(neighborhoods);
+addMarkers();
+});
+ 
+/**
+* Add a marker to the map for every neighborhood listing.
+**/
+function addMarkers() {
+/* For each feature in the GeoJSON object above: */
+for (const marker of neighborhoods.features) {
+/* Create a div element for the marker. */
+const el = document.createElement('div');
+/* Assign a unique `id` to the marker. */
+el.id = `marker-${marker.properties.id}`;
+/* Assign the `marker` class to each marker for styling. */
+el.className = 'marker';
+ 
+/**
+* Create a marker using the div element
+* defined above and add it to the map.
+**/
+new mapboxgl.Marker(el, { offset: [0, -23] })
+.setLngLat(marker.geometry.coordinates)
+.addTo(map);
+ 
+/**
+* Listen to the element and when it is clicked, do three things:
+* 1. Fly to the point
+* 2. Close all other popups and display popup for clicked neighborhood
+* 3. Highlight listing in sidebar (and remove highlight for all other listings)
+**/
+el.addEventListener('click', (e) => {
+/* Fly to the point */
+flyToNeighborhood(marker);
+/* Close all other popups and display popup for clicked neighborhood */
+createPopUp(marker);
+/* Highlight listing in sidebar */
+const activeItem = document.getElementsByClassName('active');
+e.stopPropagation();
+if (activeItem[0]) {
+activeItem[0].classList.remove('active');
+}
+const listing = document.getElementById(
+`listing-${marker.properties.id}`
+);
+listing.classList.add('active');
+});
+}
+}
+ 
+/**
+* Add a listing for each neighborhood to the sidebar.
+**/
+function buildLocationList(neighborhoods) {
+for (const neighborhood of neighborhoods.features) {
+/* Add a new listing section to the sidebar. */
+const listings = document.getElementById('listings');
+const listing = listings.appendChild(document.createElement('div'));
+/* Assign a unique `id` to the listing. */
+listing.id = `listing-${neighborhood.properties.id}`;
+/* Assign the `item` class to each listing for styling. */
+listing.className = 'item';
+ 
+/* Add the link to the individual listing created above. */
+const link = listing.appendChild(document.createElement('a'));
+link.href = '#';
+link.className = 'title';
+link.id = `link-${neighborhood.properties.id}`;
+link.innerHTML = `${neighborhood.properties.NAME}`;
+ 
+/**
+* Listen to the element and when it is clicked, do four things:
+* 1. Update the `currentFeature` to the neighborhood associated with the clicked link
+* 2. Fly to the point
+* 3. Close all other popups and display popup for clicked neighborhood
+* 4. Highlight listing in sidebar (and remove highlight for all other listings)
+**/
+link.addEventListener('click', function () {
+for (const feature of neighborhoods.features) {
+if (this.id === `link-${feature.properties.id}`) {
+flyToNeighborhood(feature);
+createPopUp(feature);
+}
+}
+const activeItem = document.getElementsByClassName('active');
+if (activeItem[0]) {
+activeItem[0].classList.remove('active');
+}
+this.parentNode.classList.add('active');
+});
+}
+}
+ 
+/**
+* Use Mapbox GL JS's `flyTo` to move the camera smoothly
+* a given center point.
+**/
+function flyToNeighborhood(currentFeature) {
+map.flyTo({
+center: currentFeature.geometry.coordinates,
+zoom: 15
+});
+}
+ 
+/**
+* Create a Mapbox GL JS `Popup`.
+**/
+function createPopUp(currentFeature) {
+const popUps = document.getElementsByClassName('mapboxgl-popup');
+if (popUps[0]) popUps[0].remove();
+const popup = new mapboxgl.Popup({ closeOnClick: false })
+.setLngLat(currentFeature.geometry.coordinates)
+.setHTML(
+`<h3>${currentFeature.properties.NAME}</h3>`
+)
+.addTo(map);
+}
+
+const geocoder = new MapboxGeocoder({
+	accessToken: mapboxgl.accessToken,
+	marker: {
+	color: '#098677'
+	},
+	mapboxgl: mapboxgl,
+	    countries: "us",
+    types:
+        "postcode,district,place,locality,neighborhood,region,address,poi.landmark"
+	});
+	map.addControl(geocoder,'bottom-left');
+
+</script>
+</body>
+</html>
