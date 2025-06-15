@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://andrewpantazi.com/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://andrewpantazi.com/clips.html</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://andrewpantazi.com/interactives.html</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://andrewpantazi.com/resume.html</loc>
+    <changefreq>yearly</changefreq>
+  </url>
+</urlset>
