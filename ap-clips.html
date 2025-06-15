@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Clips | Andrew Pantazi</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fjalla+One|Libre+Franklin:400,700&display=swap">
+  <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="header"></div>
+<script>
+  fetch('header.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('header').innerHTML = data;
+      const path = window.location.pathname;
+      if (path.includes("clips") || path.includes("ap-clips")) {
+        document.getElementById('clips-link').classList.add('active');
+      } else if (path.includes("interactives")) {
+        document.getElementById('interactives-link').classList.add('active');
+      } else if (path.includes("resume")) {
+        document.getElementById('resume-link').classList.add('active');
+      } else {
+        document.getElementById('home-link').classList.add('active');
+      }
+    });
+</script>
+<div class="container">
+  <h1>Clips</h1>
+  <div class="grid">
+
+    <!-- 1 -->
+    <div class="card">
+      <h3>
+        <a href="https://www.jacksonville.com/story/news/politics/elections/2020/10/29/duval-county-vote-counting-board-member-calls-resignation-chairman-trump/6071984002/" target="_blank">
+          Duval County judge resigns from vote-counting board after Trump donations uncovered
+        </a>
+        <span style="font-weight:400;color:#888;">(Oct. 29, 2020)</span>
+      </h3>
+      <p>
+        While covering a local election board embroiled in transparency violations, I used federal, state and judicial databases—live, during a meeting—to uncover that its acting chair, a sitting judge, had violated state law and judicial ethics with 12 donations to Trump. My reporting forced his resignation within hours and led the board to reverse its access restrictions.
+      </p>
+    </div>
+
+    <!-- 2 -->
+    <div class="card">
+      <h3>
+        <a href="https://jaxtrib.org/2022/06/02/jacksonville-sheriff-mike-williams-to-resign-after-the-tributary-revealed-he-moved-to-nassau-county/" target="_blank">
+          Jacksonville sheriff resigns after reporting reveals illegal residency
+        </a>
+        <span style="font-weight:400;color:#888;">(June 2, 2022)</span>
+      </h3>
+      <p>
+        After a tip, I used property, voting and legal records to prove Jacksonville’s sheriff no longer lived in the county. I broke the story within days, coordinated a citywide news release, and triggered his resignation days later, showing my ability to deliver rapid, high-stakes accountability journalism.
+      </p>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+      <h3>
+        <a href="https://jaxtrib.org/2024/03/14/former-jacksonville-public-defender-matt-shirk-disbarred/" target="_blank">
+          Former Jacksonville Public Defender Matt Shirk disbarred
+        </a>
+        <span style="font-weight:400;color:#888;">(Mar. 14, 2024)</span>
+      </h3>
+      <p>
+        Over a decade, I delivered a steady cadence of stories exposing the public defender’s misconduct, from hiring scandals to fiscal abuse. Even after voters removed him, my follow-ups uncovered ongoing damage and evasion. This persistent reporting led to his eventual disbarment.
+      </p>
+    </div>
+
+    <!-- 4 -->
+    <div class="card">
+      <h3>
+        <a href="https://www.jacksonville.com/story/news/local/2020/05/29/videos-raise-racial-concerns-about-jacksonville-sheriffrsquos-office-interactions-with-public/41750393/" target="_blank">
+          Videos raise racial concerns about Jacksonville Sheriff’s Office interactions with public
+        </a>
+        <span style="font-weight:400;color:#888;">(May 29, 2020)</span>
+      </h3>
+      <p>
+        In the aftermath of George Floyd’s murder, I quickly reported on two viral Jacksonville police videos: one showed a Black woman’s teeth broken during an arrest after she called 911 on another officer; another caught an officer threatening to shoot a fleeing suspect. My daily coverage combined video analysis, arrest records, and protest demands for transparency, leading coverage of local unrest and intensifying calls for police accountability.
+      </p>
+    </div>
+
+    <!-- 5 -->
+    <div class="card">
+      <h3>
+        <a href="https://www.jacksonville.com/story/news/politics/elections/2020/04/24/last-minute-maneuvers-allow-jacksonville-lawyer-to-become-judge-without-election/41700071/" target="_blank">
+          Last-minute maneuvers allow Jacksonville lawyer to become judge without an election
+        </a>
+        <span style="font-weight:400;color:#888;">(Apr. 24, 2020)</span>
+      </h3>
+      <p>
+        On the day of Florida’s judicial qualifying deadline, I exposed a last-minute resignation and filing maneuver that let a well-connected lawyer secure a judgeship with no election or public scrutiny, showing how the son of a wealthy attorney and a cousin of two sitting judges benefited from what legal experts called an end-run around democracy. The story, published the same day as the maneuver, triggered immediate outrage in the legal community and demands for ethics investigations and reform. The speed and depth of the piece underscored my ability to break watchdog stories under intense time pressure.
+      </p>
+    </div>
+
+    <!-- 6 -->
+    <div class="card">
+      <h3>
+        <a href="https://www.jacksonville.com/story/news/2016/11/09/trump-s-winning-florida-strategy-forget-cities-show-me-suburbs/15731117007/" target="_blank">
+          Trump's winning Florida strategy: Forget the cities, show me the suburbs
+        </a>
+        <span style="font-weight:400;color:#888;">(Nov. 9, 2016)</span>
+      </h3>
+      <p>
+        Hours after Trump’s upset win, I broke down Florida’s electoral map, revealing how the campaign’s focus on suburban and exurban counties, rather than urban strongholds, paved the way for victory. Drawing on real-time precinct data and rapid interviews, including with now-White House Chief of Staff Susie Wiles, my analysis forecasted a political realignment and set the stage for future coverage of Florida’s changing electorate.
+      </p>
+    </div>
+
+    <!-- 7 -->
+    <div class="card">
+      <h3>
+        <a href="https://jaxtrib.org/2022/01/11/jacksonville-redistricting-plan-risks-racial-gerrymandering-claims/" target="_blank">
+          Jacksonville’s redistricting plan risks racial gerrymandering claims, experts say
+        </a>
+        <span style="font-weight:400;color:#888;">(Jan. 11, 2022)</span>
+      </h3>
+      <p>
+        After months of daily stories reporting on City Council redistricting meetings, I published this deep dive that revealed how Jacksonville racially gerrymandered its districts. My coverage documented how council members sought to entrench incumbents and sideline community input, even if it meant hurting Black voting power. The piece laid the groundwork for successful litigation. A federal judge cited these findings when she ended Jacksonville’s 40 years of diluting the Black vote.
+      </p>
+    </div>
+
+    <!-- 8 -->
+    <div class="card">
+      <h3>
+        <a href="https://www.jacksonville.com/story/news/local/2020/07/11/59-jacksonville-sheriffrsquos-office-employees-have-been-arrested-since-sheriff-williams-took-office-two-were-sentenced-to-jail/112135592/" target="_blank">
+          59 Jacksonville Sheriff’s Office employees have been arrested since Sheriff Williams took office. Two were sentenced to jail
+        </a>
+        <span style="font-weight:400;color:#888;">(July 11, 2020)</span>
+      </h3>
+      <p>
+        Despite the Jacksonville Sheriff’s Office arresting dozens of officers, I found nearly all avoided jail. I built a first-of-its-kind database from sealed records, personnel files and court dockets to track how diversion programs, dropped charges and sealed outcomes obscured patterns of abuse. This reporting made plain how prosecutors had adopted a system of leniency for police.
+      </p>
+    </div>
+
+    <!-- 9 -->
+    <div class="card">
+      <h3>
+        <a href="https://www.jacksonville.com/story/news/local/2019/11/19/jacksonville-home-for-teen-delinquents-shut-down-after-decade-of-criticism-1800-police-calls/2226545007/" target="_blank">
+          Jacksonville home for teen delinquents shut down after decade of criticism, 1,800 police calls
+        </a>
+        <span style="font-weight:400;color:#888;">(Nov. 19, 2019)</span>
+      </h3>
+      <p>
+        I spent a year investigating Panama Youth Services, a troubled group home for foster youth with delinquency records. Using leaked confidential sources, along with state audits, contracts and court records, I showed how the state continued to fund the facility despite confirmed abuse, neglect, and a resident-involved murder. The piece revealed how Florida’s oversight systems failed to intervene after more than 1,800 police calls. My reporting shut the group home down.
+      </p>
+    </div>
+
+    <!-- 10 -->
+    <div class="card">
+      <h3>
+        <a href="https://www.jacksonville.com/story/news/2016/10/01/year-later-eureka-garden-residents-still-wait-change/15726294007/" target="_blank">
+          A year later, Eureka Garden residents still wait for change
+        </a>
+        <span style="font-weight:400;color:#888;">(Oct. 1, 2016)</span>
+      </h3>
+      <p>
+        In 2015, I began reporting on mold, gas leaks, broken stairs and other dangerous conditions at a federal-subsidized complex and followed the story for more than a year. My reporting spurred congressional action, including Senate hearings and Senate-passed reforms to housing inspections. Eventually, the reporting helped force the property’s sale.  This anniversary story capped a year’s worth of daily coverage.
+      </p>
+    </div>
+
+    <!-- 11 -->
+    <div class="card">
+      <h3>
+        <a href="https://www.jacksonville.com/story/news/local/2020/06/17/without-explanation-jacksonville-judge-sought-jail-time-required-bail-for-protesters/41742773/" target="_blank">
+          Without explanation, Jacksonville judge sought jail time, required bail for protesters
+        </a>
+        <span style="font-weight:400;color:#888;">(June 17, 2020)</span>
+      </h3>
+      <p>
+        In the days after George Floyd protests, I uncovered and reported how a Jacksonville judge denied release for nearly all peaceful protesters, imposing high bonds and ignoring pleas tied to family, health, and financial hardship. My beat coverage, based on court transcripts and interviews, exposed assembly-line justice, pressure from the police union, and the legal violations behind these decisions. The State Attorney dropped almost all charges within weeks, after my stories raised alarms about judicial overreach and due process failures.
+      </p>
+    </div>
+
+  </div>
+  <div id="social-links"></div>
+  <script>
+    fetch('social.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('social-links').innerHTML = html;
+      });
+  </script>
+</div>
+</body>
+</html>
