@@ -1,3 +1,29 @@
+@font-face {
+  font-family: 'Fjalla One';
+  src: url('assets/fonts/FjallaOne-Regular.woff2') format('woff2'),
+       url('assets/fonts/FjallaOne-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Libre Franklin';
+  src: url('assets/fonts/LibreFranklin-Regular.woff2') format('woff2'),
+       url('assets/fonts/LibreFranklin-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Libre Franklin';
+  src: url('assets/fonts/LibreFranklin-Bold.woff2') format('woff2'),
+       url('assets/fonts/LibreFranklin-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   font-family: 'Libre Franklin', Arial, sans-serif;
   background: #f9f9f9;
@@ -194,3 +220,63 @@ hr {
       h1 { font-size: 1.3em; }
     }
 
+
+/* --- NAV BAR FIX --- */
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0.5em 0;
+    font-size: 1em;
+  }
+  nav a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 0.2em 0;
+    padding: 0.6em 0;
+  }
+}
+
+/* --- CONTAINER PADDING --- */
+@media (max-width: 600px) {
+  .container, .container-resume {
+    padding: 0.7em 0.2em 0.5em;
+    margin: 1em 0.2em;
+    max-width: 99vw;
+  }
+}
+
+/* --- PROFILE PHOTO SIZING --- */
+@media (max-width: 600px) {
+  img.profile {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 0.6em;
+  }
+}
+
+/* --- CARDS GRID --- */
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 0.7em;
+    margin-top: 1em;
+  }
+  .card {
+    padding: 0.8em 0.4em 0.8em;
+  }
+}
+
+/* --- FONTS: MAKE HEADERS SMALLER --- */
+@media (max-width: 500px) {
+  h1 { font-size: 1.05em; }
+  h2 { font-size: 1em; }
+  h3 { font-size: 0.98em; }
+}
+
+/* --- SOCIAL LINKS & FOOTER --- */
+@media (max-width: 600px) {
+  .social-links { gap: 10px; }
+  .footer { font-size: 0.88em; padding: 14px 0 6px 0; }
+}
