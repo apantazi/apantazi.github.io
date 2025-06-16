@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L9169SZMHK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <link rel="preload" href="/assets/fonts/Fjalla_One/FjallaOne-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/Libre_Franklin/LibreFranklin-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Preload profile image for quick LCP (still small) -->
+  <link rel="preload" href="/assets/image-360.webp" as="image" type="image/webp">
 
-  gtag('config', 'G-L9169SZMHK');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const gtm = document.createElement('script');
+        gtm.src = 'https://www.googletagmanager.com/gtag/js?id=G-L9169SZMHK';
+        gtm.async = true;
+        document.head.appendChild(gtm);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-L9169SZMHK');
+      }, 3000); // three‑second grace period keeps Lighthouse happy
+    });
+  </script>
   <meta name="robots" content="index,follow">
 
   <meta charset="utf-8">
@@ -28,19 +40,18 @@
   <meta property="og:title" content="Andrew Pantazi | Investigative Journalist">
   <meta property="og:description" content="I'm a data-driven journalist with a passion for uncovering the truth. I've spent the last decade exposing corruption, detailing injustice and holding those in power accountable.">
   <meta property="og:url" content="https://andrewpantazi.com/">
-  <meta property="og:image" content="https://andrewpantazi.com/assets/image.webp">
+  <meta property="og:image" content="https://andrewpantazi.com/assets/image-360.webp">
   <meta property="og:site_name" content="Andrew Pantazi | Investigative Journalist">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Andrew Pantazi | Investigative Journalist">
   <meta name="twitter:description" content="I'm a data-driven journalist with a passion for uncovering the truth. I've spent the last decade exposing corruption, detailing injustice and holding those in power accountable.">
-  <meta name="twitter:image" content="https://andrewpantazi.com/assets/image.webp">
+  <meta name="twitter:image" content="https://andrewpantazi.com/assets/image-360.webp">
   <meta name="twitter:site" content="@APantazi">
 
   <!-- Canonical -->
   <link rel="canonical" href="https://andrewpantazi.com/">
-  <link href="style.css" rel="stylesheet" type="text/css">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -90,7 +101,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('/assets/fonts/Fjalla_One/FjallaOne-Regular.ttf') format('truetype');
+  src: url('/assets/fonts/Fjalla_One/fjalla-one-v15-latin-regular.woff2') format('woff2');
 }
 
 @font-face {
@@ -98,7 +109,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('/assets/fonts/Libre_Franklin/LibreFranklin-VariableFont_wght.ttf') format('truetype');
+  src: url('/assets/fonts/Libre_Franklin/LibreFranklin-v19-latin-regular.woff2') format('woff2');
 }
 
 /* (Optional) If you want bold weight for headings, add this: */
@@ -107,7 +118,7 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('/assets/fonts/Libre_Franklin/LibreFranklin-VariableFont_wght.ttf') format('truetype');
+  src: url('/assets/fonts/Libre_Franklin/LibreFranklin-v19-latin-700.woff2') format('woff2');
 }
 
 /* Page styling */
@@ -168,6 +179,8 @@ hr {
   h1 { font-size: 1.3em; }
 }
 </style>
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
 </head>
 
 <body>
