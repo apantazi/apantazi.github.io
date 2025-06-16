@@ -1,16 +1,29 @@
+/* ───── Fjalla One (single weight, keep the smaller 45 KB subset) ───── */
 @font-face {
-  font-family: 'Fjalla One';
-  src: url('/assets/fonts/Fjalla_One/FjallaOne-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
+  font-family: "Fjalla One";
+  src: url("/assets/fonts/Fjalla_One/fjalla-one-v15-latin-regular.woff2") format("woff2");
+  font-weight: 400;          /* only weight available */
+  font-style:  normal;
   font-display: swap;
 }
 
+/* ───── Libre Franklin variable WOFF 2 (normal) ───── */
 @font-face {
-  font-family: 'Libre Franklin';
-  src: url('/assets/fonts/Libre_Franklin/LibreFranklin-VariableFont_wght.ttf') format('truetype');
-  font-weight: 1 900;
-  font-style: normal;
+  font-family: "Libre Franklin";
+  src: url("/assets/fonts/Libre_Franklin/LibreFranklin-VariableFont_wght.woff2")
+       format("woff2-variations");
+  font-weight: 100 900;      /* full weight axis */
+  font-style:  normal;
+  font-display: swap;
+}
+
+/* ───── Libre Franklin variable WOFF 2 (italic) ───── */
+@font-face {
+  font-family: "Libre Franklin";
+  src: url("/assets/fonts/Libre_Franklin/LibreFranklin-Italic-VariableFont_wght.woff2")
+       format("woff2-variations");
+  font-weight: 100 900;
+  font-style:  italic;
   font-display: swap;
 }
 
