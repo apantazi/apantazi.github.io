@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Which Duval Schools Beat Expectations?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive analysis of Duval County schools' reading and math proficiency compared to expectations based on poverty rates.">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fafafa;
+      color: #222;
+      line-height: 1.6;
+    }
+    header, main, footer {
+      max-width: 800px;
+      margin: auto;
+      padding: 1.5rem;
+    }
+    header h1 {
+      margin-bottom: .3em;
+      font-size: 2.3rem;
+      line-height: 1.1;
+      font-weight: 700;
+    }
+    header h2 {
+      font-weight: 400;
+      color: #555;
+      font-size: 1.1rem;
+      margin-top: .4em;
+    }
+    .byline, .dateline {
+      font-size: 0.98rem;
+      color: #888;
+      margin-bottom: .5em;
+    }
+    .flourish-embed {
+      margin: 2em 0;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 0.5em 0 0.5em 0;
+    }
+    .methodology {
+      background: #f1f1f1;
+      border-radius: 8px;
+      padding: 1em;
+      margin-top: 2em;
+      font-size: 1rem;
+      color: #444;
+    }
+    .footnote {
+      font-size: .95em;
+      color: #666;
+      margin-top: 2em;
+    }
+    @media (max-width: 600px) {
+      header, main, footer {
+        padding: 1em;
+      }
+      header h1 {
+        font-size: 1.4rem;
+      }
+    }
+    a {
+      color: #1565c0;
+      text-decoration: none;
+    }
+    a:hover, a:focus {
+      text-decoration: underline;
+    }
+  </style>
+  <!-- Flourish script loads dynamically with embed -->
+</head>
+<body>
+  <header>
+    <h1>Which Duval Schools Beat Expectations?</h1>
+    <h2>
+      See how Jacksonville’s schools compare to expectations based on poverty rates. 
+      Each dot is a school.<br>
+      <span style="color:#1565c0;font-weight:700;">Blue</span> = above expectations; 
+      <span style="color:#FB8C00;font-weight:700;">orange</span> = below; 
+      <span style="color:#BDBDBD;font-weight:700;">grey</span> = as expected.<br>
+      <b>Use the search box or click a dot for details.</b>
+    </h2>
+    <div class="byline">
+      By Andrew Pantazi | Data via Florida Department of Education & Duval County Public Schools
+    </div>
+    <div class="dateline">
+      Published Jan. 14, 2020 • Updated June 18, 2025
+    </div>
+  </header>
+  <main>
+    <section>
+      <p>What does it mean for a school to “beat expectations”? </p>
+<p>        In Duval County, like much of the U.S., poverty is closely linked with standardized test scores.</p> 
+<p>        To see which schools truly outperform, we compared reading and math proficiency rates to what would be expected at each school’s level of economic disadvantage, based on a regression line. Hover over or search for your school to see how it stacks up.</p>
+      </p>
+    </section>
+
+    <!-- Reading Chart -->
+    <section>
+      <h2>Reading Proficiency vs. Poverty</h2>
+      <div class="flourish-embed flourish-scatter" data-src="visualisation/23813988">
+        <script src="https://public.flourish.studio/resources/embed.js"></script>
+        <noscript>
+          <img src="https://public.flourish.studio/visualisation/23813988/thumbnail" width="100%" alt="Scatterplot of Reading Proficiency vs. Poverty" />
+        </noscript>
+      </div>
+    </section>
+
+    <!-- Math Chart -->
+    <section>
+      <h2>Math Proficiency vs. Poverty</h2>
+      <div class="flourish-embed flourish-scatter" data-src="visualisation/23813882">
+        <script src="https://public.flourish.studio/resources/embed.js"></script>
+        <noscript>
+          <img src="https://public.flourish.studio/visualisation/23813882/thumbnail" width="100%" alt="Scatterplot of Math Proficiency vs. Poverty" />
+        </noscript>
+      </div>
+    </section>
+
+    <section class="methodology">
+      <strong>Methodology:</strong><br>
+      Each dot is a Duval County school. The x-axis shows the percentage of economically disadvantaged students; the y-axis shows proficiency rates (reading or math). 
+      The regression line predicts expected proficiency by poverty; dots above the line “beat expectations.” 
+      Color indicates performance: <span style="color:#1565c0;">above</span> (<b>blue</b>), <span style="color:#BDBDBD;">meets</span> (<b>grey</b>), or <span style="color:#FB8C00;">below</span> (<b>orange</b>).
+      <br>
+      Data: <a href="https://www.fldoe.org/accountability/assessments/k-12-student-assessment/results/2020.stml" target="_blank" rel="noopener">Florida DOE</a> and <a href="https://dcps.duvalschools.org/" target="_blank" rel="noopener">Duval County Public Schools</a>. 
+     <br> Visualization and analysis by Andrew Pantazi. 
+    </section>
+
+  </main>
+</body>
+</html>
