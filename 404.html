@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Page Not Found | Andrew Pantazi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="header"></div>
+<script>
+  fetch('header.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('header').innerHTML = data;
+      document.getElementById('home-link').classList.add('active');
+    });
+</script>
+<div class="container">
+  <h1>404 - Page Not Found</h1>
+  <p class="center">Sorry, the page you were looking for doesn't exist. <a href="/">Return to home</a>.</p>
+</div>
+<div id="social-links"></div>
+<script>
+  fetch('/social.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('social-links').innerHTML = html;
+    });
+</script>
+</body>
+</html>
+
