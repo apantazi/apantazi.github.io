@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momentum - To-Do & Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" xintegrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .fab {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 50;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .dark ::-webkit-scrollbar-track { background: #2d3748; }
+        ::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
+        .dark ::-webkit-scrollbar-thumb { background: #555; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+        .dark ::-webkit-scrollbar-thumb:hover { background: #777; }
+
+        /* Priority Border Colors */
+        .priority-1 { border-left-color: #ef4444; }
+        .priority-2 { border-left-color: #f97316; }
+        .priority-3 { border-left-color: #eab308; }
+        .priority-4 { border-left-color: #22c55e; }
+        .priority-5 { border-left-color: #3b82f6; }
+
+        /* Selected Priority Button in Modal */
+        .priority-btn-selected {
+            color: white !important;
+        }
+        .priority-btn-selected.p-1 { background-color: #ef4444 !important; border-color: #ef4444; }
+        .priority-btn-selected.p-2 { background-color: #f97316 !important; border-color: #f97316; }
+        .priority-btn-selected.p-3 { background-color: #eab308 !important; border-color: #eab308; }
+        .priority-btn-selected.p-4 { background-color: #22c55e !important; border-color: #22c55e; }
+        .priority-btn-selected.p-5 { background-color: #3b82f6 !important; border-color: #3b82f6; }
+
+        /* Speech Recognition Indicator */
+        .mic-listening i {
+            color: #ef4444;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+
+    <div id="app" class="pb-24">
+
+        <!-- App Header -->
+        <header class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-40 p-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold text-violet-600 dark:text-violet-400">Momentum</h1>
+                <p id="user-id-display" class="text-xs text-gray-500 dark:text-gray-400">Loading user...</p>
+            </div>
+            <div class="flex items-center space-x-4">
+                 <div class="flex items-center space-x-2 bg-yellow-100 dark:bg-yellow-800 px-3 py-1 rounded-full">
+                    <i class="fas fa-bolt text-yellow-500"></i>
+                    <span id="xp-counter" class="font-bold text-sm text-yellow-700 dark:text-yellow-300">0 XP</span>
+                </div>
+                <button id="theme-toggle" class="text-gray-600 dark:text-gray-300">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="p-4">
+            <!-- Task List View -->
+            <div id="task-list-view">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold">Task List</h2>
+                    <div class="flex space-x-2">
+                        <button class="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-full text-sm">Filter</button>
+                        <button class="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-full text-sm">Sort</button>
+                    </div>
+                </div>
+                
+                <!-- Task Items will be dynamically inserted here -->
+                <div id="tasks-container" class="space-y-3">
+                    <!-- Placeholder for when tasks are loading or empty -->
+                    <div id="tasks-placeholder" class="text-center py-10 text-gray-500">
+                        <i class="fas fa-check-double fa-3x mb-4"></i>
+                        <p>No tasks yet. Add one to get started!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Planner View (Hidden by default) -->
+            <div id="planner-view" class="hidden">
+                 <!-- Planner content remains the same for now -->
+                 <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold">Today's Planner</h2>
+                    <input type="date" id="planner-date" class="bg-gray-200 dark:bg-gray-700 border-none rounded-lg text-sm">
+                </div>
+                <div class="space-y-4">
+                    <!-- Time blocks will be dynamic later -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Floating Action Button -->
+        <button id="add-task-fab" class="fab bg-violet-600 hover:bg-violet-700 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg">
+            <i class="fas fa-plus text-2xl"></i>
+        </button>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav bg-white dark:bg-gray-800 shadow-[0_-1px_3px_rgba(0,0,0,0.1)] flex justify-around">
+            <button id="nav-task-list" class="flex-1 p-4 text-center text-violet-600 dark:text-violet-400 border-t-2 border-violet-600 dark:border-violet-400">
+                <i class="fas fa-tasks text-xl"></i>
+                <span class="block text-xs font-medium">Tasks</span>
+            </button>
+            <button id="nav-planner" class="flex-1 p-4 text-center text-gray-500 dark:text-gray-400">
+                <i class="fas fa-calendar-day text-xl"></i>
+                <span class="block text-xs font-medium">Planner</span>
+            </button>
+            <button class="flex-1 p-4 text-center text-gray-500 dark:text-gray-400">
+                <i class="fas fa-chart-pie text-xl"></i>
+                <span class="block text-xs font-medium">Stats</span>
+            </button>
+             <button class="flex-1 p-4 text-center text-gray-500 dark:text-gray-400">
+                <i class="fas fa-cog text-xl"></i>
+                <span class="block text-xs font-medium">Settings</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Add Task Modal -->
+    <div id="add-task-modal" class="fixed inset-0 bg-black bg-opacity-50 z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-lg max-h-full overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold">Add New Task</h2>
+                    <button id="close-modal-btn" class="text-2xl leading-none">&times;</button>
+                </div>
+                
+                <form id="add-task-form" class="space-y-4">
+                    <input name="title" id="task-title-input" type="text" placeholder="Task Title (e.g., Walk the dog)" class="w-full p-3 bg-gray-100 dark:bg-gray-700 border-2 border-transparent focus:border-violet-500 rounded-lg outline-none" required>
+                    
+                    <div>
+                        <label class="text-sm font-medium">Priority</label>
+                        <div class="flex justify-between mt-1" data-value="3">
+                            <button type="button" data-priority="1" class="priority-btn p-1 p-2 w-1/5 rounded-lg border-2 border-red-400 text-red-500">1</button>
+                            <button type="button" data-priority="2" class="priority-btn p-2 p-2 w-1/5 rounded-lg border-2 border-orange-400 text-orange-500">2</button>
+                            <button type="button" data-priority="3" class="priority-btn p-3 p-2 w-1/5 rounded-lg border-2 border-yellow-400 text-yellow-500 priority-btn-selected">3</button>
+                            <button type="button" data-priority="4" class="priority-btn p-4 p-2 w-1/5 rounded-lg border-2 border-green-400 text-green-500">4</button>
+                            <button type="button" data-priority="5" class="priority-btn p-5 p-2 w-1/5 rounded-lg border-2 border-blue-400 text-blue-500">5</button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input name="category" type="text" placeholder="Category (e.g., Home)" class="w-full p-3 bg-gray-100 dark:bg-gray-700 rounded-lg outline-none border-2 border-transparent focus:border-violet-500">
+                        <input name="estimatedTime" type="number" placeholder="Est. Time (minutes)" class="w-full p-3 bg-gray-100 dark:bg-gray-700 rounded-lg outline-none border-2 border-transparent focus:border-violet-500">
+                    </div>
+
+                    <textarea name="summary" placeholder="Add a summary or notes..." rows="3" class="w-full p-3 bg-gray-100 dark:bg-gray-700 rounded-lg outline-none border-2 border-transparent focus:border-violet-500"></textarea>
+
+                    <div class="flex items-center justify-between bg-gray-100 dark:bg-gray-700 p-2 rounded-lg">
+                        <div class="flex space-x-2">
+                           <button id="mic-btn" type="button" class="p-2 text-gray-500 dark:text-gray-400 hover:text-violet-600"><i class="fas fa-microphone"></i></button>
+                           <button type="button" class="p-2 text-gray-500 dark:text-gray-400 hover:text-violet-600"><i class="fas fa-paperclip"></i></button>
+                        </div>
+                        <button type="submit" class="bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 px-6 rounded-lg">Add Task</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, serverTimestamp, query, where } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- FIREBASE SETUP ---
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? JSON.parse(__firebase_config)
+            : {
+                apiKey: "YOUR_API_KEY",
+                authDomain: "YOUR_AUTH_DOMAIN",
+                projectId: "YOUR_PROJECT_ID",
+                storageBucket: "YOUR_STORAGE_BUCKET",
+                messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+                appId: "YOUR_APP_ID"
+            };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'momentum-app-v1';
+
+        let currentUserId = null;
+        let tasksUnsubscribe = null;
+
+        // --- AUTHENTICATION ---
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUserId = user.uid;
+                document.getElementById('user-id-display').textContent = `User: ${currentUserId.substring(0, 8)}...`;
+                if (tasksUnsubscribe) tasksUnsubscribe();
+                listenForTasks();
+            } else {
+                currentUserId = null;
+                document.getElementById('user-id-display').textContent = 'Not signed in';
+                try {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                } catch (error) {
+                    console.error("Authentication Error:", error);
+                    document.getElementById('user-id-display').textContent = 'Auth failed';
+                }
+            }
+        });
+
+        // --- FIRESTORE: REAL-TIME TASK MANAGEMENT ---
+        function listenForTasks() {
+            if (!currentUserId) return;
+
+            const tasksContainer = document.getElementById('tasks-container');
+            const tasksPlaceholder = document.getElementById('tasks-placeholder');
+            const xpCounter = document.getElementById('xp-counter');
+            
+            const tasksCollection = collection(db, 'artifacts', appId, 'users', currentUserId, 'tasks');
+            
+            tasksUnsubscribe = onSnapshot(tasksCollection, (snapshot) => {
+                tasksContainer.innerHTML = '';
+                let totalXP = 0;
+
+                if (snapshot.empty) {
+                    tasksContainer.appendChild(tasksPlaceholder);
+                    tasksPlaceholder.style.display = 'block';
+                } else {
+                    tasksPlaceholder.style.display = 'none';
+                    snapshot.docs.forEach(doc => {
+                        const task = { id: doc.id, ...doc.data() };
+                        if(task.completed) {
+                            totalXP += (task.estimatedTime || 10);
+                        }
+                        const taskElement = createTaskElement(task);
+                        tasksContainer.appendChild(taskElement);
+                    });
+                }
+                xpCounter.textContent = `${totalXP} XP`;
+            }, (error) => {
+                console.error("Error fetching tasks:", error);
+                tasksPlaceholder.textContent = "Could not load tasks.";
+                tasksPlaceholder.style.display = 'block';
+            });
+        }
+
+        // --- DOM MANIPULATION: CREATE TASK ELEMENT ---
+        function createTaskElement(task) {
+            const div = document.createElement('div');
+            div.className = `bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md border-l-4 priority-${task.priority} flex items-start space-x-4 transition-opacity duration-300`;
+            if (task.completed) {
+                div.classList.add('opacity-50');
+            }
+
+            const completedCheckbox = document.createElement('input');
+            completedCheckbox.type = 'checkbox';
+            completedCheckbox.checked = task.completed;
+            completedCheckbox.className = 'mt-1 h-5 w-5 rounded text-violet-600 focus:ring-violet-500 cursor-pointer';
+            completedCheckbox.addEventListener('change', () => toggleTaskCompletion(task.id, !task.completed));
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'flex-1';
+            
+            const title = document.createElement('h3');
+            title.className = 'font-semibold';
+            if (task.completed) title.classList.add('line-through');
+            title.textContent = task.title;
+            
+            contentDiv.appendChild(title);
+            
+            if (task.summary) {
+                const summary = document.createElement('p');
+                summary.className = 'text-sm text-gray-500 dark:text-gray-400';
+                if (task.completed) summary.classList.add('line-through');
+                summary.textContent = task.summary;
+                contentDiv.appendChild(summary);
+            }
+
+            const tagsDiv = document.createElement('div');
+            tagsDiv.className = 'flex items-center flex-wrap gap-2 text-xs mt-2';
+            
+            if (task.category) {
+                const categoryTag = document.createElement('span');
+                categoryTag.className = 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded-full';
+                categoryTag.innerHTML = `<i class="fas fa-tag mr-1"></i>${task.category}`;
+                tagsDiv.appendChild(categoryTag);
+            }
+            if (task.estimatedTime) {
+                const timeTag = document.createElement('span');
+                timeTag.className = 'text-gray-400';
+                timeTag.innerHTML = `<i class="fas fa-clock mr-1"></i>${task.estimatedTime} min`;
+                tagsDiv.appendChild(timeTag);
+            }
+            contentDiv.appendChild(tagsDiv);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'text-gray-400 hover:text-red-500 dark:hover:text-red-400';
+            deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
+            deleteButton.addEventListener('click', () => deleteTask(task.id));
+
+            div.appendChild(completedCheckbox);
+            div.appendChild(contentDiv);
+            div.appendChild(deleteButton);
+
+            return div;
+        }
+
+        // --- FIRESTORE: CRUD OPERATIONS ---
+        async function addTask(taskData) {
+            if (!currentUserId) {
+                console.error("Cannot add task: no user signed in.");
+                return;
+            }
+            try {
+                const tasksCollection = collection(db, 'artifacts', appId, 'users', currentUserId, 'tasks');
+                await addDoc(tasksCollection, {
+                    ...taskData,
+                    completed: false,
+                    createdAt: serverTimestamp()
+                });
+            } catch (error) {
+                console.error("Error adding document: ", error);
+            }
+        }
+
+        async function toggleTaskCompletion(taskId, isCompleted) {
+             if (!currentUserId) return;
+             const taskDocRef = doc(db, 'artifacts', appId, 'users', currentUserId, 'tasks', taskId);
+             await updateDoc(taskDocRef, { completed: isCompleted });
+        }
+
+        async function deleteTask(taskId) {
+            if (!currentUserId) return;
+            const taskDocRef = doc(db, 'artifacts', appId, 'users', currentUserId, 'tasks', taskId);
+            await deleteDoc(taskDocRef);
+        }
+
+        // --- EVENT LISTENERS ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- THEME TOGGLING ---
+            const themeToggle = document.getElementById('theme-toggle');
+            const htmlEl = document.documentElement;
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                htmlEl.classList.add('dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+            themeToggle.addEventListener('click', () => {
+                htmlEl.classList.toggle('dark');
+                localStorage.setItem('theme', htmlEl.classList.contains('dark') ? 'dark' : 'light');
+                themeToggle.innerHTML = htmlEl.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            });
+
+            // --- NAVIGATION ---
+            const navTaskList = document.getElementById('nav-task-list');
+            const navPlanner = document.getElementById('nav-planner');
+            const taskListView = document.getElementById('task-list-view');
+            const plannerView = document.getElementById('planner-view');
+            const allNavButtons = document.querySelectorAll('.bottom-nav button');
+            function setActiveNav(activeButton) {
+                 allNavButtons.forEach(btn => {
+                    btn.classList.remove('text-violet-600', 'dark:text-violet-400', 'border-t-2', 'border-violet-600', 'dark:border-violet-400');
+                    btn.classList.add('text-gray-500', 'dark:text-gray-400');
+                });
+                activeButton.classList.add('text-violet-600', 'dark:text-violet-400', 'border-t-2', 'border-violet-600', 'dark:border-violet-400');
+                activeButton.classList.remove('text-gray-500', 'dark:text-gray-400');
+            }
+            navTaskList.addEventListener('click', () => {
+                taskListView.classList.remove('hidden');
+                plannerView.classList.add('hidden');
+                setActiveNav(navTaskList);
+            });
+            navPlanner.addEventListener('click', () => {
+                taskListView.classList.add('hidden');
+                plannerView.classList.remove('hidden');
+                setActiveNav(navPlanner);
+            });
+
+            // --- MODAL HANDLING ---
+            const addTaskFab = document.getElementById('add-task-fab');
+            const addTaskModal = document.getElementById('add-task-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const addTaskForm = document.getElementById('add-task-form');
+
+            addTaskFab.addEventListener('click', () => addTaskModal.classList.remove('hidden'));
+            closeModalBtn.addEventListener('click', () => addTaskModal.classList.add('hidden'));
+            addTaskModal.addEventListener('click', (e) => {
+                if (e.target === addTaskModal) addTaskModal.classList.add('hidden');
+            });
+
+            // --- MODAL FORM LOGIC ---
+            const priorityContainer = addTaskForm.querySelector('.flex.justify-between');
+            priorityContainer.addEventListener('click', (e) => {
+                if (e.target.matches('.priority-btn')) {
+                    const button = e.target;
+                    const priority = button.dataset.priority;
+                    priorityContainer.dataset.value = priority;
+                    
+                    priorityContainer.querySelectorAll('.priority-btn').forEach(btn => {
+                        btn.classList.remove('priority-btn-selected', `p-${btn.dataset.priority}`);
+                    });
+                    button.classList.add('priority-btn-selected', `p-${priority}`);
+                }
+            });
+
+            addTaskForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(addTaskForm);
+                const taskData = {
+                    title: formData.get('title'),
+                    priority: parseInt(priorityContainer.dataset.value, 10) || 3,
+                    category: formData.get('category') || '',
+                    estimatedTime: parseInt(formData.get('estimatedTime'), 10) || null,
+                    summary: formData.get('summary') || '',
+                };
+                addTask(taskData);
+                addTaskForm.reset();
+                 priorityContainer.dataset.value = "3";
+                 priorityContainer.querySelectorAll('.priority-btn').forEach(btn => {
+                    btn.classList.remove('priority-btn-selected', `p-${btn.dataset.priority}`);
+                    if(btn.dataset.priority === "3") {
+                        btn.classList.add('priority-btn-selected', 'p-3');
+                    }
+                });
+                addTaskModal.classList.add('hidden');
+            });
+
+            // --- SPEECH-TO-TEXT (STT) ---
+            const micBtn = document.getElementById('mic-btn');
+            const taskTitleInput = document.getElementById('task-title-input');
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+            if (SpeechRecognition) {
+                const recognition = new SpeechRecognition();
+                recognition.continuous = false;
+                recognition.lang = 'en-US';
+                recognition.interimResults = true;
+
+                micBtn.addEventListener('click', () => {
+                    recognition.start();
+                });
+
+                recognition.onstart = () => {
+                    micBtn.classList.add('mic-listening');
+                    taskTitleInput.placeholder = 'Listening...';
+                };
+
+                recognition.onend = () => {
+                    micBtn.classList.remove('mic-listening');
+                    taskTitleInput.placeholder = 'Task Title (e.g., Walk the dog)';
+                };
+
+                recognition.onerror = (event) => {
+                    console.error('Speech recognition error:', event.error);
+                    taskTitleInput.placeholder = 'Sorry, I couldn\'t hear you. Try again.';
+                };
+
+                recognition.onresult = (event) => {
+                    const transcript = Array.from(event.results)
+                        .map(result => result[0])
+                        .map(result => result.transcript)
+                        .join('');
+                    
+                    taskTitleInput.value = transcript;
+
+                    // If it's the final result, stop recognition
+                    if (event.results[0].isFinal) {
+                        recognition.stop();
+                    }
+                };
+
+            } else {
+                console.warn('Speech Recognition not supported in this browser.');
+                micBtn.style.display = 'none'; // Hide the button if not supported
+            }
+
+            // --- PLANNER DATE ---
+            const plannerDateInput = document.getElementById('planner-date');
+            plannerDateInput.value = new Date().toISOString().split('T')[0];
+        });
+    </script>
+</body>
+</html>
