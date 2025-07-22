@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" xintegrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
-            font-family: 'Inter', sans-serif; 
+            font-family: 'Inter', sans-serif;
         }
         .fab {
             position: fixed;
@@ -68,14 +68,14 @@
 
         <!-- App Header -->
         <header class="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-40 p-4 flex justify-between items-center">
-            <div>
-                <h1 class="text-xl font-bold text-violet-600 dark:text-violet-400">Momentum</h1>
-                <p id="user-id-display" class="text-xs text-gray-500 dark:text-gray-400">Loading user...</p>
-            </div>
+            <h1 class="text-xl font-bold text-violet-600 dark:text-violet-400">Momentum</h1>
             <div class="flex items-center space-x-4">
-                 <div class="flex items-center space-x-2 bg-yellow-100 dark:bg-yellow-800 px-3 py-1 rounded-full">
+                 <div id="gamification-widget" class="flex items-center space-x-2 bg-yellow-100 dark:bg-yellow-800 px-3 py-1 rounded-full hidden">
                     <i class="fas fa-bolt text-yellow-500"></i>
                     <span id="xp-counter" class="font-bold text-sm text-yellow-700 dark:text-yellow-300">0 XP</span>
+                </div>
+                <div id="auth-container">
+                    <!-- This will be populated by JavaScript -->
                 </div>
                 <button id="theme-toggle" class="text-gray-600 dark:text-gray-300">
                     <i class="fas fa-moon"></i>
@@ -85,46 +85,53 @@
 
         <!-- Main Content -->
         <main class="p-4">
-            <!-- Task List View -->
-            <div id="task-list-view">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-2xl font-bold">Task List</h2>
-                    <div class="flex space-x-2">
-                        <button class="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-full text-sm">Filter</button>
-                        <button class="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-full text-sm">Sort</button>
-                    </div>
-                </div>
-                
-                <!-- Task Items will be dynamically inserted here -->
-                <div id="tasks-container" class="space-y-3">
-                    <!-- Placeholder for when tasks are loading or empty -->
-                    <div id="tasks-placeholder" class="text-center py-10 text-gray-500">
-                        <i class="fas fa-check-double fa-3x mb-4"></i>
-                        <p>No tasks yet. Add one to get started!</p>
-                    </div>
-                </div>
+            <!-- Logged Out View -->
+            <div id="logged-out-view" class="text-center py-16">
+                <i class="fas fa-lock text-4xl text-gray-400 mb-4"></i>
+                <h2 class="text-2xl font-bold mb-2">Welcome to Momentum</h2>
+                <p class="text-gray-600 dark:text-gray-400">Please sign in with Google to save your tasks.</p>
             </div>
 
-            <!-- Planner View (Hidden by default) -->
-            <div id="planner-view" class="hidden">
-                 <!-- Planner content remains the same for now -->
-                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-2xl font-bold">Today's Planner</h2>
-                    <input type="date" id="planner-date" class="bg-gray-200 dark:bg-gray-700 border-none rounded-lg text-sm">
+            <!-- Logged In View (Task List & Planner) -->
+            <div id="logged-in-view" class="hidden">
+                <!-- Task List View -->
+                <div id="task-list-view">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-2xl font-bold">Task List</h2>
+                        <div class="flex space-x-2">
+                            <button class="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-full text-sm">Filter</button>
+                            <button class="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-full text-sm">Sort</button>
+                        </div>
+                    </div>
+                    
+                    <div id="tasks-container" class="space-y-3">
+                        <div id="tasks-placeholder" class="text-center py-10 text-gray-500">
+                            <i class="fas fa-check-double fa-3x mb-4"></i>
+                            <p>No tasks yet. Add one to get started!</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="space-y-4">
-                    <!-- Time blocks will be dynamic later -->
+
+                <!-- Planner View (Hidden by default) -->
+                <div id="planner-view" class="hidden">
+                     <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-2xl font-bold">Today's Planner</h2>
+                        <input type="date" id="planner-date" class="bg-gray-200 dark:bg-gray-700 border-none rounded-lg text-sm">
+                    </div>
+                    <div class="space-y-4">
+                        <!-- Time blocks will be dynamic later -->
+                    </div>
                 </div>
             </div>
         </main>
 
         <!-- Floating Action Button -->
-        <button id="add-task-fab" class="fab bg-violet-600 hover:bg-violet-700 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg">
+        <button id="add-task-fab" class="fab bg-violet-600 hover:bg-violet-700 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hidden">
             <i class="fas fa-plus text-2xl"></i>
         </button>
 
         <!-- Bottom Navigation -->
-        <nav class="bottom-nav bg-white dark:bg-gray-800 shadow-[0_-1px_3px_rgba(0,0,0,0.1)] flex justify-around">
+        <nav id="bottom-nav" class="bottom-nav bg-white dark:bg-gray-800 shadow-[0_-1px_3px_rgba(0,0,0,0.1)] flex justify-around hidden">
             <button id="nav-task-list" class="flex-1 p-4 text-center text-violet-600 dark:text-violet-400 border-t-2 border-violet-600 dark:border-violet-400">
                 <i class="fas fa-tasks text-xl"></i>
                 <span class="block text-xs font-medium">Tasks</span>
@@ -190,7 +197,7 @@
     <script type="module">
         // Import Firebase modules
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, serverTimestamp, query, where } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- FIREBASE SETUP ---
@@ -206,6 +213,7 @@
                     measurementId: "G-WFKV6GHEM5"
             };
 
+ 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
@@ -215,37 +223,92 @@
         let currentUserId = null;
         let tasksUnsubscribe = null;
 
+        // UI Elements
+        const authContainer = document.getElementById('auth-container');
+        const loggedInView = document.getElementById('logged-in-view');
+        const loggedOutView = document.getElementById('logged-out-view');
+        const addTaskFab = document.getElementById('add-task-fab');
+        const bottomNav = document.getElementById('bottom-nav');
+        const gamificationWidget = document.getElementById('gamification-widget');
+        const tasksContainer = document.getElementById('tasks-container');
+        const tasksPlaceholder = document.getElementById('tasks-placeholder');
+        const xpCounter = document.getElementById('xp-counter');
+
         // --- AUTHENTICATION ---
-        onAuthStateChanged(auth, async (user) => {
+        const provider = new GoogleAuthProvider();
+
+        async function signInWithGoogle() {
+            try {
+                await signInWithPopup(auth, provider);
+            } catch (error) {
+                console.error("Error signing in with Google:", error);
+            }
+        }
+
+        async function logOut() {
+            try {
+                await signOut(auth);
+            } catch (error) {
+                console.error("Error signing out:", error);
+            }
+        }
+
+        onAuthStateChanged(auth, (user) => {
             if (user) {
+                // User is signed in
                 currentUserId = user.uid;
-                document.getElementById('user-id-display').textContent = `User: ${currentUserId.substring(0, 8)}...`;
-                if (tasksUnsubscribe) tasksUnsubscribe();
+                updateUIForLoggedInUser(user);
+                if (tasksUnsubscribe) tasksUnsubscribe(); // Unsubscribe from old listener if any
                 listenForTasks();
             } else {
+                // User is signed out
                 currentUserId = null;
-                document.getElementById('user-id-display').textContent = 'Not signed in';
-                try {
-                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                        await signInWithCustomToken(auth, __initial_auth_token);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                } catch (error) {
-                    console.error("Authentication Error:", error);
-                    document.getElementById('user-id-display').textContent = 'Auth failed';
+                updateUIForLoggedOutUser();
+                if (tasksUnsubscribe) {
+                    tasksUnsubscribe(); // Detach the listener
+                    tasksUnsubscribe = null;
                 }
             }
         });
 
+        function updateUIForLoggedInUser(user) {
+            loggedInView.classList.remove('hidden');
+            loggedOutView.classList.add('hidden');
+            addTaskFab.classList.remove('hidden');
+            bottomNav.classList.remove('hidden');
+            gamificationWidget.classList.remove('hidden');
+
+            authContainer.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <img src="${user.photoURL}" alt="User photo" class="w-8 h-8 rounded-full">
+                    <span class="text-sm font-medium hidden sm:block">${user.displayName}</span>
+                    <button id="sign-out-btn" class="p-2 text-gray-500 dark:text-gray-400 hover:text-violet-600"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            `;
+            document.getElementById('sign-out-btn').addEventListener('click', logOut);
+        }
+
+        function updateUIForLoggedOutUser() {
+            loggedInView.classList.add('hidden');
+            loggedOutView.classList.remove('hidden');
+            addTaskFab.classList.add('hidden');
+            bottomNav.classList.add('hidden');
+            gamificationWidget.classList.add('hidden');
+
+            authContainer.innerHTML = `
+                <button id="sign-in-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full flex items-center space-x-2 text-sm">
+                    <i class="fab fa-google"></i>
+                    <span>Sign In</span>
+                </button>
+            `;
+            document.getElementById('sign-in-btn').addEventListener('click', signInWithGoogle);
+            tasksContainer.innerHTML = ''; // Clear tasks
+            tasksContainer.appendChild(tasksPlaceholder);
+        }
+
         // --- FIRESTORE: REAL-TIME TASK MANAGEMENT ---
         function listenForTasks() {
             if (!currentUserId) return;
-
-            const tasksContainer = document.getElementById('tasks-container');
-            const tasksPlaceholder = document.getElementById('tasks-placeholder');
-            const xpCounter = document.getElementById('xp-counter');
-            
             const tasksCollection = collection(db, 'artifacts', appId, 'users', currentUserId, 'tasks');
             
             tasksUnsubscribe = onSnapshot(tasksCollection, (snapshot) => {
@@ -254,9 +317,7 @@
 
                 if (snapshot.empty) {
                     tasksContainer.appendChild(tasksPlaceholder);
-                    tasksPlaceholder.style.display = 'block';
                 } else {
-                    tasksPlaceholder.style.display = 'none';
                     snapshot.docs.forEach(doc => {
                         const task = { id: doc.id, ...doc.data() };
                         if(task.completed) {
@@ -270,7 +331,6 @@
             }, (error) => {
                 console.error("Error fetching tasks:", error);
                 tasksPlaceholder.textContent = "Could not load tasks.";
-                tasksPlaceholder.style.display = 'block';
             });
         }
 
@@ -406,7 +466,6 @@
             });
 
             // --- MODAL HANDLING ---
-            const addTaskFab = document.getElementById('add-task-fab');
             const addTaskModal = document.getElementById('add-task-modal');
             const closeModalBtn = document.getElementById('close-modal-btn');
             const addTaskForm = document.getElementById('add-task-form');
@@ -492,7 +551,6 @@
                     
                     taskTitleInput.value = transcript;
 
-                    // If it's the final result, stop recognition
                     if (event.results[0].isFinal) {
                         recognition.stop();
                     }
@@ -500,7 +558,7 @@
 
             } else {
                 console.warn('Speech Recognition not supported in this browser.');
-                micBtn.style.display = 'none'; // Hide the button if not supported
+                micBtn.style.display = 'none';
             }
 
             // --- PLANNER DATE ---
