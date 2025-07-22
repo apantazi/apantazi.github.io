@@ -5,89 +5,161 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jacksonville Sheriff's Office - Public Records Requests</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Using a modern font and Tailwind CSS for a clean look */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Tailwind gray-50 */
+            background-color: #f8fafc;
         }
-        /* Custom styles for status tags */
-        .status-completed { background-color: #dcfce7; color: #166534; } /* green */
-        .status-open { background-color: #dbeafe; color: #1e40af; } /* blue */
-        .status-pending, .status-in-progress { background-color: #fef3c7; color: #92400e; } /* amber */
-        .status-unknown { background-color: #e5e7eb; color: #4b5563; } /* gray */
+        .status-completed { background-color: #dcfce7; color: #166534; }
+        .status-open { background-color: #dbeafe; color: #1e40af; }
+        .status-pending, .status-in-progress { background-color: #fef3c7; color: #92400e; }
+        .status-unknown { background-color: #e5e7eb; color: #4b5563; }
 
         .control-label {
             font-size: 0.875rem;
             font-weight: 500;
-            color: #4b5563; /* gray-600 */
+            color: #4b5563;
         }
-        .control-select {
+        .control-select, .control-input {
             padding: 0.5rem;
-            border: 1px solid #d1d5db; /* gray-300 */
-            border-radius: 0.375rem; /* rounded-md */
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
             background-color: white;
-            flex-grow: 1;
+            width: 100%;
+        }
+        
+        #date-slider-container {
+            position: relative;
+            height: 60px;
+            width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        #slider-track {
+            position: absolute;
+            top: 0;
+            left: 10px;
+            right: 10px;
+            height: 60px;
+        }
+        .slider-handle {
+            position: absolute;
+            top: -5px;
+            width: 20px;
+            height: 70px;
+            background-color: rgba(59, 130, 246, 0.5);
+            border: 2px solid #2563eb;
+            border-radius: 4px;
+            cursor: ew-resize;
+            z-index: 20;
+        }
+        #slider-range {
+            position: absolute;
+            top: 0;
+            height: 60px;
+            background-color: rgba(59, 130, 246, 0.2);
+            z-index: 10;
+        }
+        .histogram-bar {
+            fill: #cbd5e1;
+            shape-rendering: crispEdges;
+        }
+        .histogram-bar:hover {
+            fill: #94a3b8;
+        }
+        .pagination-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            background-color: white;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .pagination-btn:hover:not(:disabled) {
+            background-color: #f3f4f6;
+        }
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
     </style>
 </head>
 <body class="text-gray-800">
 
-    <!-- Header Section -->
     <header class="bg-gradient-to-r from-blue-800 to-blue-600 text-white p-4 sm:p-6 text-center shadow-md">
         <h1 class="text-2xl sm:text-3xl font-bold">Jacksonville Sheriff's Office</h1>
         <p class="text-sm sm:text-base opacity-90">Public Records Requests</p>
     </header>
 
-    <!-- Controls Section -->
     <div class="bg-white p-4 border-b border-gray-200 sticky top-0 z-10">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
-            <!-- Search Input -->
-            <div class="sm:col-span-2 lg:col-span-1">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 items-end">
+            <div>
                 <label for="searchInput" class="control-label block mb-1">Search</label>
-                <input type="text" id="searchInput" placeholder="Ref No, description..." class="w-full p-2 border border-gray-300 rounded-md">
+                <input type="text" id="searchInput" placeholder="Ref No, description..." class="control-input">
             </div>
-            <!-- Filter by Status -->
             <div>
                 <label for="statusFilter" class="control-label block mb-1">Filter by Status</label>
-                <select id="statusFilter" class="control-select w-full"></select>
+                <select id="statusFilter" class="control-select"></select>
             </div>
-            <!-- Filter by Files -->
             <div>
                 <label for="fileFilter" class="control-label block mb-1">Filter by Files</label>
-                <select id="fileFilter" class="control-select w-full">
+                <select id="fileFilter" class="control-select">
                     <option value="all">All</option>
                     <option value="yes">Has Files</option>
                     <option value="no">No Files</option>
                 </select>
             </div>
-            <!-- Sort by -->
             <div>
                 <label for="sortControl" class="control-label block mb-1">Sort By</label>
-                <select id="sortControl" class="control-select w-full">
-                    <option value="filed-date-desc">Filed Date (Newest)</option>
-                    <option value="filed-date-asc">Filed Date (Oldest)</option>
+                <select id="sortControl" class="control-select">
                     <option value="close-date-desc">Close Date (Newest)</option>
                     <option value="close-date-asc">Close Date (Oldest)</option>
+                    <option value="filed-date-desc">Filed Date (Newest)</option>
+                    <option value="filed-date-asc">Filed Date (Oldest)</option>
                     <option value="days-desc">Days to Complete (Slowest)</option>
                     <option value="days-asc">Days to Complete (Fastest)</option>
                     <option value="files-desc">File Count (Most)</option>
                     <option value="files-asc">File Count (Least)</option>
-                    <option value="status-asc">Status (A-Z)</option>
-                    <option value="status-desc">Status (Z-A)</option>
                 </select>
             </div>
-            <!-- Download Button -->
-            <button id="downloadBtn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-md transition duration-200 h-10">
-                📥 Download CSV
-            </button>
+            <div>
+                <label for="perPageSelect" class="control-label block mb-1">Per Page</label>
+                <select id="perPageSelect" class="control-select">
+                    <option value="25">25</option>
+                    <option value="50" selected>50</option>
+                    <option value="250">250</option>
+                    <option value="1000">1000</option>
+                    <option value="all">All</option>
+                </select>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-4 pt-4 border-t border-gray-200">
+             <label class="control-label block mb-2 text-center">Filter by Close Date Range</label>
+             <div id="date-slider-container">
+                <svg id="histogram-svg" width="100%" height="60"></svg>
+                <div id="slider-track">
+                    <div id="slider-range"></div>
+                    <div id="slider-handle-start" class="slider-handle"></div>
+                    <div id="slider-handle-end" class="slider-handle"></div>
+                </div>
+            </div>
+            <div class="flex justify-between items-center mt-2 gap-4">
+                <div>
+                    <label for="startDateInput" class="control-label">Start Date</label>
+                    <input type="date" id="startDateInput" class="control-input text-sm">
+                </div>
+                <div>
+                    <label for="endDateInput" class="control-label text-right block">End Date</label>
+                    <input type="date" id="endDateInput" class="control-input text-sm">
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Stats Section -->
     <div class="bg-white py-4">
         <div class="max-w-3xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-4 text-center px-4">
             <div class="bg-gray-50 p-3 rounded-lg border-l-4 border-blue-500">
@@ -110,13 +182,11 @@
         </div>
     </div>
 
-    <!-- Main Content -->
     <main class="max-w-7xl mx-auto p-4">
-        <div id="loading" class="text-center py-10 text-gray-500">
-            <p>Loading records...</p>
-        </div>
+        <div id="loading" class="text-center py-10 text-gray-500"><p>Loading records...</p></div>
         <div id="error" class="hidden bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md my-4"></div>
         <div id="recordsContainer" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        <div id="pagination-controls" class="hidden mt-8 flex justify-center items-center gap-4"></div>
         <div id="noResults" class="hidden text-center py-10 text-gray-500">
             <h3 class="text-xl font-semibold text-gray-700">No records found</h3>
             <p>Try adjusting your search or filter settings.</p>
@@ -124,10 +194,12 @@
     </main>
 
     <script>
-        // --- GLOBALS ---
+        // --- GLOBALS & CONFIG ---
         let allRecords = [];
         let filteredAndSortedRecords = [];
         const JSON_URL = 'https://raw.githubusercontent.com/apantazi/jso/main/jso_records_requests.json';
+        let dateSlider = {};
+        let pagination = { currentPage: 1 };
 
         // --- DOM ELEMENTS ---
         const loadingEl = document.getElementById('loading');
@@ -138,20 +210,29 @@
         const statusFilter = document.getElementById('statusFilter');
         const fileFilter = document.getElementById('fileFilter');
         const sortControl = document.getElementById('sortControl');
-        const downloadBtn = document.getElementById('downloadBtn');
+        const perPageSelect = document.getElementById('perPageSelect');
         const totalRecordsCountEl = document.getElementById('totalRecordsCount');
         const matchingRecordsEl = document.getElementById('matchingRecords');
         const openRecordsEl = document.getElementById('openRecords');
         const closedRecordsEl = document.getElementById('closedRecords');
         const fileRecordsEl = document.getElementById('fileRecords');
+        const startDateInput = document.getElementById('startDateInput');
+        const endDateInput = document.getElementById('endDateInput');
+        const paginationControlsEl = document.getElementById('pagination-controls');
 
-        // --- DATA ACCESSOR HELPERS ---
+        // --- DATA ACCESSORS & HELPERS ---
+        const parseDate = (dateString) => {
+            if (!dateString) return null;
+            const d = new Date(dateString);
+            if (isNaN(d.getTime())) return null;
+            d.setUTCHours(0, 0, 0, 0);
+            return d;
+        };
         const getId = (record) => record["Reference No"] || 'N/A';
         const getStatus = (record) => record.Status || 'Unknown';
         const getDescription = (record) => record["Public Record Request"] || 'No description available.';
-        const getCloseDate = (record) => record["Close Date"] || '';
+        const getCloseDate = (record) => parseDate(record["Close Date"]);
         const getFilesInfo = (record) => record.Files || '';
-        
         const getFiledDate = (record) => {
             const refNo = getId(record);
             const hyphenIndex = refNo.indexOf('-');
@@ -161,50 +242,154 @@
                 const month = datePart.substring(0, 2);
                 const day = datePart.substring(2, 4);
                 const year = `20${datePart.substring(4, 6)}`;
-                return new Date(`${year}-${month}-${day}`);
-            } catch (e) {
-                return null;
-            }
+                return parseDate(`${year}-${month}-${day}`);
+            } catch (e) { return null; }
         };
-
         const getFileCount = (record) => {
             const filesInfo = getFilesInfo(record);
             const match = filesInfo.match(/\((\d+)\)/);
             return match ? parseInt(match[1], 10) : 0;
         };
-        
         const hasFiles = (record) => getFileCount(record) > 0;
-
         const getDaysToComplete = (record) => {
             const filedDate = getFiledDate(record);
-            const closeDateStr = getCloseDate(record);
-            if (!filedDate || !closeDateStr) return null;
-            
-            const closeDate = new Date(closeDateStr);
-            if (isNaN(filedDate.getTime()) || isNaN(closeDate.getTime())) return null;
-
+            const closeDate = getCloseDate(record);
+            if (!filedDate || !closeDate) return null;
             const diffTime = Math.abs(closeDate - filedDate);
             return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         };
+        const debounce = (func, delay) => {
+            let timeout;
+            return (...args) => {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), delay);
+            };
+        };
 
-        // --- CORE APPLICATION LOGIC ---
+        // --- DATE SLIDER/HISTOGRAM LOGIC ---
+        function initializeDateSlider(records) {
+            const validRecords = records.map(r => ({...r, closeDate: getCloseDate(r)})).filter(r => r.closeDate);
+            if (validRecords.length === 0) return;
 
+            const minDate = d3.min(validRecords, d => d.closeDate);
+            const maxDate = d3.max(validRecords, d => d.closeDate);
+
+            const svg = d3.select("#histogram-svg");
+            svg.selectAll("*").remove();
+            const width = parseInt(svg.style("width"));
+            const height = parseInt(svg.style("height"));
+            
+            const x = d3.scaleTime().domain([minDate, maxDate]).range([0, width]);
+            const histogram = d3.bin().value(d => d.closeDate).domain(x.domain()).thresholds(x.ticks(d3.timeMonth.every(1)));
+            const bins = histogram(validRecords);
+            const y = d3.scaleLinear().domain([0, d3.max(bins, d => d.length)]).range([height, 0]);
+
+            svg.selectAll("rect").data(bins).enter().append("rect")
+                .attr("class", "histogram-bar")
+                .attr("x", d => x(d.x0) + 1)
+                .attr("width", d => Math.max(0, x(d.x1) - x(d.x0) - 1))
+                .attr("y", d => y(d.length))
+                .attr("height", d => height - y(d.length));
+
+            dateSlider = { xScale: x, minDate, maxDate, width };
+            
+            const formatDate = (date) => date.toISOString().split('T')[0];
+            startDateInput.value = formatDate(minDate);
+            startDateInput.min = formatDate(minDate);
+            startDateInput.max = formatDate(maxDate);
+            endDateInput.value = formatDate(maxDate);
+            endDateInput.min = formatDate(minDate);
+            endDateInput.max = formatDate(maxDate);
+
+            setupSliderHandles();
+        }
+
+        function setupSliderHandles() {
+            const track = document.getElementById('slider-track');
+            const handleStart = document.getElementById('slider-handle-start');
+            const handleEnd = document.getElementById('slider-handle-end');
+            const range = document.getElementById('slider-range');
+            const trackWidth = track.offsetWidth;
+
+            const updateRange = () => {
+                const startPos = parseFloat(handleStart.style.left || '0px');
+                const endPos = parseFloat(handleEnd.style.left || '0px');
+                range.style.left = `${startPos}px`;
+                range.style.width = `${endPos - startPos}px`;
+            };
+
+            const updateInputsFromHandles = () => {
+                const startPct = parseFloat(handleStart.style.left || '0px') / trackWidth;
+                const endPct = parseFloat(handleEnd.style.left || '0px') / trackWidth;
+                const startDate = dateSlider.xScale.invert(startPct * dateSlider.width);
+                const endDate = dateSlider.xScale.invert(endPct * dateSlider.width);
+                startDateInput.value = startDate.toISOString().split('T')[0];
+                endDateInput.value = endDate.toISOString().split('T')[0];
+            };
+
+            const makeDraggable = (handle) => {
+                let isDragging = false;
+                handle.addEventListener('mousedown', () => { isDragging = true; document.body.style.cursor = 'ew-resize'; });
+                window.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    const rect = track.getBoundingClientRect();
+                    let x = e.clientX - rect.left;
+                    x = Math.max(0, Math.min(x, trackWidth));
+                    const otherHandle = handle === handleStart ? handleEnd : handleStart;
+                    const otherPos = parseFloat(otherHandle.style.left || '0px');
+                    x = (handle === handleStart) ? Math.min(x, otherPos - 10) : Math.max(x, otherPos + 10);
+                    handle.style.left = `${x}px`;
+                    updateRange();
+                });
+                window.addEventListener('mouseup', () => {
+                    if (isDragging) {
+                        isDragging = false;
+                        document.body.style.cursor = 'auto';
+                        updateInputsFromHandles();
+                        applyFiltersAndSort();
+                    }
+                });
+            };
+            
+            handleStart.style.left = '0px';
+            handleEnd.style.left = `${trackWidth - handleEnd.offsetWidth}px`;
+            updateRange();
+            makeDraggable(handleStart);
+            makeDraggable(handleEnd);
+        }
+        
+        function updateHandlesFromInputs() {
+            if (!dateSlider.xScale) return;
+            const trackWidth = document.getElementById('slider-track').offsetWidth;
+            const handleStart = document.getElementById('slider-handle-start');
+            const handleEnd = document.getElementById('slider-handle-end');
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(endDateInput.value);
+            const startPos = dateSlider.xScale(startDate) / dateSlider.width * trackWidth;
+            const endPos = dateSlider.xScale(endDate) / dateSlider.width * trackWidth;
+            handleStart.style.left = `${Math.max(0, startPos)}px`;
+            handleEnd.style.left = `${Math.min(trackWidth - handleEnd.offsetWidth, endPos)}px`;
+            document.getElementById('slider-range').style.left = `${startPos}px`;
+            document.getElementById('slider-range').style.width = `${endPos - startPos}px`;
+        }
+
+
+        // --- CORE LOGIC ---
         async function initializeApp() {
             try {
                 const response = await fetch(JSON_URL);
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 allRecords = await response.json();
-
-                if (!Array.isArray(allRecords)) {
-                    throw new TypeError("Fetched data is not an array.");
-                }
+                if (!Array.isArray(allRecords)) throw new TypeError("Fetched data is not an array.");
                 
                 totalRecordsCountEl.textContent = `of ${allRecords.length.toLocaleString()} total`;
                 populateStatusFilter();
+                initializeDateSlider(allRecords);
                 applyFiltersAndSort(); 
 
                 loadingEl.style.display = 'none';
                 recordsContainerEl.style.display = 'grid';
+                paginationControlsEl.style.display = 'flex';
 
             } catch (error) {
                 console.error('Initialization failed:', error);
@@ -227,15 +412,11 @@
             });
         }
         
-        /**
-         * UPDATED: Calculates stats based on the provided array of records.
-         */
         function updateStats(recordsToCount) {
             const matching = recordsToCount.length;
             const open = recordsToCount.filter(r => !getStatus(r).toUpperCase().includes('COMPLETED')).length;
             const closed = matching - open;
             const withFiles = recordsToCount.filter(hasFiles).length;
-
             matchingRecordsEl.textContent = matching.toLocaleString();
             openRecordsEl.textContent = open.toLocaleString();
             closedRecordsEl.textContent = closed.toLocaleString();
@@ -244,157 +425,142 @@
 
         function applyFiltersAndSort() {
             let records = [...allRecords];
-            const searchTerm = searchInput.value.toLowerCase();
-            if (searchTerm) {
-                records = records.filter(record => {
-                    const searchableText = [
-                        getId(record),
-                        getDescription(record),
-                        getStatus(record),
-                        getFiledDate(record)?.toLocaleDateString(),
-                        getDaysToComplete(record)
-                    ].join(' ').toLowerCase();
-                    return searchableText.includes(searchTerm);
+            
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(endDateInput.value);
+            if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
+                records = records.filter(r => {
+                    const closeDate = getCloseDate(r);
+                    return closeDate && closeDate >= startDate && closeDate <= endDate;
                 });
             }
 
+            const searchTerm = searchInput.value.toLowerCase();
+            if (searchTerm) {
+                records = records.filter(r => [getId(r), getDescription(r), getStatus(r)].join(' ').toLowerCase().includes(searchTerm));
+            }
             const selectedStatus = statusFilter.value;
             if (selectedStatus !== 'all') {
                 records = records.filter(r => getStatus(r) === selectedStatus);
             }
-            
             const selectedFileOption = fileFilter.value;
-            if (selectedFileOption === 'yes') {
-                records = records.filter(hasFiles);
-            } else if (selectedFileOption === 'no') {
-                records = records.filter(r => !hasFiles(r));
-            }
+            if (selectedFileOption === 'yes') records = records.filter(hasFiles);
+            else if (selectedFileOption === 'no') records = records.filter(r => !hasFiles(r));
             
-            // UPDATED: Call updateStats with the newly filtered records
             updateStats(records);
 
             const sortValue = sortControl.value;
             records.sort((a, b) => {
                 const sortWithNulls = (valA, valB, asc = true) => {
-                    if (valA === null) return 1;
-                    if (valB === null) return -1;
+                    if (valA === null || valA === undefined) return 1;
+                    if (valB === null || valB === undefined) return -1;
                     if (valA === valB) return 0;
                     return asc ? valA - valB : valB - valA;
                 };
-
                 switch (sortValue) {
-                    case 'filed-date-asc':
-                        return sortWithNulls(getFiledDate(a), getFiledDate(b));
-                    case 'filed-date-desc':
-                        return sortWithNulls(getFiledDate(a), getFiledDate(b), false);
-                    case 'close-date-asc':
-                        return sortWithNulls(new Date(getCloseDate(a)), new Date(getCloseDate(b)));
-                    case 'close-date-desc':
-                         return sortWithNulls(new Date(getCloseDate(a)), new Date(getCloseDate(b)), false);
-                    case 'days-asc':
-                        return sortWithNulls(getDaysToComplete(a), getDaysToComplete(b));
-                    case 'days-desc':
-                        return sortWithNulls(getDaysToComplete(a), getDaysToComplete(b), false);
-                    case 'files-asc':
-                        return getFileCount(a) - getFileCount(b);
-                    case 'files-desc':
-                        return getFileCount(b) - getFileCount(a);
-                    case 'status-asc':
-                        return getStatus(a).localeCompare(getStatus(b));
-                    case 'status-desc':
-                        return getStatus(b).localeCompare(getStatus(a));
-                    default:
-                        return sortWithNulls(getFiledDate(a), getFiledDate(b), false);
+                    case 'filed-date-asc': return sortWithNulls(getFiledDate(a), getFiledDate(b));
+                    case 'filed-date-desc': return sortWithNulls(getFiledDate(a), getFiledDate(b), false);
+                    case 'close-date-asc': return sortWithNulls(getCloseDate(a), getCloseDate(b));
+                    case 'close-date-desc': return sortWithNulls(getCloseDate(a), getCloseDate(b), false);
+                    case 'days-asc': return sortWithNulls(getDaysToComplete(a), getDaysToComplete(b));
+                    case 'days-desc': return sortWithNulls(getDaysToComplete(a), getDaysToComplete(b), false);
+                    case 'files-asc': return getFileCount(a) - getFileCount(b);
+                    case 'files-desc': return getFileCount(b) - getFileCount(a);
+                    default: return sortWithNulls(getCloseDate(a), getCloseDate(b), false);
                 }
             });
 
             filteredAndSortedRecords = records;
-            renderRecords();
+            pagination.currentPage = 1;
+            renderPage();
         }
 
-        function renderRecords() {
-            if (filteredAndSortedRecords.length === 0) {
-                recordsContainerEl.style.display = 'none';
-                noResultsEl.style.display = 'block';
-                return;
-            }
+        function renderPage() {
+            const perPageValue = perPageSelect.value;
+            const recordsPerPage = perPageValue === 'all' ? filteredAndSortedRecords.length : parseInt(perPageValue, 10);
+            
+            const totalPages = Math.ceil(filteredAndSortedRecords.length / recordsPerPage);
+            pagination.currentPage = Math.max(1, Math.min(pagination.currentPage, totalPages || 1));
 
-            recordsContainerEl.style.display = 'grid';
-            noResultsEl.style.display = 'none';
+            const startIndex = (pagination.currentPage - 1) * recordsPerPage;
+            const endIndex = startIndex + recordsPerPage;
+            const pageRecords = filteredAndSortedRecords.slice(startIndex, endIndex);
 
-            recordsContainerEl.innerHTML = filteredAndSortedRecords.map(record => {
+            recordsContainerEl.style.display = pageRecords.length ? 'grid' : 'none';
+            noResultsEl.style.display = filteredAndSortedRecords.length ? 'none' : 'block';
+            
+            recordsContainerEl.innerHTML = pageRecords.map(record => {
                 const status = getStatus(record);
                 const statusClass = `status-${status.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
                 const filedDate = getFiledDate(record);
                 const closeDate = getCloseDate(record);
                 const daysToComplete = getDaysToComplete(record);
                 const fileCount = getFileCount(record);
-
                 return `
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col">
                         <div class="p-4 border-b border-gray-100 flex justify-between items-start gap-2">
                             <h3 class="font-bold text-blue-900 text-sm">#${getId(record)}</h3>
                             <span class="text-xs font-semibold px-2 py-1 rounded-full ${statusClass}">${status}</span>
                         </div>
-                        <div class="p-4 flex-grow">
-                            <p class="text-gray-700 text-sm mb-4">${getDescription(record)}</p>
-                        </div>
+                        <div class="p-4 flex-grow"><p class="text-gray-700 text-sm mb-4">${getDescription(record)}</p></div>
                         <div class="p-4 bg-gray-50 text-xs text-gray-600 rounded-b-lg space-y-2">
                             <div><strong>Filed Date:</strong> ${filedDate ? filedDate.toLocaleDateString() : 'N/A'}</div>
-                            <div><strong>Close Date:</strong> ${closeDate || 'N/A'}</div>
+                            <div><strong>Close Date:</strong> ${closeDate ? closeDate.toLocaleDateString() : 'N/A'}</div>
                             <div><strong>Days to Complete:</strong> <span class="font-medium">${daysToComplete !== null ? daysToComplete : 'N/A'}</span></div>
-                            <div>
-                                <strong>Files:</strong>
-                                <span class="ml-1 font-medium">${fileCount}</span>
-                            </div>
+                            <div><strong>Files:</strong><span class="ml-1 font-medium">${fileCount}</span></div>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             }).join('');
+            
+            renderPaginationControls(totalPages);
+            window.scrollTo(0, 0);
         }
-
-        function downloadCSV() {
-            if (allRecords.length === 0) {
-                alert('No data available to download.');
-                return;
-            }
-
-            const headers = ['Reference No', 'Status', 'Filed Date', 'Close Date', 'Days to Complete', 'File Count', 'Public Record Request'];
-            let csvContent = headers.join(',') + '\n';
-
-            allRecords.forEach(record => {
-                const filedDate = getFiledDate(record);
-                const row = [
-                    `"${getId(record)}"`,
-                    `"${getStatus(record)}"`,
-                    `"${filedDate ? filedDate.toLocaleDateString() : ''}"`,
-                    `"${getCloseDate(record)}"`,
-                    `"${getDaysToComplete(record) || ''}"`,
-                    `"${getFileCount(record)}"`,
-                    `"${getDescription(record).replace(/"/g, '""')}"`
-                ];
-                csvContent += row.join(',') + '\n';
+        
+        function renderPaginationControls(totalPages) {
+            paginationControlsEl.style.display = totalPages > 1 ? 'flex' : 'none';
+            paginationControlsEl.innerHTML = `
+                <button id="prevBtn" class="pagination-btn" ${pagination.currentPage === 1 ? 'disabled' : ''}>Previous</button>
+                <span class="px-4 text-sm">Page ${pagination.currentPage} of ${totalPages || 1}</span>
+                <button id="nextBtn" class="pagination-btn" ${pagination.currentPage === totalPages || totalPages === 0 ? 'disabled' : ''}>Next</button>
+            `;
+            document.getElementById('prevBtn')?.addEventListener('click', () => {
+                if (pagination.currentPage > 1) {
+                    pagination.currentPage--;
+                    renderPage();
+                }
             });
-
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.setAttribute('download', 'jso_records_requests.csv');
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            document.getElementById('nextBtn')?.addEventListener('click', () => {
+                if (pagination.currentPage < totalPages) {
+                    pagination.currentPage++;
+                    renderPage();
+                }
+            });
         }
-
+        
         // --- EVENT LISTENERS ---
-        searchInput.addEventListener('input', applyFiltersAndSort);
+        const debouncedFilter = debounce(applyFiltersAndSort, 300);
+        searchInput.addEventListener('input', debouncedFilter);
         statusFilter.addEventListener('change', applyFiltersAndSort);
         fileFilter.addEventListener('change', applyFiltersAndSort);
-        sortControl.addEventListener('change', applyFiltersAndSort);
-        downloadBtn.addEventListener('click', downloadCSV);
+        sortControl.addEventListener('change', () => {
+            pagination.currentPage = 1;
+            applyFiltersAndSort();
+        });
+        perPageSelect.addEventListener('change', () => {
+            pagination.currentPage = 1;
+            renderPage();
+        });
+        startDateInput.addEventListener('change', () => { updateHandlesFromInputs(); applyFiltersAndSort(); });
+        endDateInput.addEventListener('change', () => { updateHandlesFromInputs(); applyFiltersAndSort(); });
+        window.addEventListener('resize', () => {
+            if (allRecords.length > 0) {
+                initializeDateSlider(allRecords);
+                updateHandlesFromInputs();
+            }
+        });
 
         // --- INITIALIZE ---
         document.addEventListener('DOMContentLoaded', initializeApp);
-
     </script>
 </body>
 </html>
