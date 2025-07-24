@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>React Component</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useMemo } = React;
+
+    const TextDiffApp = () => {
+      const [text1, setText1] = useState('');
+      const [text2, setText2] = useState('');
+      const [viewMode, setViewMode] = useState('inline');
+      const [ignoreWhitespace, setIgnoreWhitespace] = useState(true);
+      const [showSettings, setShowSettings] = useState(false);
+
+      const processText = (text) => {
+        if (ignoreWhitespace) {
+          return text.replace(/\s+/g, ' ').trim().toLowerCase();
+        }
+        return text;
+      };
+
+      const computeDiff = (text1, text2) => {
+        const words1 = processText(text1).split(/(\s+)/);
+        const words2 = processText(text2).split(/(\s+)/);
+
+        const originalWords1 = text1.split(/(\s+)/);
+        const originalWords2 = text2.split(/(\s+)/);
+
+        const diff = [];
+        let i = 0, j = 0;
+
+        while (i < words1.length || j < words2.length) {
+          if (i >= words1.length) {
+            while (j < words2.length) {
+              diff.push({ type: 'added', value: originalWords2[j] });
+              j++;
+            }
+          } else if (j >= words2.length) {
+            while (i < words1.length) {
+              diff.push({ type: 'deleted', value: originalWords1[i] });
+              i++;
+            }
+          } else if (words1[i] === words2[j]) {
+            diff.push({ type: 'equal', value: originalWords1[i] });
+            i++;
+            j++;
+          } else {
+            let found = false;
+            for (let k = j + 1; k < Math.min(j + 5, words2.length); k++) {
+              if (words1[i] === words2[k]) {
+                for (let l = j; l < k; l++) {
+                  diff.push({ type: 'added', value: originalWords2[l] });
+                }
+                j = k;
+                found = true;
+                break;
+              }
+            }
+            if (!found) {
+              for (let k = i + 1; k < Math.min(i + 5, words1.length); k++) {
+                if (words1[k] === words2[j]) {
+                  for (let l = i; l < k; l++) {
+                    diff.push({ type: 'deleted', value: originalWords1[l] });
+                  }
+                  i = k;
+                  found = true;
+                  break;
+                }
+              }
+            }
+            if (!found) {
+              diff.push({ type: 'deleted', value: originalWords1[i] });
+              diff.push({ type: 'added', value: originalWords2[j] });
+              i++;
+              j++;
+            }
+          }
+        }
+        return diff;
+      };
+
+      const diff = useMemo(() => computeDiff(text1, text2), [text1, text2, ignoreWhitespace]);
+      const stats1 = { words: text1.trim() ? text1.trim().split(/\s+/).length : 0, characters: text1.length };
+      const stats2 = { words: text2.trim() ? text2.trim().split(/\s+/).length : 0, characters: text2.length };
+
+      const renderInlineView = () => (
+        <div>
+          <h3>Inline Comparison</h3>
+          <div>
+            {diff.map((part, idx) => (
+              <span key={idx} style={{
+                background: part.type === 'added' ? '#d1fadf' :
+                            part.type === 'deleted' ? '#fde2e1' : 'none',
+                textDecoration: part.type === 'deleted' ? 'line-through' : 'none',
+                fontWeight: part.type === 'added' ? 'bold' : 'normal'
+              }}>
+                {part.value}
+              </span>
+            ))}
+          </div>
+        </div>
+      );
+
+      const renderSideBySideView = () => {
+        const left = [], right = [];
+        diff.forEach((part, idx) => {
+          if (part.type === 'equal') {
+            left.push(<span key={idx}>{part.value}</span>);
+            right.push(<span key={idx}>{part.value}</span>);
+          } else if (part.type === 'deleted') {
+            left.push(<span key={idx} style={{ background: '#fde2e1', textDecoration: 'line-through' }}>{part.value}</span>);
+          } else if (part.type === 'added') {
+            right.push(<span key={idx} style={{ background: '#d1fadf', fontWeight: 'bold' }}>{part.value}</span>);
+          }
+        });
+        return (
+          <div style={{ display: 'flex', gap: 20 }}>
+            <div><strong>Original</strong><div>{left}</div></div>
+            <div><strong>Modified</strong><div>{right}</div></div>
+          </div>
+        );
+      };
+
+      return (
+        <div style={{ maxWidth: 900, margin: 'auto', padding: 20 }}>
+          <h1>Smart Text Diff Tool</h1>
+          <button onClick={() => setViewMode(viewMode === 'inline' ? 'sideBySide' : 'inline')}>
+            {viewMode === 'inline' ? 'Inline' : 'Side-by-Side'}
+          </button>
+          <button onClick={() => setShowSettings(!showSettings)}>
+            Settings
+          </button>
+          {showSettings && (
+            <div>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={ignoreWhitespace}
+                  onChange={e => setIgnoreWhitespace(e.target.checked)}
+                />
+                Ignore whitespace
+              </label>
+            </div>
+          )}
+          <div style={{ display: 'flex', gap: 10, marginTop: 20 }}>
+            <div>
+              <textarea rows={10} value={text1} onChange={e => setText1(e.target.value)} placeholder="Original text" />
+              <div>{stats1.words} words, {stats1.characters} chars</div>
+            </div>
+            <div>
+              <textarea rows={10} value={text2} onChange={e => setText2(e.target.value)} placeholder="Modified text" />
+              <div>{stats2.words} words, {stats2.characters} chars</div>
+            </div>
+          </div>
+          <div style={{ marginTop: 20 }}>
+            {(text1 || text2) ? (
+              viewMode === 'inline' ? renderInlineView() : renderSideBySideView()
+            ) : (
+              <div>Paste your texts above to see differences</div>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<TextDiffApp />);
+  </script>
+</body>
+</html>
