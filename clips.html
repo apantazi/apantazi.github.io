@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head><!-- Google tag (gtag.js) -->
@@ -31,119 +33,17 @@
   <meta name="twitter:site" content="@APantazi">
   <link rel="canonical" href="https://andrewpantazi.com/clips">
   <link href="style.css" rel="stylesheet" type="text/css">
-
-  <style>
-/* Self-hosted fonts */
-@font-face {
-  font-family: 'Fjalla One';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/assets/fonts/Fjalla_One/FjallaOne-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Libre Franklin';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/assets/fonts/Libre_Franklin/LibreFranklin-VariableFont_wght.ttf') format('truetype');
-}
-
-/* (Optional) If you want bold weight for headings, add this: */
-@font-face {
-  font-family: 'Libre Franklin';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/assets/fonts/Libre_Franklin/LibreFranklin-VariableFont_wght.ttf') format('truetype');
-}
-
-/* Page styling */
-body {
-  font-family: 'Libre Franklin', Arial, sans-serif;
-  background: #f9f9f9;
-  margin: 0;
-}
-.container {
-  max-width: 900px;
-  margin: 2em auto;
-  background: #fff;
-  padding: 2em 2em 1em;
-  border-radius: 8px;
-  box-sizing: border-box;
-}
-h1 {
-  font-family: 'Fjalla One', Arial, sans-serif;
-  font-size: 2.2em;
-  text-align: center;
-  margin-top: 0;
-}
-h2 {
-  font-family: 'Fjalla One', Arial, sans-serif;
-  font-size: 1.3em;
-  margin: 1.4em 0 .6em;
-  color: #222;
-  text-align: left;
-}
-img.profile {
-  width: 180px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 50%;
-  display: block;
-  margin: 0 auto 1em;
-}
-.center {
-  text-align: center;
-}
-hr {
-  border: none;
-  border-top: 1px solid #eee;
-  margin: 2em 0;
-}
-
-/* Responsive tweaks */
-@media (max-width: 900px) {
-  .container { max-width: 98vw; }
-}
-@media (max-width: 700px) {
-  .container { padding: 1em .5em; }
-}
-@media (max-width: 600px) {
-  h1 { font-size: 1.3em; }
-}
-@media (max-width: 500px) {
-  h1 { font-size: 1.3em; }
-}
-</style>
 </head>
 
 <body>
-<div id="header"></div>
-<script>
-  fetch('header.html')
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById('header').innerHTML = data;
-      const path = window.location.pathname;
-      if (path.includes("clips")) {
-        document.getElementById('clips-link').classList.add('active');
-      } else if (path.includes("interactives")) {
-        document.getElementById('interactives-link').classList.add('active');
-      } else if (path.includes("resume")) {
-        document.getElementById('resume-link').classList.add('active');
-      } else {
-        document.getElementById('home-link').classList.add('active');
-      }
-    });
-</script>
+{% include header.html %}
 <div class="container">
   <h1>Portfolio</h1>
   <div class="grid">
 
     <!-- Investigative -->
     <div class="card">
+      <img class="card-thumb" src="/assets/placeholder-investigative.jpg" alt="Investigative category thumbnail" loading="lazy">
       <h2>Investigative</h2>
       <div class="blurb">Uncovering corruption, systemic failures and hidden injustices to hold the powerful to account.</div>
       
@@ -164,6 +64,7 @@ hr {
 
     <!-- Editing -->
 <div class="card">
+  <img class="card-thumb" src="/assets/placeholder-editing.jpg" alt="Editing category thumbnail" loading="lazy">
   <h2>Editing</h2>
   <div class="blurb">Investigative stories shaped from pitch to publication.</div>
 
@@ -192,6 +93,7 @@ hr {
 
     <!-- Redistricting -->
     <div class="card">
+      <img class="card-thumb" src="/assets/placeholder-redistricting.jpg" alt="Redistricting category thumbnail" loading="lazy">
       <h2>Redistricting</h2>
       <div class="blurb">Examining how maps are drawn, who benefits and the court fights over fair representation.</div>
       <h3><a href="/interactives">Interactives:</a></h3>
@@ -209,6 +111,7 @@ hr {
 
     <!-- Politics -->
     <div class="card">
+      <img class="card-thumb" src="/assets/placeholder-politics.jpg" alt="Politics category thumbnail" loading="lazy">
       <h2>Politics</h2>
       <div class="blurb">Tracking elections, campaign money and the political maneuvering shaping Florida government.</div>
       <h3><a href="https://jaxtrib.org/2022/06/07/jacksonville-mayoral-campaign-finance-records-thanks-to-lax-florida-campaign-finance-laws-contributions-expenses-donna-deegan-daniel-davis-leanna-cumber-al-ferraro-tk-waters-lakesha-burton/" target="_blank">Money and Politics: Jacksonville’s Mayoral Race Exposes Lax Campaign Finance Laws</a> <span style="font-weight:400;color:#888;">(June 7, 2022)</span></h3>
@@ -223,6 +126,7 @@ hr {
     
     <!-- Policing & Justice -->
   <div class="card">
+  <img class="card-thumb" src="/assets/placeholder-policing.jpg" alt="Policing and prosecuting category thumbnail" loading="lazy">
   <h2>Policing & Prosecuting</h2>
   <div class="blurb">Investigating law enforcement and failures of justice.</div>
 
@@ -247,6 +151,7 @@ hr {
 
 <!-- Judges -->
     <div class="card">
+      <img class="card-thumb" src="/assets/placeholder-judges.jpg" alt="Judges category thumbnail" loading="lazy">
       <h2>Judges</h2>
       <div class="blurb">Scrutinizing judicial ethics, sentencing disparities and the power of Florida’s courts.</div>
       <h3><a href="https://www.jacksonville.com/story/news/politics/elections/2020/04/24/last-minute-maneuvers-allow-jacksonville-lawyer-to-become-judge-without-election/41700071/" target="_blank">Last-minute Maneuvers Put Insider on Bench</a> <span style="font-weight:400;color:#888;">(Apr. 24, 2020)</span></h3>
@@ -266,6 +171,7 @@ hr {
 
     <!-- Human Interest -->
     <div class="card">
+      <img class="card-thumb" src="/assets/placeholder-human.jpg" alt="Human interest category thumbnail" loading="lazy">
       <h2>Human Interest</h2>
       <div class="blurb">Stories of hardship, resilience and hope amid injustice.</div>
       <h3><a href="https://www.jacksonville.com/story/sports/high-school/2016/01/31/three-raines-teenagers-varying-pasts-take-aim-one-ultimate-goal/15698066007/" target="_blank">Raines High School: Football as Escape</a> <span style="font-weight:400;color:#888;">(Jan. 31, 2016)</span></h3>
@@ -291,6 +197,7 @@ Chronicled longtime Brooklyn residents' hopes and fears as they awaited impendin
 
     <!-- Business -->
 <div class="card">
+  <img class="card-thumb" src="/assets/placeholder-business.jpg" alt="Business category thumbnail" loading="lazy">
   <h2>Business</h2>
   <div class="blurb">Chronicling economic change, revitalization and the forces shaping Florida’s businesses and workers.</div>
   <h3><a href="https://jaxtrib.org/2022/11/28/edward-waters-university-shuts-down-faculty-union-claiming-religious-exemption/" target="_blank">Edward Waters University shuts down faculty union, claiming religious exemption</a> <span style="font-weight:400;color:#888;">(Nov. 28, 2022)</span></h3>
@@ -321,14 +228,8 @@ Charted Palatka’s rebound as poverty fell, home values rose and new leaders re
     
   </div>
 
-  <div id="social-links"></div>
-  <script>
-    fetch('/social.html')
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('social-links').innerHTML = html;
-      });
-  </script>
+  {% include social.html %}
+  {% include footer.html %}
 </div>
 </body>
 </html>
