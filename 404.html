@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,27 +10,14 @@
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<div id="header"></div>
-<script>
-  fetch('header.html')
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById('header').innerHTML = data;
-      document.getElementById('home-link').classList.add('active');
-    });
-</script>
+{% include header.html %}
 <div class="container">
   <h1>404 - Page Not Found</h1>
+  <img src="/assets/placeholder-404.svg" alt="Not found illustration" class="notfound-illustration">
   <p class="center">Sorry, the page you were looking for doesn't exist. <a href="/">Return to home</a>.</p>
 </div>
-<div id="social-links"></div>
-<script>
-  fetch('/social.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('social-links').innerHTML = html;
-    });
-</script>
+{% include social.html %}
+{% include footer.html %}
 </body>
 </html>
 
