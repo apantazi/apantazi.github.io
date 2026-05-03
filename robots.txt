@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /wellness-app/
+
+Sitemap: https://andrewpantazi.com/sitemap.xml
