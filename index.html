@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,116 +98,11 @@
     }
   </script>
 
-<style>
-/* Self-hosted fonts */
-@font-face {
-  font-family: 'Fjalla One';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/assets/fonts/Fjalla_One/fjalla-one-v15-latin-regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Libre Franklin';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/assets/fonts/Libre_Franklin/libre-franklin-v19-latin-regular.woff2') format('woff2');
-}
-
-/* (Optional) If you want bold weight for headings, add this: */
-@font-face {
-  font-family: 'Libre Franklin';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/assets/fonts/Libre_Franklin/Libre-Franklin-v19-latin-700.woff2') format('woff2');
-}
-
-/* Page styling */
-body {
-  font-family: 'Libre Franklin', Arial, sans-serif;
-  background: #f9f9f9;
-  margin: 0;
-}
-.container {
-  max-width: 900px;
-  margin: 2em auto;
-  background: #fff;
-  padding: 2em 2em 1em;
-  border-radius: 8px;
-  box-sizing: border-box;
-}
-h1 {
-  font-family: 'Fjalla One', Arial, sans-serif;
-  font-size: 2.2em;
-  text-align: center;
-  margin-top: 0;
-}
-h2 {
-  font-family: 'Fjalla One', Arial, sans-serif;
-  font-size: 1.3em;
-  margin: 1.4em 0 .6em;
-  color: #222;
-  text-align: center;
-}
-img.profile {
-  width: 180px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 50%;
-  display: block;
-  margin: 0 auto 1em;
-}
-.center {
-  text-align: center;
-}
-hr {
-  border: none;
-  border-top: 1px solid #eee;
-  margin: 2em 0;
-}
-
-/* Responsive tweaks */
-@media (max-width: 900px) {
-  .container { max-width: 98vw; }
-}
-@media (max-width: 700px) {
-  .container { padding: 1em .5em; }
-}
-@media (max-width: 600px) {
-  h1 { font-size: 1.3em; }
-}
-@media (max-width: 500px) {
-  h1 { font-size: 1.3em; }
-}
-</style>
-  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+<link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
-<div id="header"></div>
-<script>
-  fetch('header.html')
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById('header').innerHTML = data;
-
-      // Optionally highlight the current page
-      const path = window.location.pathname;
-      if (path.includes("clips")) {
-        document.getElementById('clips-link').classList.add('active');
-      } else if (path.includes("interactives")) {
-        document.getElementById('interactives-link').classList.add('active');
-      } else if (path.includes("resume")) {
-        document.getElementById('resume-link').classList.add('active');
-      } else {
-        document.getElementById('home-link').classList.add('active');
-      }
-    });
-</script>
+{% include header.html %}
   <div class="container">
 <img class="profile" src="assets/image-360.webp" alt="Andrew Pantazi" width="180" height="180">
     <h1>Andrew Pantazi</h1>
@@ -224,13 +121,7 @@ hr {
       Twitter: <a href="http://www.twitter.com/APantazi" target="_blank">@APantazi</a></p>
     </div>
   </div>
-  <div id="social-links"></div>
-<script>
-  fetch('/social.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('social-links').innerHTML = html;
-    });
-</script>
+  {% include social.html %}
+  {% include footer.html %}
 </body>
 </html>
