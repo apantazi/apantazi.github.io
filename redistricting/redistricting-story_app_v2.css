@@ -241,14 +241,101 @@ h3 {
   border-right: 1px solid var(--ink);
 }
 
-#districtMap {
-  width: 100%;
-  height: min(68vh, 650px);
-  min-height: 530px;
+.map-viewport {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
   background:
     linear-gradient(rgba(16,21,22,.045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(16,21,22,.045) 1px, transparent 1px);
   background-size: 32px 32px;
+}
+
+#districtMap {
+  display: block;
+  width: 100%;
+  height: min(68vh, 650px);
+  min-height: 530px;
+  cursor: grab;
+  touch-action: none;
+}
+
+#districtMap.is-panning {
+  cursor: grabbing;
+}
+
+.map-content {
+  transform-box: fill-box;
+  transform-origin: 0 0;
+}
+
+.map-tools {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 4;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: calc(100% - 20px);
+}
+
+.map-tools button {
+  min-width: 38px;
+  min-height: 34px;
+  padding: 6px 9px;
+  border: 1px solid var(--ink);
+  background: rgba(255, 250, 241, .96);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 950;
+  box-shadow: 3px 3px 0 rgba(16, 21, 22, .14);
+}
+
+.map-tools button:hover,
+.map-tools button:focus-visible {
+  background: var(--ink);
+  color: #fffaf1;
+}
+
+.map-legend {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  max-width: calc(100% - 20px);
+  color: #202927;
+  font-size: 11px;
+  font-weight: 900;
+  pointer-events: none;
+}
+
+.map-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 24px;
+  padding: 4px 7px;
+  border: 1px solid rgba(16,21,22,.36);
+  background: rgba(255,250,241,.94);
+}
+
+.legend-line {
+  width: 28px;
+  height: 0;
+  border-top: 2px dashed var(--blue-deep);
+}
+
+.legend-fill {
+  width: 20px;
+  height: 12px;
+  border: 1px solid rgba(16,21,22,.45);
+  background: var(--red);
 }
 
 .district-path {
@@ -268,10 +355,11 @@ h3 {
 
 .old-outline {
   fill: none;
-  stroke: rgba(16,21,22,.58);
+  stroke: var(--blue-deep);
   stroke-dasharray: 3 3;
-  stroke-width: 1;
+  stroke-width: 1.45;
   vector-effect: non-scaling-stroke;
+  pointer-events: none;
 }
 
 .district-label {
@@ -297,6 +385,30 @@ figcaption {
 }
 
 figcaption strong { color: var(--ink); }
+
+.map-panel:fullscreen {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  padding: 18px;
+  border: 0;
+  background: var(--paper-2);
+}
+
+.map-panel:fullscreen .map-viewport {
+  flex: 1;
+  min-height: 0;
+}
+
+.map-panel:fullscreen #districtMap {
+  height: 100%;
+  min-height: 0;
+}
+
+.map-panel:fullscreen figcaption {
+  flex: 0 0 auto;
+}
 
 .inspector {
   display: flex;

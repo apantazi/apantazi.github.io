@@ -23,11 +23,11 @@
     <main id="top">
       <section class="hero">
         <div class="hero-copy">
-          <p class="label">Interactive investigation</p>
-          <h1>The public record against Florida's 24-4 map.</h1>
+          <p class="label">Interactive investigation v2</p>
+          <h1>The public record is the case against Florida's 24-4 map.</h1>
           <p class="dek">
-            The public record
-            shows how the map was built with partisan data to put the Fair Districts Amendments
+            The deeper story is not just that the map helps Republicans. It is how openly the record
+            says the map was built: partisan data in, race-neutral legal theory out, Fair Districts put
             on trial.
           </p>
           <div class="kpis" id="kpis"></div>
@@ -52,7 +52,17 @@
           </div>
           <div class="desk-body">
             <figure class="map-panel">
-              <svg id="districtMap" role="img" aria-labelledby="mapTitle mapDesc"></svg>
+              <div class="map-viewport">
+                <svg id="districtMap" role="img" aria-labelledby="mapTitle mapDesc"></svg>
+                <div class="map-tools" role="group" aria-label="Map zoom controls">
+                  <button data-map-zoom="in" type="button" aria-label="Zoom in" title="Zoom in">+</button>
+                  <button data-map-zoom="out" type="button" aria-label="Zoom out" title="Zoom out">-</button>
+                  <button data-map-zoom="reset" type="button" aria-label="Reset map zoom" title="Reset map zoom">1:1</button>
+                  <button data-map-zoom="district" type="button" aria-label="Zoom to selected district" title="Zoom to selected district">CD</button>
+                  <button data-map-fullscreen type="button" aria-label="Toggle fullscreen map" title="Toggle fullscreen map">Full</button>
+                </div>
+                <div id="mapLegend" class="map-legend" aria-hidden="true"></div>
+              </div>
               <figcaption>
                 <strong id="mapTitle">2026 congressional plan</strong>
                 <span id="mapDesc">Districts are colored by 2024 presidential margin.</span>
