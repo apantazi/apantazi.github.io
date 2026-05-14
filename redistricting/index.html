@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+    <title>Florida redraw, receipts</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fffaf0'/%3E%3Cpath d='M4 4h11v24H4z' fill='%23236aa5'/%3E%3Cpath d='M17 4h11v24H17z' fill='%23c63d32'/%3E%3Cpath d='M16 4v24' stroke='%23101516' stroke-width='2'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="redistricting-story_app_v2.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>Florida redraw, receipts</a>
+      <nav aria-label="Story sections">
+        <a href="#math">Math</a>
+        <a href="#compactness">Compactness</a>
+        <a href="#receipts">Receipts</a>
+        <a href="#vault">Search</a>
+        <a href="#lawsuits">Lawsuits</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="label">Interactive investigation v2</p>
+          <h1>The public record is the case against Florida's 24-4 map.</h1>
+          <p class="dek">
+            The deeper story is not just that the map helps Republicans. It is how openly the record
+            says the map was built: partisan data in, race-neutral legal theory out, Fair Districts put
+            on trial.
+          </p>
+          <div class="kpis" id="kpis"></div>
+          <div class="hero-actions">
+            <a href="#receipts">Read the receipts</a>
+            <a href="#vault">Search the OCR vault</a>
+          </div>
+        </div>
+
+        <section class="desk" aria-label="Interactive redistricting desk">
+          <div class="desk-toolbar">
+            <div class="segmented" role="group" aria-label="Plan">
+              <button data-map-mode="new" class="is-active" type="button">2026</button>
+              <button data-map-mode="old" type="button">2022</button>
+              <button data-map-mode="overlay" type="button">Overlay</button>
+            </div>
+            <div class="segmented" role="group" aria-label="Layer">
+              <button data-layer="partisan" class="is-active" type="button">Partisan</button>
+              <button data-layer="challenge" type="button">Challenges</button>
+              <button data-layer="compactness" type="button">Compactness</button>
+            </div>
+          </div>
+          <div class="desk-body">
+            <figure class="map-panel">
+              <svg id="districtMap" role="img" aria-labelledby="mapTitle mapDesc"></svg>
+              <figcaption>
+                <strong id="mapTitle">2026 congressional plan</strong>
+                <span id="mapDesc">Districts are colored by 2024 presidential margin.</span>
+              </figcaption>
+            </figure>
+            <aside class="inspector">
+              <p class="label">Selected district</p>
+              <h2 id="districtTitle">CD 14</h2>
+              <p id="districtSpotlight"></p>
+              <div class="metric-pair">
+                <div><span>2022</span><strong id="oldMargin"></strong><small>2024 president</small></div>
+                <div><span>2026</span><strong id="newMargin"></strong><small>2024 president</small></div>
+              </div>
+              <div class="mini-metrics">
+                <div><span>Composite shift</span><strong id="compositeShift"></strong></div>
+                <div><span>Polsby-Popper</span><strong id="ppShift"></strong></div>
+                <div><span>Claims</span><strong id="claimsCount"></strong></div>
+              </div>
+              <div id="districtClaims" class="chips"></div>
+              <button id="districtReceipts" class="dark-button" type="button">Show receipts tied to this district</button>
+            </aside>
+          </div>
+        </section>
+      </section>
+
+      <section class="section findings" id="findings">
+        <div class="section-head">
+          <div>
+            <p class="label">Topline</p>
+            <h2>Six facts that make the map hard to defend.</h2>
+          </div>
+          <p>
+            The state has arguments. It will talk population, race-neutrality and aggregate compactness.
+            The record gives plaintiffs a blunt answer: the political result is too clean, the process too
+            controlled, and the admissions too useful.
+          </p>
+        </div>
+        <div id="analysisCards" class="finding-grid"></div>
+      </section>
+
+      <section class="section math" id="math">
+        <div class="section-head">
+          <div>
+            <p class="label">Partisan math</p>
+            <h2>The new map does not need a wave. It survives one.</h2>
+          </div>
+          <p>
+            Move the slider. A uniform Democratic swing that would make the old map competitive still
+            leaves the new map locked at 24 Republican seats until the swing gets very large.
+          </p>
+        </div>
+        <div class="simulator">
+          <label for="swingSlider">Uniform Democratic swing <output id="swingValue">D+0</output></label>
+          <input id="swingSlider" type="range" min="-10" max="20" step="1" value="0" />
+          <div id="swingPanels" class="swing-panels"></div>
+          <div id="movementTable" class="movement-table"></div>
+        </div>
+      </section>
+
+      <section class="section compactness" id="compactness">
+        <div class="section-head">
+          <div>
+            <p class="label">Compactness fingerprints</p>
+            <h2>The aggregate defense hides district-level damage.</h2>
+          </div>
+          <p>
+            The statewide averages move only slightly. That is the state's best compactness fact. The
+            district-level view is worse: CD15 and CD25 crater, and CD25 becomes the least compact new
+            district while flipping from blue to red.
+          </p>
+        </div>
+        <div id="compactnessLab" class="compact-grid"></div>
+      </section>
+
+      <section class="section receipts" id="receipts">
+        <div class="section-head">
+          <div>
+            <p class="label">Damning receipts</p>
+            <h2>Poreda, Jazil, the general counsel and floor debate in their own words.</h2>
+          </div>
+          <p>
+            These are short excerpts because the power is in the collision: what the state said, what the
+            map did, and what Florida's constitution says voters banned.
+          </p>
+        </div>
+        <div id="receiptFilters" class="filter-row"></div>
+        <div id="receiptBoard" class="receipt-board"></div>
+      </section>
+
+      <section class="section vault" id="vault">
+        <div class="section-head">
+          <div>
+            <p class="label">Document vault</p>
+            <h2>Search the OCR, then open the source PDF.</h2>
+          </div>
+          <p>
+            This is a client-side OCR search with concept expansion, not cloud embeddings. Try:
+            <strong>partisan data</strong>, <strong>Fox News</strong>, <strong>compactness</strong>,
+            <strong>race neutral</strong>, <strong>population</strong>, <strong>Section 20</strong>.
+          </p>
+        </div>
+        <div class="vault-grid">
+          <div class="search-panel">
+            <div class="search-box">
+              <input id="docSearch" type="search" value="Poreda partisan data every district" aria-label="Search OCR vault" />
+              <button id="runSearch" type="button">Search</button>
+            </div>
+            <div id="searchStats" class="search-stats"></div>
+            <div id="searchResults" class="search-results"></div>
+          </div>
+          <div class="pdf-panel">
+            <div class="pdf-header">
+              <strong id="pdfTitle">Source PDF</strong>
+              <a id="pdfOpen" href="#" target="_blank" rel="noopener">Open PDF</a>
+            </div>
+            <iframe id="pdfFrame" title="Source PDF viewer"></iframe>
+            <div id="resultDetail" class="result-detail"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section lawsuits" id="lawsuits">
+        <div class="section-head">
+          <div>
+            <p class="label">Three state cases</p>
+            <h2>Same target, different theories.</h2>
+          </div>
+          <p>
+            Common Cause goes broad on partisan intent. Equal Ground adds compactness and boundary
+            claims. Thompson-Wynn focuses on Central Florida and Tampa Bay. All three ask state courts
+            to stop the 2026 plan.
+          </p>
+        </div>
+        <div id="lawsuitCards" class="lawsuit-cards"></div>
+        <div class="matrix-wrap">
+          <div class="matrix-title">Challenged districts by case</div>
+          <div id="lawsuitMatrix"></div>
+        </div>
+      </section>
+    </main>
+
+    <div id="mapTooltip" class="tooltip" hidden></div>
+
+    <script src="redistricting-story_data_v2.js"></script>
+    <script src="redistricting-story_app_v2.js"></script>
+  </body>
+</html>
