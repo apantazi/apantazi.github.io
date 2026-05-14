@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /wellness-app/
+Disallow: /redistricting/
 
 Sitemap: https://andrewpantazi.com/sitemap.xml
