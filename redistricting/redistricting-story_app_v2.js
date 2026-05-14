@@ -15,8 +15,14 @@
     receiptDistrict: null,
     activeReceipt: null,
     activeSearchIndex: 0,
+    zoom: 1,
+    panX: 0,
+    panY: 0,
+    suppressDistrictClick: false,
   };
   let currentSearchResults = [];
+  let mapContent = null;
+  let dragState = null;
 
   const view = {
     width: 770,
@@ -192,14 +198,9 @@
     svg.setAttribute("viewBox", `0 0 ${view.width} ${view.height}`);
     svg.innerHTML = "";
 
-    if (state.mapMode === "overlay") {
-      data.maps.old.features.forEach((feature) => {
-        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        path.setAttribute("d", geometryPath(feature.geometry));
-        path.setAttribute("class", "old-outline");
-        svg.appendChild(path);
-      });
-    }
+    mapContent = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    mapContent.setAttribute("class", "map-content");
+    svg.appendChild(mapContent);
 
     getPlanFeatures().forEach((feature) => {
       const id = Number(feature.properties.id || feature.properties.NAME);
@@ -212,8 +213,14 @@
       path.setAttribute("tabindex", "0");
       path.setAttribute("role", "button");
       path.setAttribute("aria-label", `District ${id}`);
-      path.style.opacity = state.mapMode === "overlay" ? "0.84" : "1";
-      path.addEventListener("click", () => selectDistrict(id));
+      path.style.opacity = state.mapMode === "overlay" ? "0.78" : "1";
+      path.addEventListener("click", (event) => {
+        if (state.suppressDistrictClick) {
+          event.preventDefault();
+          return;
+        }
+        selectDistrict(id);
+      });
       path.addEventListener("keydown", (event) => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
@@ -222,8 +229,17 @@
       });
       path.addEventListener("mousemove", (event) => showTooltip(event, metric));
       path.addEventListener("mouseleave", hideTooltip);
-      svg.appendChild(path);
+      mapContent.appendChild(path);
     });
+
+    if (state.mapMode === "overlay") {
+      data.maps.old.features.forEach((feature) => {
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", geometryPath(feature.geometry));
+        path.setAttribute("class", "old-outline");
+        mapContent.appendChild(path);
+      });
+    }
 
     getPlanLabels().forEach((feature) => {
       const id = Number(feature.properties.id || feature.properties.NAME);
@@ -235,10 +251,12 @@
       text.setAttribute("y", y.toFixed(2));
       text.setAttribute("class", "district-label");
       text.textContent = id;
-      svg.appendChild(text);
+      mapContent.appendChild(text);
     });
 
+    applyMapTransform();
     updateMapCaption();
+    renderMapLegend();
   }
 
   function updateMapCaption() {
@@ -253,6 +271,128 @@
           : "Districts are colored by 2024 presidential margin.";
     title.textContent = plan;
     desc.textContent = layer;
+  }
+
+  function renderMapLegend() {
+    const legend = document.getElementById("mapLegend");
+    if (!legend) return;
+    if (state.mapMode !== "overlay") {
+      legend.innerHTML = "";
+      return;
+    }
+    legend.innerHTML = `
+      <span><i class="legend-fill"></i>2026 fill</span>
+      <span><i class="legend-line"></i>2022 outline</span>
+    `;
+  }
+
+  function applyMapTransform() {
+    if (!mapContent) return;
+    mapContent.setAttribute(
+      "transform",
+      `translate(${state.panX.toFixed(2)} ${state.panY.toFixed(2)}) scale(${state.zoom.toFixed(4)})`,
+    );
+  }
+
+  function svgPointFromEvent(event) {
+    const rect = svg.getBoundingClientRect();
+    return [
+      ((event.clientX - rect.left) / rect.width) * view.width,
+      ((event.clientY - rect.top) / rect.height) * view.height,
+    ];
+  }
+
+  function setMapZoom(nextZoom, origin = [view.width / 2, view.height / 2]) {
+    const oldZoom = state.zoom;
+    const zoom = clamp(nextZoom, 1, 8);
+    if (Math.abs(zoom - oldZoom) < 0.001) return;
+    state.panX = origin[0] - (origin[0] - state.panX) * (zoom / oldZoom);
+    state.panY = origin[1] - (origin[1] - state.panY) * (zoom / oldZoom);
+    state.zoom = zoom;
+    applyMapTransform();
+  }
+
+  function zoomMapBy(factor, origin) {
+    setMapZoom(state.zoom * factor, origin);
+  }
+
+  function resetMapView() {
+    state.zoom = 1;
+    state.panX = 0;
+    state.panY = 0;
+    applyMapTransform();
+  }
+
+  function currentFeatureForDistrict(id) {
+    return getPlanFeatures().find((feature) => Number(feature.properties.id || feature.properties.NAME) === Number(id));
+  }
+
+  function projectedBounds(feature) {
+    const box = { minX: Infinity, minY: Infinity, maxX: -Infinity, maxY: -Infinity };
+    walkCoordinates(feature.geometry.coordinates, (coord) => {
+      const [x, y] = project(coord);
+      box.minX = Math.min(box.minX, x);
+      box.maxX = Math.max(box.maxX, x);
+      box.minY = Math.min(box.minY, y);
+      box.maxY = Math.max(box.maxY, y);
+    });
+    return box;
+  }
+
+  function focusSelectedDistrict() {
+    const feature = currentFeatureForDistrict(state.district);
+    if (!feature) return;
+    const box = projectedBounds(feature);
+    const width = Math.max(1, box.maxX - box.minX);
+    const height = Math.max(1, box.maxY - box.minY);
+    const padding = 120;
+    const zoom = clamp(Math.min((view.width - padding) / width, (view.height - padding) / height), 1.8, 8);
+    state.zoom = zoom;
+    state.panX = view.width / 2 - ((box.minX + box.maxX) / 2) * zoom;
+    state.panY = view.height / 2 - ((box.minY + box.maxY) / 2) * zoom;
+    applyMapTransform();
+  }
+
+  function startMapPan(event) {
+    if (event.button !== 0) return;
+    dragState = {
+      pointerId: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+      panX: state.panX,
+      panY: state.panY,
+      moved: false,
+    };
+    svg.setPointerCapture(event.pointerId);
+    svg.classList.add("is-panning");
+  }
+
+  function continueMapPan(event) {
+    if (!dragState || dragState.pointerId !== event.pointerId) return;
+    const rect = svg.getBoundingClientRect();
+    const dx = ((event.clientX - dragState.x) / rect.width) * view.width;
+    const dy = ((event.clientY - dragState.y) / rect.height) * view.height;
+    if (Math.abs(dx) + Math.abs(dy) > 2) dragState.moved = true;
+    state.panX = dragState.panX + dx;
+    state.panY = dragState.panY + dy;
+    applyMapTransform();
+  }
+
+  function endMapPan(event) {
+    if (!dragState || dragState.pointerId !== event.pointerId) return;
+    if (dragState.moved) {
+      state.suppressDistrictClick = true;
+      window.setTimeout(() => {
+        state.suppressDistrictClick = false;
+      }, 0);
+    }
+    try {
+      svg.releasePointerCapture(event.pointerId);
+    } catch {
+      // Pointer capture can already be gone if the browser canceled the pointer.
+    }
+    dragState = null;
+    svg.classList.remove("is-panning");
   }
 
   function showTooltip(event, metric) {
@@ -766,6 +906,42 @@
         renderMap();
       });
     });
+
+    document.querySelectorAll("[data-map-zoom]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const action = button.dataset.mapZoom;
+        if (action === "in") zoomMapBy(1.35, [view.width / 2, view.height / 2]);
+        if (action === "out") zoomMapBy(1 / 1.35, [view.width / 2, view.height / 2]);
+        if (action === "reset") resetMapView();
+        if (action === "district") focusSelectedDistrict();
+      });
+    });
+
+    const fullscreenButton = document.querySelector("[data-map-fullscreen]");
+    const mapPanel = document.querySelector(".map-panel");
+    fullscreenButton.addEventListener("click", () => {
+      if (document.fullscreenElement) {
+        document.exitFullscreen?.();
+        return;
+      }
+      const request = mapPanel.requestFullscreen?.();
+      request?.catch?.(() => {});
+    });
+
+    document.addEventListener("fullscreenchange", () => {
+      fullscreenButton.textContent = document.fullscreenElement === mapPanel ? "Exit" : "Full";
+    });
+
+    svg.addEventListener("wheel", (event) => {
+      event.preventDefault();
+      const factor = event.deltaY < 0 ? 1.18 : 1 / 1.18;
+      zoomMapBy(factor, svgPointFromEvent(event));
+    }, { passive: false });
+
+    svg.addEventListener("pointerdown", startMapPan);
+    svg.addEventListener("pointermove", continueMapPan);
+    svg.addEventListener("pointerup", endMapPan);
+    svg.addEventListener("pointercancel", endMapPan);
 
     document.getElementById("districtReceipts").addEventListener("click", () => {
       state.receiptDistrict = state.district;
