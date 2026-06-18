@@ -21,3 +21,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Personal business card — contains a private cell number; keep local, don't publish
+business-card.html
+business-card.pdf
