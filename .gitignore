@@ -25,3 +25,6 @@ dist-ssr
 # Personal business card — contains a private cell number; keep local, don't publish
 business-card.html
 business-card.pdf
+
+# Generated link audit reports
+link-report*
