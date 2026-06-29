@@ -1,0 +1,21 @@
+<header class="site-header">
+  <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+  <nav class="nav-links">
+    <a href="/" class="{% if page.url == '/' %}active{% endif %}">Home</a>
+    <a href="/clips" class="{% if page.url contains 'clips' %}active{% endif %}">Portfolio</a>
+    <a href="/interactives" class="{% if page.url contains 'interactives' %}active{% endif %}">Interactives</a>
+    <a href="/resume" class="{% if page.url contains 'resume' %}active{% endif %}">Resume</a>
+  </nav>
+</header>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    toggle.addEventListener('click', function() {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', !expanded);
+      navLinks.classList.toggle('open');
+    });
+  });
+</script>
+
