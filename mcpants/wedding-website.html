@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preload" href="/assets/fonts/Fjalla_One/fjalla-one-v15-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/Libre_Franklin/libre-franklin-v19-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/Libre_Franklin/libre-franklin-v19-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Preload profile image for quick LCP (still small) -->
+  <!-- link rel="preload" href="/assets/image-360.webp" as="image" type="image/webp" -->
+
+  <meta name="robots" content="none,noai,noimageai">
+
+  <meta charset="utf-8">
+  <title>McPants Wedding</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <link rel="icon" type="image/png" href="https://andrewpantazi.com/assets/favicon.png">
+
+<style>
+/* Self-hosted fonts */
+@font-face {
+  font-family: 'Fjalla One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/Fjalla_One/fjalla-one-v15-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Libre Franklin';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/Libre_Franklin/libre-franklin-v19-latin-regular.woff2') format('woff2');
+}
+
+/* (Optional) If you want bold weight for headings, add this: */
+@font-face {
+  font-family: 'Libre Franklin';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/Libre_Franklin/Libre-Franklin-v19-latin-700.woff2') format('woff2');
+}
+
+/* Page styling */
+body {
+  font-family: 'Libre Franklin', Arial, sans-serif;
+  background: #f9f9f9;
+  margin: 0;
+}
+.container {
+  max-width: 900px;
+  margin: 2em auto;
+  background: #fff;
+  padding: 2em 2em 1em;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+h1 {
+  font-family: 'Fjalla One', Arial, sans-serif;
+  font-size: 2.5em;
+  text-align: center;
+  margin-top: 10;
+  line-height: 25%;
+}
+h2 {
+  font-family: 'Fjalla One', Arial, sans-serif;
+  font-size: 2em;
+  margin: 1.1em 0.6em;
+  color: #222;
+  text-align: center;
+  line-height: 10%;
+}
+img.profile {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 1em;
+}
+.center {
+  text-align: center;
+}
+hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 2em 0;
+}
+.names {
+  font-size:x-large;
+}
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  .container { max-width: 98vw; }
+}
+@media (max-width: 700px) {
+  .container { padding: 1em .5em; }
+}
+@media (max-width: 600px) {
+  h1 { font-size: 2.5em; }
+}
+</style>
+  <link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/style.css"></noscript>
+</head>
+
+<body>
+<div id="header"></div>
+  <div class="container">
+<img class="profile" src="assets/mcpants1.webp" alt="Andrew Pantazi" width="180" height="180">
+    <h1>McPants</h1>
+    <h2>Wedding</h2>
+    <p class="center names"><strong>Caitlin McGlade<br />and <br/>Andrew Pantazi</strong></p>
+    <p class="center"><strong>Date:</strong> June 17, 2027</p>
+    <p class="center"><strong>Location:</strong> Sky Retreat,<br />438 Cascade Dr,<br />Purlear, NC 28665</p>
+    <p class="center"><strong>More details TKTK.</strong></p>
+    <p class="center">In the meantime, give <a href="https://open.spotify.com/track/4JGKZS7h4Qa16gOU3oNETV?si=abdc364629514a83">this</a> a listen.</p>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdZu__UaL-KIKR3W9D-PFVs_dM6f_y9aCPweX7MWHHUbcQkmg/viewform?embedded=true" width="100%" height="1008" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+</body>
+</html>
